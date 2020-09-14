@@ -1,0 +1,203 @@
+<strings>
+
+    <string id="AppName">OpenWatchFace</string>
+    <string id="AppVersionTitle">App Version</string>
+    
+   <!-- <string id="weatherProviderTitle">Choose the weather provider. DarkSky require a key but provide precipitation probability and a bit more accurate</string>
+	<string id="openWeatherTitle">OpenWeather (% humidity)</string> -->
+	<string id="OpenWeatherAPITokenTitle">OpenWeather API Token</string>
+	
+    <string id = "field_0_title">Show in activity field 1</string>
+    <string id = "field_1_title">Show in activity field 2</string>
+	<string id = "field_2_title">Show in activity field 3</string>
+	<string id = "WField_0_Title">Show in weather field 1</string>
+    <string id = "WField_1_Title">Show in weather field 2</string>
+    <string id = "WField_2_Title">Show in weather field 3</string>
+    <string id = "DisplayDistance">Distance</string>
+    <string id = "DisplayPulse">Pulse</string>
+    <string id = "DisplayFloors">Floors Climbed</string>
+    <string id = "DisplayAltitude">Altitude</string>
+    <string id = "DisplayCalories">Calories</string>
+    <string id = "DisplaySteps">Steps</string>
+	<string id = "DisplaySunEvent">Sunrise/Sunset</string>
+	
+	<string id = "DisplayHumidity">Humidity</string>
+	<string id = "DisplayDewPoint">Dew Point</string>
+	<string id = "DisplayPressure">Barometric Pressure</string>
+	<string id = "DisplayWindSpeed">Wind Speed</string>
+	<string id = "DisplayWindDirection">Wind Direction (numeric)</string>
+	<string id = "DisplayUVI">UV Index</string>
+	<string id = "DisplayTodayPrecipitation">Today's Precipitation Probability</string>
+	<string id = "DisplayNextPrecipitation">Tomorrow's Precipitation Probability</string>
+	<string id = "DisplayNextNextPrecipitation">Next Day's Precipitation Probability</string>
+    
+    <string id="TempSystemTitle">Temperature</string>
+    <string id="Celsius">Celsius</string>
+    <string id="Farenheit">Farenheit</string>
+    
+    <string id="WindSystemTitle">Wind</string>
+    <string id="Knots">Knots</string>
+    <string id="Meters">m/s</string>
+    <string id="KilometersPh">km/h</string>
+    <string id="MilesPh">mph</string>
+    
+    <string id="DistSystemTitle">Distance</string>
+    <string id="Kilometers">Kilometers</string>
+    <string id="Miles">Miles</string>
+    <string id="Steps">Steps</string>
+    
+    <string id = "AltimeterSystemTitle">Altitude</string>
+    <string id = "Meter">Meters</string>
+	<string id = "Feet">Feet</string>
+	    
+    <string id = "BarometricSystemTitle">Pressure</string>
+    <string id = "Millibars">Millibars</string>
+	<string id = "Inches">Inches</string>
+
+    <string id="BackgroundColorTitle">Background Color</string>
+	<!-- <string id="TimeColorTitle">Time Color</string> -->
+	<string id="HourColorTitle">Hour Color</string>
+	<string id="MinColorTitle">Minute Color</string>
+	<!-- <string id="MinColorTitle">Minute Color</string> -->
+	<string id="TextColorTitle">Text Color</string>
+    <!-- <string id="BrightColorTitle">Bright Color</string> -->
+    <!-- <string id="DimColorTitle">Dim Color</string> -->
+    
+    <string id="DateOrderTitle">Date Format</string>
+    <string id="DateOrderWDM">WeekDay:Month:Day</string>
+    <string id="DateOrderWMD">WeekDay:Day:Month</string>
+    <string id="DateOrderDMW">Day:Month:WeekDay</string>
+	<string id="DateOrderMDW">Month:Day:WeekDay</string>
+	
+	<string id="TimeOptions">Display Seconds or AM/PM</string>
+    <string id="TimeOptionSeconds">Display Seconds</string>
+    <string id="TimeOptionAmPm">Display AM/PM</string>
+    <string id="TimeOptionDecline">Display Neither</string>
+
+    <string id = "ColorBlack">Black</string>
+    <string id = "ColorDarkGray">Dark Gray</string>
+    <string id = "ColorLightGray">Light Gray</string>
+    <string id = "ColorWhite">White</string>
+    <string id = "ColorBlue">Blue</string>
+    <string id = "ColorRed">Red</string>
+    <string id = "ColorLimeGreen">LimeGreen</string>
+    <string id = "ColorYellowGreen">Yellow Green</string>
+    <string id = "ColorPaleGreen">Pale Green</string>
+    <string id = "ColorPaleBlue">Pale Blue</string>
+	<string id = "ColorLime">Lime</string>
+	<string id = "ColorPink">Pink</string>
+	<string id = "ColorAqua">Aqua</string>
+	<string id = "ColorYellow">Yellow</string>
+	<string id = "ColorPaleYellow">PaleYellow</string>
+	<string id = "ColorYellowRed">Yellow Red</string>
+	<string id = "ColorOrange">Orange</string>
+	
+	<!-- <string id="isShowWeatherTitle">Show Weather</string> -->
+	<!-- <string id="IsShowCityTitle">Show Current City</string> -->
+	<string id="showTimeOptionsTitle">Show Seconds or AM/PM</string>
+	
+	<!-- <string id="CityAlignTitle">City align</string> -->
+	<string id = "Left">Left</string>
+	<string id = "Center">Center</string>
+	<string id = "Right">Right</string>
+	<!-- <string id = "IsShowMoonTitle">Show Moon Phase</string> -->
+	<!-- <string id = "BottomLineTitle">Bottom Line</string> -->
+	<!-- <string id = "BottomMoonRight">Moon:Alarm:Notification</string> -->
+	<!-- <string id = "BottomMoonLeft">Alarm:Notification:Moon</string> -->
+	
+	<!-- <string id = "ShowNever">Never</string>
+	<string id = "ShowOnlyValue">Non-Zero</string>
+	<string id = "ShowAlways">Always</string> -->
+	
+	<!-- <string id ="ExtraTimeZoneTitle">Second Time Zone</string> -->
+	<!-- <string id = "id1"> [-12] (+12, Etc/GMT-12) </string>
+	<string id = "id2"> [-11] (SST, US/Samoa) </string>
+	<string id = "id3"> [-10] (HST, US/Hawaii) </string>
+	<string id = "id4"> [-930] (-0930, Pacific/Marquesas) </string>
+	<string id = "id5"> [-9, -8] (AKST, US/Alaska) </string>
+	<string id = "id6"> [-8, -7] (PST, America/Los_Angeles) </string>
+	<string id = "id7"> [-7] (MST, US/Arizona) </string>
+	<string id = "id8"> [-7, -6] (MST, America/Denver) </string>
+	<string id = "id9"> [-6, -5] (CST, America/Chicago) </string>
+	<string id = "id10"> [-5, -4] (EST, America/New_York) </string>
+	<string id = "id11"> [-4] (AST, America/Port_of_Spain) </string>
+	<string id = "id12"> [-330, -230] (NST, Canada/Newfoundland) </string>
+	<string id = "id13"> [-3] (-03, America/Buenos_Aires) </string>
+	<string id = "id14"> [-2] (-02, Atlantic/South_Georgia) </string>
+	<string id = "id15"> [-1] (-01, Atlantic/Azores) </string>
+	<string id = "id16"> [0] (UTC, UTC) </string>
+	<string id = "id17"> [0, +1] (GMT, Europe/London) </string>
+	<string id = "id18"> [+1, +2] (CET, Europe/Berlin) </string>
+	<string id = "id19"> [+2, +3] (EET, Europe/Athens) </string>
+	<string id = "id20"> [+3] (MSK, Europe/Moscow) </string>
+	<string id = "id21"> [+330, +430] (+0330, Iran) </string>
+	<string id = "id22"> [+4] (+04, Asia/Dubai) </string>
+	<string id = "id23"> [+430] (+0430, Asia/Kabul) </string>
+	<string id = "id24"> [+5] (+05, Asia/Tashkent) </string>
+	<string id = "id25"> [+530] (IST, Asia/Kolkata) </string>
+	<string id = "id26"> [+545] (+0545, Asia/Kathmandu) </string>
+	<string id = "id27"> [+6] (+06, Asia/Thimphu) </string>
+	<string id = "id28"> [+630] (+0630, Asia/Rangoon) </string>
+	<string id = "id29"> [+7] (+07, Asia/Bangkok) </string>
+	<string id = "id30"> [+8] (+08, Asia/Singapore) </string>
+	<string id = "id31"> [+845] (+0845, Australia/Eucla) </string>
+	<string id = "id32"> [+9] (JST, Japan) </string>
+	<string id = "id33"> [+1030, +930] (ACDT, Australia/Adelaide) </string>
+	<string id = "id34"> [+11, +10] (AEDT, Australia/Sydney) </string>
+	<string id = "id35"> [+11, +1030] (+11, Australia/Lord_Howe) </string>
+	<string id = "id36"> [+11] (+11, Pacific/Pohnpei) </string>
+	<string id = "id37"> [+13, +12] (NZDT, Pacific/Auckland) </string>
+	<string id = "id38"> [+1345, +1245] (+1345, Pacific/Chatham) </string>
+	<string id = "id39"> [+13] (+13, Pacific/Tongatapu) </string>
+	<string id = "id40"> [+14] (+14, Pacific/Kiritimati) </string> -->
+	
+	<!-- <string id = "cur_EUR">Euro</string>
+	<string id = "cur_USD">United States Dollar</string>
+	<string id = "cur_HUF">Hungarian Forint</string>
+	<string id = "cur_AUD">Australian Dollar</string>
+	<string id = "cur_NZD">New Zealand Dollar</string>
+	<string id = "cur_OMR">Omani Rial</string>
+	<string id = "cur_SEK">Swedish Krona</string>
+	<string id = "cur_AMD">Armenian Dram</string>
+	<string id = "cur_CNY">Chinese Yuan</string>
+	<string id = "cur_CZK">Czech Koruna</string>
+	<string id = "cur_INR">Indian Rupee</string>
+	<string id = "cur_KRW">South Korean Won</string>
+	<string id = "cur_ANG">Netherlands Antillean Gulden</string>
+	<string id = "cur_QAR">Qatari Riyal</string>
+	<string id = "cur_DKK">Danish Krone</string>
+	<string id = "cur_IDR">Indonesian Rupiah</string>
+	<string id = "cur_ILS">Israeli New Sheqel</string>
+	<string id = "cur_PAB">Panamanian Balboa</string>
+	<string id = "cur_PHP">Philippine Peso</string>
+	<string id = "cur_SGD">Singapore Dollar</string>
+	<string id = "cur_ZAR">South African Rand</string>
+	<string id = "cur_ARS">Argentine Peso</string>
+	<string id = "cur_BGN">Bulgarian Lev</string>
+	<string id = "cur_CAD">Canadian Dollar</string>
+	<string id = "cur_CLP">Chilean Peso</string>
+	<string id = "cur_DOP">Dominican Peso</string>
+	<string id = "cur_JPY">Japanese Yen</string>
+	<string id = "cur_LVL">Latvian Lats</string>
+	<string id = "cur_CHF">Swiss Franc</string>
+	<string id = "cur_SCR">Seychellois Rupee</string>
+	<string id = "cur_THB">Thai Baht</string>
+	<string id = "cur_TRY">Turkish New Lira</string>
+	<string id = "cur_TWD">New Taiwan Dollar</string>
+	<string id = "cur_AED">UAE Dirham</string>
+	<string id = "cur_BRL">Brazilian Real</string>
+	<string id = "cur_KHR">Cambodian Riel</string>
+	<string id = "cur_HRK">Croatian Kuna</string>
+	<string id = "cur_EGP">Egyptian Pound</string>
+	<string id = "cur_HKD">Hong Kong Dollar</string>
+	<string id = "cur_MXN">Mexican Peso</string>
+	<string id = "cur_NOK">Norwegian Krone</string>
+	<string id = "cur_PLN">Polish Zloty</string>
+	<string id = "cur_RUB">Russian Ruble</string>
+	<string id = "cur_VND">Vietnamese Dong</string>
+	<string id = "cur_UAH">Ukrainian Hryvnia</string>
+	<string id = "cur_GBP">British Pound</string>
+	<string id = "cur_BTC">Bitcoin</string>
+	<string id = "cur_BYN">New Belarusian Ruble</string> -->
+	
+</strings>

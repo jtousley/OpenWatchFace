@@ -1,0 +1,223 @@
+<settings>
+
+    <setting propertyKey="@Properties.appVersion" title="@Strings.AppVersionTitle">
+        <settingConfig type="alphaNumeric" readonly="true" />
+    </setting>
+
+    <setting propertyKey="@Properties.Open-Weather-API-Token" title="@Strings.OpenWeatherAPITokenTitle">
+        <settingConfig type="alphaNumeric"></settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.ShowTimeOptions" title="@Strings.showTimeOptionsTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.TimeOptionSeconds</listEntry>
+            <listEntry value="1">@Strings.TimeOptionAmPm</listEntry>
+            <listEntry value="2">@Strings.TimeOptionDecline</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.BackgroundColor" title="@Strings.BackgroundColorTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.ColorBlack</listEntry>
+            <listEntry value="3">@Strings.ColorWhite</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.HourColor" title="@Strings.HourColorTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.ColorBlack</listEntry>
+            <listEntry value="1">@Strings.ColorDarkGray</listEntry>
+            <listEntry value="2">@Strings.ColorLightGray</listEntry>
+            <listEntry value="3">@Strings.ColorWhite</listEntry>
+            <listEntry value="4">@Strings.ColorBlue</listEntry>
+            <listEntry value="5">@Strings.ColorRed</listEntry>
+            <listEntry value="6">@Strings.ColorLimeGreen</listEntry>
+            <listEntry value="7">@Strings.ColorLime</listEntry>
+            <listEntry value="8">@Strings.ColorYellowGreen</listEntry>
+            <listEntry value="9">@Strings.ColorPaleGreen</listEntry>
+            <listEntry value="10">@Strings.ColorPaleBlue</listEntry>
+            <listEntry value="11">@Strings.ColorPink</listEntry>
+            <listEntry value="12">@Strings.ColorAqua</listEntry>
+            <listEntry value="13">@Strings.ColorYellow</listEntry>
+            <listEntry value="14">@Strings.ColorPaleYellow</listEntry>
+            <listEntry value="15">@Strings.ColorYellowRed</listEntry>
+            <listEntry value="16">@Strings.ColorOrange</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.MinColor" title="@Strings.MinColorTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.ColorBlack</listEntry>
+            <listEntry value="1">@Strings.ColorDarkGray</listEntry>
+            <listEntry value="2">@Strings.ColorLightGray</listEntry>
+            <listEntry value="3">@Strings.ColorWhite</listEntry>
+            <listEntry value="4">@Strings.ColorBlue</listEntry>
+            <listEntry value="5">@Strings.ColorRed</listEntry>
+            <listEntry value="6">@Strings.ColorLimeGreen</listEntry>
+            <listEntry value="7">@Strings.ColorLime</listEntry>
+            <listEntry value="8">@Strings.ColorYellowGreen</listEntry>
+            <listEntry value="9">@Strings.ColorPaleGreen</listEntry>
+            <listEntry value="10">@Strings.ColorPaleBlue</listEntry>
+            <listEntry value="11">@Strings.ColorPink</listEntry>
+            <listEntry value="12">@Strings.ColorAqua</listEntry>
+            <listEntry value="13">@Strings.ColorYellow</listEntry>
+            <listEntry value="14">@Strings.ColorPaleYellow</listEntry>
+            <listEntry value="15">@Strings.ColorYellowRed</listEntry>
+            <listEntry value="16">@Strings.ColorOrange</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.TextColor" title="@Strings.TextColorTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.ColorBlack</listEntry>
+            <listEntry value="1">@Strings.ColorDarkGray</listEntry>
+            <listEntry value="2">@Strings.ColorLightGray</listEntry>
+            <listEntry value="3">@Strings.ColorWhite</listEntry>
+            <listEntry value="4">@Strings.ColorBlue</listEntry>
+            <listEntry value="5">@Strings.ColorRed</listEntry>
+            <listEntry value="6">@Strings.ColorLimeGreen</listEntry>
+            <listEntry value="7">@Strings.ColorLime</listEntry>
+            <listEntry value="8">@Strings.ColorYellowGreen</listEntry>
+            <listEntry value="9">@Strings.ColorPaleGreen</listEntry>
+            <listEntry value="10">@Strings.ColorPaleBlue</listEntry>
+            <listEntry value="11">@Strings.ColorPink</listEntry>
+            <listEntry value="12">@Strings.ColorAqua</listEntry>
+            <listEntry value="13">@Strings.ColorYellow</listEntry>
+            <listEntry value="14">@Strings.ColorPaleYellow</listEntry>
+            <listEntry value="15">@Strings.ColorYellowRed</listEntry>
+            <listEntry value="16">@Strings.ColorOrange</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.date-order" title="@Strings.DateOrderTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.DateOrderWDM</listEntry>
+            <listEntry value="1">@Strings.DateOrderWMD</listEntry>
+            <listEntry value="2">@Strings.DateOrderDMW</listEntry>
+            <listEntry value="3">@Strings.DateOrderMDW</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.tempSystem" title="@Strings.TempSystemTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.Celsius</listEntry>
+            <listEntry value="1">@Strings.Farenheit</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.windSystem" title="@Strings.WindSystemTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.KilometersPh</listEntry>
+            <listEntry value="1">@Strings.Knots</listEntry>
+            <listEntry value="2">@Strings.Meters</listEntry>
+            <listEntry value="3">@Strings.MilesPh</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey = "@Properties.field-0" title = "@Strings.field_0_title">
+        <settingConfig type = "list">
+            <!-- <listEntry value = "0">@Strings.DisplayExtraTz</listEntry>
+			<listEntry value = "1">@Strings.DisplayExchangeRate</listEntry> -->
+            <listEntry value = "0">@Strings.DisplayPulse</listEntry>
+            <listEntry value = "1">@Strings.DisplayDistance</listEntry>
+            <listEntry value = "2">@Strings.DisplaySteps</listEntry>
+            <listEntry value = "3">@Strings.DisplayFloors</listEntry>
+            <listEntry value = "4">@Strings.DisplayAltitude</listEntry>
+            <listEntry value = "5">@Strings.DisplayCalories</listEntry>
+            <listEntry value = "6">@Strings.DisplaySunEvent</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey = "@Properties.field-1" title = "@Strings.field_1_title">
+        <settingConfig type = "list">
+            <!-- <listEntry value = "0">@Strings.DisplayExtraTz</listEntry>
+			<listEntry value = "1">@Strings.DisplayExchangeRate</listEntry> -->
+            <listEntry value = "0">@Strings.DisplayPulse</listEntry>
+            <listEntry value = "1">@Strings.DisplayDistance</listEntry>
+            <listEntry value = "2">@Strings.DisplaySteps</listEntry>
+            <listEntry value = "3">@Strings.DisplayFloors</listEntry>
+            <listEntry value = "4">@Strings.DisplayAltitude</listEntry>
+            <listEntry value = "5">@Strings.DisplayCalories</listEntry>
+            <listEntry value = "6">@Strings.DisplaySunEvent</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey = "@Properties.field-2" title = "@Strings.field_2_title">
+        <settingConfig type = "list">
+            <!-- <listEntry value = "0">@Strings.DisplayExtraTz</listEntry>
+			<listEntry value = "1">@Strings.DisplayExchangeRate</listEntry> -->
+            <listEntry value = "0">@Strings.DisplayPulse</listEntry>
+            <listEntry value = "1">@Strings.DisplayDistance</listEntry>
+            <listEntry value = "2">@Strings.DisplaySteps</listEntry>
+            <listEntry value = "3">@Strings.DisplayFloors</listEntry>
+            <listEntry value = "4">@Strings.DisplayAltitude</listEntry>
+            <listEntry value = "5">@Strings.DisplayCalories</listEntry>
+            <listEntry value = "6">@Strings.DisplaySunEvent</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey = "@Properties.wfield-0" title = "@Strings.WField_0_Title">
+        <settingConfig type = "list">
+            <listEntry value = "0">@Strings.DisplayHumidity</listEntry>
+            <listEntry value = "1">@Strings.DisplayDewPoint</listEntry>
+            <listEntry value = "2">@Strings.DisplayPressure</listEntry>
+            <listEntry value = "3">@Strings.DisplayWindSpeed</listEntry>
+            <listEntry value = "4">@Strings.DisplayWindDirection</listEntry>
+            <listEntry value = "5">@Strings.DisplayUVI</listEntry>
+            <listEntry value = "6">@Strings.DisplayTodayPrecipitation</listEntry>
+            <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
+            <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey = "@Properties.wfield-1" title = "@Strings.WField_0_Title">
+        <settingConfig type = "list">
+            <listEntry value = "0">@Strings.DisplayHumidity</listEntry>
+            <listEntry value = "1">@Strings.DisplayDewPoint</listEntry>
+            <listEntry value = "2">@Strings.DisplayPressure</listEntry>
+            <listEntry value = "3">@Strings.DisplayWindSpeed</listEntry>
+            <listEntry value = "4">@Strings.DisplayWindDirection</listEntry>
+            <listEntry value = "5">@Strings.DisplayUVI</listEntry>
+            <listEntry value = "6">@Strings.DisplayTodayPrecipitation</listEntry>
+            <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
+            <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey = "@Properties.wfield-2" title = "@Strings.WField_2_Title">
+        <settingConfig type = "list">
+            <listEntry value = "0">@Strings.DisplayHumidity</listEntry>
+            <listEntry value = "1">@Strings.DisplayDewPoint</listEntry>
+            <listEntry value = "2">@Strings.DisplayPressure</listEntry>
+            <listEntry value = "3">@Strings.DisplayWindSpeed</listEntry>
+            <listEntry value = "4">@Strings.DisplayWindDirection</listEntry>
+            <listEntry value = "5">@Strings.DisplayUVI</listEntry>
+            <listEntry value = "6">@Strings.DisplayTodayPrecipitation</listEntry>
+            <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
+            <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.distSystem" title="@Strings.DistSystemTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.Kilometers</listEntry>
+            <listEntry value="1">@Strings.Miles</listEntry>
+            <listEntry value="2">@Strings.Steps</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.altimeter-system" title="@Strings.AltimeterSystemTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.Meter</listEntry>
+            <listEntry value="1">@Strings.Feet</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.barometric-system" title="@Strings.BarometricSystemTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.Millibars</listEntry>
+            <listEntry value="1">@Strings.Inches</listEntry>
+        </settingConfig>
+    </setting>
+
+</settings>

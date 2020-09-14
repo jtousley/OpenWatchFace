@@ -1,0 +1,7 @@
+.project
+.settings/
+DEPLOY/
+/bin
+resources/settings/secret.xml
+developer_key
+*.swp
