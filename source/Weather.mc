@@ -44,7 +44,7 @@ class Weather {
  public
   var _weatherDateTime = 0;
  public
-  var _city = "UNK";
+  var _city = "Unknown";
 
   // DAILY VALUES
   // Astral events
@@ -52,6 +52,8 @@ class Weather {
   var _sunriseTime = 0;
  public
   var _sunsetTime = 0;
+ public
+  var _nextSunriseTime = 0;
   // Min/Max Temperatures
  public
   var _minTempCelcius = 0;

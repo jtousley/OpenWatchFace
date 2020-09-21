@@ -34,6 +34,7 @@ class SettingsCache {
     distanceSystem = Setting.GetDistSystem();
     altimeterSystem = Setting.GetAltimeterSystem();
     barometricSystem = Setting.GetBarometricSystem();
+    sensorPressureType = Setting.GetSensorPressureType();
     // showMessage = Setting.GetShowMessage();
     // showAlarm = Setting.GetShowAlarm();
     dateOrder = Setting.GetDateOrder();
@@ -65,6 +66,7 @@ class SettingsCache {
     weather._uvIndex = weatherArray[Enumerations.WVAL_UV];
     weather._sunriseTime = weatherArray[Enumerations.WVAL_SUNRISE];
     weather._sunsetTime = weatherArray[Enumerations.WVAL_SUNSET];
+    weather._nextSunriseTime = weatherArray[Enumerations.WVAL_N_SUNRISE];
     weather._dewPoint = weatherArray[Enumerations.WVAL_DEW];
     weather._currentId = weatherArray[Enumerations.WVAL_CURR_ID];
     weather._weatherDateTime = weatherArray[Enumerations.WVAL_DT];
@@ -85,8 +87,6 @@ class SettingsCache {
     weather._nextNextPrecipitationPercent =
         weatherArray[Enumerations.WVAL_NN_POP];
   }
-
-
 
  public
   var field3;
@@ -126,12 +126,8 @@ class SettingsCache {
   var altimeterSystem;
  public
   var barometricSystem;
-  //  public
-  //   var showMessage;
-  //  public
-  //   var showAlarm;
+ public
+  var sensorPressureType;
  public
   var dateOrder;
-  //  public
-  //   var isShowMoon;
 }

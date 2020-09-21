@@ -134,10 +134,6 @@ using Toybox.Time as Time;
 
     var weatherArray = [];
 
-    // if (data has : hasKey && data["event_null"] != null) {
-    //   Setting.SetTextColor(data["event_null"]);
-    // }
-
     if (data has : hasKey && data["city"] != null) {
       Setting.SetWeatherCityStorage(data["city"]);
     }
@@ -176,6 +172,10 @@ using Toybox.Time as Time;
 
     if (data has : hasKey && data["sunset"] != null) {
       weatherArray.add(data["sunset"]);
+    }
+
+    if (data has : hasKey && data["nextSunrise"] != null) {
+      weatherArray.add(data["nextSunrise"]);
     }
 
     if (data has : hasKey && data["dew_point"] != null) {

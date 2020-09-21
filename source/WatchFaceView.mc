@@ -199,30 +199,26 @@ class WatchFaceView extends Ui.WatchFace {
         funcs = [ "", "", "", "", "" ];
       }
 
-      var x_coord = null;
-      var font = null;
-      var text = null;
-
       for (var j = 0; j < _layouts[i]["x"].size(); j++) {
         // Sys.println("Setting color for: " + _layouts[i]["x"]);
         var color = _colors[_layouts[i]["col"][j]];
-        if ((_layouts[i].hasKey("text") &&
-             _layouts[i]["text"][j] == true)) {  // text color
-          color = _colors[Setting.GetTextColor()];
+        if (_layouts[i].hasKey("type")) {
+          if (_layouts[i]["type"][j] == Enumerations.TYPE_TEXT) {  // text color
+            color = _colors[Setting.GetTextColor()];
+          } else if (_layouts[i]["type"][j] == Enumerations.TYPE_ICON) {
+            color = _colors[Setting.GetIconColor()];
+          }
         }
         dc.setColor(color, Gfx.COLOR_TRANSPARENT);
 
+        var font = _layouts[i]["font"][j] < 100
+                       ? _layouts[i]["font"][j]
+                       : _fonts[_layouts[i]["font"][j] - 100];
+        var text = funcs[j];
         var justification = _layouts[i]["jus"][j];
 
-        x_coord = _layouts[i]["x"][j];
-
-        font = _layouts[i]["font"][j] < 100
-                   ? _layouts[i]["font"][j]
-                   : _fonts[_layouts[i]["font"][j] - 100];
-
-        text = funcs[j];
-
-        dc.drawText(x_coord, _layouts[i]["y"][j], font, text, justification);
+        dc.drawText(_layouts[i]["x"][j], _layouts[i]["y"][j], font, text,
+                    justification);
       }
     }
 

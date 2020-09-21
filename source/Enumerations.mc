@@ -39,6 +39,17 @@ class Enumerations {
   }
 
   static enum {
+    PRESSURE_MILLIBAR = 0,
+    PRESSURE_PASCAL = 1,
+    PRESSURE_INCHES = 2
+  }
+
+  static enum {
+    TYPE_TEXT = 0,
+    TYPE_ICON = 1
+  }
+
+  static enum {
     INTENSITY_LIGHT = "",
     INTENSITY_MEDIUM = ".",
     INTENSITY_HARD = "..",
@@ -128,34 +139,35 @@ class Enumerations {
   }
 
   static enum {
-    WVAL_CURR_TEMP = 0,
-    WVAL_FEEL_TEMP = 1,
-    WVAL_PRESS = 2,
-    WVAL_HUM = 3,
-    WVAL_WIND_S = 4,
-    WVAL_WIND_D = 5,
-    WVAL_UV = 6,
-    WVAL_SUNRISE = 7,
-    WVAL_SUNSET = 8,
-    WVAL_DEW = 9,
-    WVAL_CURR_ID = 10,
-    WVAL_DT = 11,
-    WVAL_T_MIN = 12,
-    WVAL_T_MAX = 13,
-    WVAL_T_ID = 14,
-    WVAL_T_CLOUD = 15,
-    WVAL_T_POP = 16,
-    WVAL_N_MIN = 17,
-    WVAL_N_MAX = 18,
-    WVAL_N_ID = 19,
-    WVAL_N_CLOUD = 20,
-    WVAL_N_POP = 21,
-    WVAL_NN_MIN = 22,
-    WVAL_NN_MAX = 23,
-    WVAL_NN_ID = 24,
-    WVAL_NN_CLOUD = 25,
-    WVAL_NN_POP = 26,
-    WVAL_SIZE = 27
+    WVAL_CURR_TEMP=0,
+    WVAL_FEEL_TEMP,
+    WVAL_PRESS,
+    WVAL_HUM,
+    WVAL_WIND_S,
+    WVAL_WIND_D,
+    WVAL_UV,
+    WVAL_SUNRISE,
+    WVAL_SUNSET,
+    WVAL_N_SUNRISE,
+    WVAL_DEW,
+    WVAL_CURR_ID,
+    WVAL_DT,
+    WVAL_T_MIN,
+    WVAL_T_MAX,
+    WVAL_T_ID,
+    WVAL_T_CLOUD,
+    WVAL_T_POP,
+    WVAL_N_MIN,
+    WVAL_N_MAX,
+    WVAL_N_ID,
+    WVAL_N_CLOUD,
+    WVAL_N_POP,
+    WVAL_NN_MIN,
+    WVAL_NN_MAX,
+    WVAL_NN_ID,
+    WVAL_NN_CLOUD,
+    WVAL_NN_POP,
+    WVAL_SIZE = 28
   }
 
   static enum {

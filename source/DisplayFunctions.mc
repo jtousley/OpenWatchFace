@@ -44,13 +44,14 @@ class DisplayFunctions {
     , :DisplayAltitude
     , :DisplayCalories
     , :DisplaySunEvent
+    , :DisplaySensorPressure
     ];
 
  protected
   var _weatherFuncs = [//
                          :DisplayHumidity
                         , :DisplayDewPoint
-                        , :DisplayPressure
+                        , :DisplayWeatherPressure
                         , :DisplayWind
                         , :DisplayWindDirection
                         , :DisplayUVI
@@ -363,7 +364,7 @@ class DisplayFunctions {
   function DisplayWind(layout) {
     var weather = _settings.weather;
 
-     var windTable = [ 3.6, 1.94384, 1, 2.23694 ];
+    var windTable = [ 3.6, 1.94384, 1, 2.23694 ];
 
     var windMultiplier = windTable[_settings.weatherWindSystem];
     var windSpeed = weather._windSpeedMeterSeconds * windMultiplier;
@@ -381,16 +382,24 @@ class DisplayFunctions {
 
     var sunrise = weather._sunriseTime;
     var sunset = weather._sunsetTime;
+    var nextSunrise = weather._nextSunriseTime;
     var currTimeOffset = Sys.getClockTime().timeZoneOffset;
-    if (Time.now().value() > sunrise) {  // next is sunset
+    if (Time.now().value() < sunrise) {  // next is sunrise
+      var equalizedSunrise = new Time.Moment(sunrise + currTimeOffset);
+      var info = Gregorian.utcInfo(equalizedSunrise, Time.FORMAT_SHORT);
+      return [
+        Enumerations.SUNRISE, info.hour.format("%02u").toString() + ":" +
+                                  info.min.format("%02u").toString()
+      ];
+    } else if (Time.now().value() < sunset) {  // next is sunset
       var equalizedSunset = new Time.Moment(sunset + currTimeOffset);
       var info = Gregorian.utcInfo(equalizedSunset, Time.FORMAT_SHORT);
       return [
         Enumerations.SUNSET, info.hour.format("%02u").toString() + ":" +
                                  info.min.format("%02u").toString()
       ];
-    } else {  // next is sunrise
-      var equalizedSunrise = new Time.Moment(sunrise + currTimeOffset);
+    } else {  // tomorrow sunrise
+      var equalizedSunrise = new Time.Moment(nextSunrise + currTimeOffset);
       var info = Gregorian.utcInfo(equalizedSunrise, Time.FORMAT_SHORT);
       return [
         Enumerations.SUNRISE, info.hour.format("%02u").toString() + ":" +
@@ -487,11 +496,39 @@ class DisplayFunctions {
     return [ Enumerations.CALORIES, calories ];
   }
 
+  // Display the calculated barometric pressure
+  //
+  function DisplaySensorPressure(layout) {
+    var convTable = [ 0.01, 1, 0.0002953 ];  // pascals to
+    var pressure = "---";
+    var info = Activity.getActivityInfo();
+
+    if (info != null && info has
+        : ambientPressure && info.ambientPressure != null && info has
+        : rawAmbientPressure && info.rawAmbientPressure != null && info has
+        : meanSeaLevelPressure && info.meanSeaLevelPressure != null) {
+      var pressureTypes = [
+        info.ambientPressure, info.rawAmbientPressure, info.meanSeaLevelPressure
+      ];
+      pressure = pressureTypes[_settings.sensorPressureType] *
+                 convTable[_settings.barometricSystem];
+      if (_settings.barometricSystem == Enumerations.PRESSURE_MILLIBAR) {
+        pressure = pressure.format("%d");
+      } else if (_settings.barometricSystem == Enumerations.PRESSURE_PASCAL) {
+        pressure = pressure.format("%2.1f");
+      } else if (_settings.barometricSystem == Enumerations.PRESSURE_INCHES) {
+        pressure = pressure.format("%2.1f");
+      }
+    }
+
+    return [ Enumerations.PRESSURE, pressure ];
+  }
+
   // Display current city name based on known GPS location
   //
   function DisplayLocation(layout) {
     var city = _settings.weather._city;
-    var MAX_CITY_LENGTH = 9;
+    var MAX_CITY_LENGTH = 11;
 
     if (city.length() > MAX_CITY_LENGTH) {
       city = city.substring(0, MAX_CITY_LENGTH - 1);
@@ -521,12 +558,17 @@ class DisplayFunctions {
 
   // Display current pressure
   //
-  function DisplayPressure(layout) {
+  function DisplayWeatherPressure(layout) {
     var weather = _settings.weather;
-    var val = weather._baroPressureBars;
+    var convTable = [ 1, 100, 0.02953 ];  // millibars to
+    var val = weather._baroPressureBars * convTable[_settings.barometricSystem];
 
-    if (_settings.barometricSystem == 1) {
-      val = (val * 0.02953).format("%2.1f");
+    if (_settings.barometricSystem == Enumerations.PRESSURE_MILLIBAR) {
+      val = val.format("%d");
+    } else if (_settings.barometricSystem == Enumerations.PRESSURE_PASCAL) {
+      val = val.format("%2.1f");
+    } else if (_settings.barometricSystem == Enumerations.PRESSURE_INCHES) {
+      val = val.format("%2.1f");
     }
 
     return [ Enumerations.PRESSURE, val ];

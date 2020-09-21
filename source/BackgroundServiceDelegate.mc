@@ -42,17 +42,17 @@ using Toybox.Time as Time;
       if (lastEventTime == null || lastWeather == null ||
           (lastWeather has
            : size && lastWeather.size() == 0)) {
-        // Sys.println("Updating because last event was null");
         doUpdate = true;
-        // _received["event_null"] = 12;
       } else {
-        Sys.println("Not enough time elapsed");
         var ONE_HOUR = new Time.Duration(60 * 60);
         var lastEvent = new Time.Moment(lastEventTime);
         var nextUpdate = lastEvent.add(ONE_HOUR);
         if (nextUpdate.lessThan(now)) {
+          Sys.println("Update time : " + nextUpdate.value());
+          Sys.println("Now : " + now.value());
           doUpdate = true;
-          // _received["event_null"] = 9;
+        } else {
+          Sys.println("Not enough time elapsed");
         }
       }
       lastEventTime = null;
@@ -180,8 +180,10 @@ using Toybox.Time as Time;
       var location = Setting.GetLastKnownLocation();
       _appid = Setting.GetOpenWeatherToken();
       Sys.println("Appid : " + _appid);
-      if (location == null || _appid == null || _appid == "") {
+      if (location == null) {
         Sys.println("Could not get location");
+      } else if (_appid == null || _appid == "") {
+        Sys.println("Invalid key");
       } else if (false) {  // Accuweather
         if (location != _lastLocation) {
           _lastLocation = location;
@@ -464,6 +466,14 @@ using Toybox.Time as Time;
                        (data["daily"] != null) && (data["daily"].size() > 1) &&
                        (data["daily"][1]["pop"] != null)
                    ? data["daily"][1]["pop"]
+                   : 0);
+
+          _received["nextSunrise"] =  // tomorrow sunrise
+              ((data has
+                : hasKey) &&
+                       (data["daily"] != null) && (data["daily"].size() > 1) &&
+                       (data["daily"][1]["sunrise"] != null)
+                   ? data["daily"][1]["sunrise"]
                    : 0);
 
           // NEXT NEXT DAY

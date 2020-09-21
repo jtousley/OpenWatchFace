@@ -40,12 +40,14 @@ using Toybox.Application.Storage as Storage;
   static protected var _distSystem = "distSystem";
   static protected var _altimeterSystem = "altimeter-system";
   static protected var _barometricSystem = "barometric-system";
+  static protected var _sensorPressureType = "sensor-barometric-type";
   static protected var _field0 = "field-0";
   static protected var _field1 = "field-1";
   static protected var _field2 = "field-2";
   static protected var _wfield0 = "wfield-0";
   static protected var _wfield1 = "wfield-1";
   static protected var _wfield2 = "wfield-2";
+  static protected var _iconColor = "IconColor";
   static protected var _hourColor = "HourColor";
   static protected var _minColor = "MinColor";
   static protected var _backgroundColor = "BackgroundColor";
@@ -162,6 +164,12 @@ using Toybox.Application.Storage as Storage;
   }
 
  public
+  static function GetIconColor() {
+    var val = App.getApp().getProperty(_iconColor);
+    return (val != null ? val : GetTextColor());
+  }
+
+ public
   static function GetHourColor() {
     var val = App.getApp().getProperty(_hourColor);
     return (val != null ? val : GetTextColor());
@@ -236,6 +244,11 @@ using Toybox.Application.Storage as Storage;
  public
   static function GetAltimeterSystem() {
     var val = App.getApp().getProperty(_altimeterSystem);
+    return (val != null ? val : 0);
+  }
+
+  public static function GetSensorPressureType() { 
+   var val = App.getApp().getProperty(_sensorPressureType);
     return (val != null ? val : 0);
   }
 
