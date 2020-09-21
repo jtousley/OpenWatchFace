@@ -101,10 +101,14 @@ class WatchFaceView extends Ui.WatchFace {
     // Setting.SetWatchServerToken(Ui.loadResource(Rez.Strings.WatchServerTokenValue));
     // Setting.SetExchangeApiKey(Ui.loadResource(Rez.Strings.ExchangeApiKeyValue));
     Setting.SetIsTest(Ui.loadResource(Rez.Strings.IsTest).toNumber() == 1);
-    Setting.SetOpenWeatherToken(
-        Ui.loadResource(Rez.Strings.OpenWeatherApiKeyValue));
-    Setting.SetAccuWeatherToken(
-        Ui.loadResource(Rez.Strings.AccuWeatherApiKeyValue));
+
+    var openWeatherToken = Ui.loadResource(Rez.Strings.OpenWeatherApiKeyValue);
+    if (openWeatherToken != null && openWeatherToken has
+        : length && openWeatherToken.length() > 0) {
+      Setting.SetOpenWeatherToken(openWeatherToken);
+    }
+    // Setting.SetAccuWeatherToken(
+    //     Ui.loadResource(Rez.Strings.AccuWeatherApiKeyValue));
     Setting.SetDeviceName(Ui.loadResource(Rez.Strings.DeviceName));
   }
 

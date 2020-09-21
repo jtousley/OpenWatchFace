@@ -26,11 +26,14 @@ using Toybox.Time as Time;
   var _watchFaceView;
  protected
   var _settingsCache;
+ protected
+  var _forceTemporalEvent;
   static protected var _singleton;
 
   function initialize() {
     AppBase.initialize();
     _singleton = self;
+    _forceTemporalEvent = false;
   }
 
   function setSettings(settings) { _settingsCache = settings; }
@@ -52,6 +55,7 @@ using Toybox.Time as Time;
   // New app settings have been received so trigger a UI update
   //
   function onSettingsChanged() {
+    _forceTemporalEvent = true;
     baseInitApp();
     InitBackgroundEvents();
     _watchFaceView.InvalidateLayout();
@@ -89,10 +93,11 @@ using Toybox.Time as Time;
     var FIVE_MINUTES = new Toybox.Time.Duration(5 * 60);
 
     var lastTime = Background.getLastTemporalEventTime();
-    if (lastTime != null) {
+    if (lastTime != null && !_forceTemporalEvent) {
       var nextTime = lastTime.add(FIVE_MINUTES);
       Background.registerForTemporalEvent(nextTime);
     } else {
+      _forceTemporalEvent = false;
       Background.registerForTemporalEvent(Time.now());
     }
   }
