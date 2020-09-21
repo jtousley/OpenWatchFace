@@ -25,7 +25,7 @@ using Toybox.Time as Time;
 //
 ( : background) class BackgroundServiceDelegate extends Sys.ServiceDelegate {
  protected
-  var _received = {};
+  var _received = null;
   var _lastLocation = [];
   var _lastLocationData = null;
   var _locationKey = null;
@@ -34,11 +34,14 @@ using Toybox.Time as Time;
   function initialize() { Sys.ServiceDelegate.initialize(); }
 
   function onTemporalEvent() {
+    var doUpdate = false;
     try {
       var now = new Time.Moment(Time.now().value());
-      var doUpdate = false;
       var lastEventTime = Setting.GetLastEventTime();
-      if (lastEventTime == null) {
+      var lastWeather = Setting.GetWeatherStorage();
+      if (lastEventTime == null || lastWeather == null ||
+          (lastWeather has
+           : size && lastWeather.size() == 0)) {
         // Sys.println("Updating because last event was null");
         doUpdate = true;
         // _received["event_null"] = 12;
@@ -52,16 +55,21 @@ using Toybox.Time as Time;
           // _received["event_null"] = 9;
         }
       }
-
-      if (doUpdate) {
-        _received["isErr"] = true;
-        // Sys.println("Updateing");
-        RequestUpdate();
-      }
+      lastEventTime = null;
+      lastWeather = null;
 
     } catch (ex) {
-      Sys.println(ex.getErrorMessage());
-      Sys.println(ex.printStackTrace());
+      if (ex has : getErrorMessage) {
+        Sys.println(ex.getErrorMessage());
+      }
+      if (ex has : printStackTrace) {
+        Sys.println(ex.printStackTrace());
+      }
+    }
+    _received = {};
+    if (doUpdate) {
+      _received["isErr"] = true;
+      RequestUpdate();
     }
   }
 
@@ -117,38 +125,38 @@ using Toybox.Time as Time;
 
   function RequestOpenWeather() {
     var url = "https://api.openweathermap.org/data/2.5/weather";
-    Sys.println("Web request: " + url);
 
-    Sys.println("Location : " + _lastLocation);
+    Sys.println("Location : " + _lastLocation[0] + ", " + _lastLocation[1]);
 
     Comm.makeWebRequest(url, 
-    // PARAMS
-    {"lat" => _lastLocation[0],
-          "lon" => _lastLocation[1],
-          "units" => "metric",
-          "appid" => _appid
-    },
-    // OPTIONS
-     {
+      // PARAMS
+      {     "lat" => _lastLocation[0],
+            "lon" => _lastLocation[1],
+            "units" => "metric",
+            "cnt" => 1,
+            "appid" =>  _appid
+      },
+      // OPTIONS
+      {
         :method => Comm.HTTP_REQUEST_METHOD_GET,
         :headers => {"Content-Type" => Communications.REQUEST_CONTENT_TYPE_URL_ENCODED},
         :responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
       },
-       method( : OnReceiveOpenLocationUpdate));
+      method( : OnReceiveOpenLocationUpdate));
   }
 
   function RequestOpenWeatherData() {
     var url = "https://api.openweathermap.org/data/2.5/onecall";
-    Sys.println("Web request: " + url);
+    Sys.println("Requesting data");
 
     Comm.makeWebRequest(url, 
     // PARAMS
-    {"lat" => _lastLocation[0],
+    {     "lat" => _lastLocation[0],
           "lon" => _lastLocation[1],
-          "exclude" => "minutely, hourly",
+          "exclude" => "minutely,hourly",
           "cnt" => 3,
           "units" => "metric",
-          "appid" => _appid
+          "appid" =>  _appid
     },
     // OPTIONS
      {
@@ -171,7 +179,8 @@ using Toybox.Time as Time;
       // var weatherProvider = Setting.GetWeatherProvider();
       var location = Setting.GetLastKnownLocation();
       _appid = Setting.GetOpenWeatherToken();
-      if (location == null || _appid == null) {
+      Sys.println("Appid : " + _appid);
+      if (location == null || _appid == null || _appid == "") {
         Sys.println("Could not get location");
       } else if (false) {  // Accuweather
         if (location != _lastLocation) {
@@ -187,57 +196,82 @@ using Toybox.Time as Time;
         RequestOpenWeather();
       }
     } catch (ex) {
-      Sys.println(ex.getErrorMessage());
-      Sys.println(ex.printStackTrace());
+      if (ex has : getErrorMessage) {
+        Sys.println(ex.getErrorMessage());
+      }
+      if (ex has : printStackTrace) {
+        Sys.println(ex.printStackTrace());
+      }
     }
   }
 
   function OnReceiveOpenLocationUpdate(responseCode, data) {
+    Sys.println("OnReceiveOpenLocationUpdate - Memory: " +
+                Sys.getSystemStats().usedMemory + "/" +
+                Sys.getSystemStats().totalMemory + ":" +
+                Sys.getSystemStats().freeMemory);
     try {
       if (responseCode != 200) {
         _received["isErr"] = true;
-        Sys.println("API calls exceeded");
+        Sys.println("API calls exceeded : " + responseCode);
+        if (data != null) {
+          Sys.println("Data : " + data);
+        } else {
+          Sys.println("null");
+        }
       } else {
         if (data == null) {
           Sys.println("Failed to get response from weather service");
         }
         _received["city"] = data["name"];
-        Sys.println("Location : " + _received["city"]);
       }
     } catch (ex) {
-      Sys.println("get weather error : " + ex.getErrorMessage());
-      Sys.println(ex.printStackTrace());
       _received["isErr"] = true;
+      if (ex has : getErrorMessage) {
+        Sys.println(ex.getErrorMessage());
+      }
+      if (ex has : printStackTrace) {
+        Sys.println(ex.printStackTrace());
+      }
     }
     RequestOpenWeatherData();
   }
 
   function OnReceiveOpenWeatherUpdate(responseCode, data) {
-    Sys.println("OnReceiveOpenWeatherUpdate");
+    // Sys.println("OnReceiveOpenWeatherUpdate");
     try {
       if (responseCode != 200) {
         _received["isErr"] = true;
-        Sys.println("API calls exceeded");
+        Sys.println("API calls exceeded : " + responseCode);
+        if (data != null) {
+          Sys.println("Data : " + data);
+        } else {
+          Sys.println("null");
+        }
       } else {
-        Sys.println("OnReceiveOpenWeatherUpdate - Memory: " +
-                    Sys.getSystemStats().usedMemory + "/" +
-                    Sys.getSystemStats().totalMemory + ":" +
-                    Sys.getSystemStats().freeMemory);
         ParseReceivedData(data);
         data = null;
-        Sys.println("Data interpreted, exiting with : " + _received);
       }
     } catch (ex) {
-      Sys.println("get weather error : " + ex.getErrorMessage());
-      Sys.println(ex.printStackTrace());
       _received["isErr"] = true;
+      if (ex has : getErrorMessage) {
+        Sys.println(ex.getErrorMessage());
+      }
+      if (ex has : printStackTrace) {
+        Sys.println(ex.printStackTrace());
+      }
     }
     try {
       Background.exit(_received);
     } catch (ex) {
-      Sys.println(ex.getErrorMessage());
-      Sys.println(ex.printStackTrace());
+      if (ex has : getErrorMessage) {
+        Sys.println(ex.getErrorMessage());
+      }
+      if (ex has : printStackTrace) {
+        Sys.println(ex.printStackTrace());
+      }
     }
+    _received = null;
   }
 
   function ParseReceivedData(data) {
@@ -481,8 +515,12 @@ using Toybox.Time as Time;
       }
     } catch (ex) {
       _received["isErr"] = true;
-      Sys.println(ex.getErrorMessage());
-      Sys.println(ex.printStackTrace());
+      if (ex has : getErrorMessage) {
+        Sys.println(ex.getErrorMessage());
+      }
+      if (ex has : printStackTrace) {
+        Sys.println(ex.printStackTrace());
+      }
     }
   }
 }

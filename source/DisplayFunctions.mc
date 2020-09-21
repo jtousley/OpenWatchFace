@@ -70,12 +70,8 @@ class DisplayFunctions {
   function DisplayTopLine(layout) {
     var data = [ "", "", "" ];
 
-    // if (_settings.isShowMoon) {
     var moonData = WatchData.GetMoonPhase(Time.now());
     data[0] = moonData[0];
-    // data[0] = (moonData[0] + 118).toChar();
-    // data[1] = (moonData[1] + 78).toChar();
-    // }
 
     // layout["col"] = _settings.connError ? [3] : [0];
     var deviceSettings = Sys.getDeviceSettings();
@@ -367,11 +363,11 @@ class DisplayFunctions {
   function DisplayWind(layout) {
     var weather = _settings.weather;
 
-    var conv = new Conversions();
-    var windMultiplier = conv.windMultiplier[_settings.weatherWindSystem];
+     var windTable = [ 3.6, 1.94384, 1, 2.23694 ];
+
+    var windMultiplier = windTable[_settings.weatherWindSystem];
     var windSpeed = weather._windSpeedMeterSeconds * windMultiplier;
     var formattedWindSpeed = windSpeed.format("%2.1f");
-    var windUnit = conv.windSystemLabel[_settings.weatherWindSystem];
 
     return [ Enumerations.WEATHER_WIND, formattedWindSpeed ];
   }

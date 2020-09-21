@@ -45,38 +45,33 @@ class WatchFaceView extends Ui.WatchFace {
   ];
 
  protected
-  var _funcs = [:DisplayLocation        // = 0
-                                        // , :DisplayBottomAlarmCount     // = 1
-                                        // , :DisplayBottomMessageCount   // = 2
-                , :DisplayLocation      // =
-                , :DisplayLocation      // =
-                , :DisplayDate          // = 3
-                , :DisplayTime          // = 4
-                , :DisplayPmAm          // = 5
-                , :DisplaySeconds       // = 6
-                , :DisplayCurrentTemp   // = 7
-                , :DisplayFeelsTemp     // = 8
-                , :DisplayTodayMaxTemp  // = 9
-                , :DisplayTodayMinTemp  // = 10
-                , :DisplayNextMaxTemp   // = 11
-                , :DisplayNextMinTemp   // = 12
-                , :DisplayNextNextMaxTemp      // = 13
-                , :DisplayNextNextMinTemp      // = 14
-                , :DisplayWeatherOption1       // = 15
-                , :DisplayWeatherOption2       // = 16
-                , :DisplayWeatherOption3       // = 16
-                , :DisplayTodayWeatherIcon     // = 17
-                , :DisplayNextWeatherIcon      // = 18
-                , :DisplayNextNextWeatherIcon  // = 19
-                // , :DisplayWind                 // = 20
-                , :DisplayCurrWeatherIcon
-                , :LoadField3          // = 21
-                , :LoadField4          // = 22
-                , :LoadField5          // = 23
-                , :DisplayWatchStatus  // = 24
-                , :DisplayBottomLine   // = 25
-                // , :DisplayConnection           // = 26
-                , :DisplayTopLine];
+  var _funcs = [:DisplayLocation               // = 0
+                , :DisplayDate                 // = 1
+                , :DisplayTime                 // = 2
+                , :DisplayPmAm                 // = 3
+                , :DisplaySeconds              // = 4
+                , :DisplayCurrentTemp          // = 5
+                , :DisplayFeelsTemp            // = 6
+                , :DisplayTodayMaxTemp         // = 7
+                , :DisplayTodayMinTemp         // = 8
+                , :DisplayNextMaxTemp          // = 9
+                , :DisplayNextMinTemp          // = 10
+                , :DisplayNextNextMaxTemp      // = 11
+                , :DisplayNextNextMinTemp      // = 12
+                , :DisplayWeatherOption1       // = 13
+                , :DisplayWeatherOption2       // = 14
+                , :DisplayWeatherOption3       // = 15
+                , :DisplayTodayWeatherIcon     // = 16
+                , :DisplayNextWeatherIcon      // = 17
+                , :DisplayNextNextWeatherIcon  // = 18
+                , :DisplayCurrWeatherIcon      // = 19
+                , :LoadField3                  // = 20
+                , :LoadField4                  // = 21
+                , :LoadField5                  // = 22
+                , :DisplayWatchStatus          // = 23
+                , :DisplayBottomLine           // = 24
+                , :DisplayTopLine              // = 25
+  ];
 
  protected
   var _wfApp;
@@ -150,7 +145,8 @@ class WatchFaceView extends Ui.WatchFace {
 
       if (pulseData[2]) {
         // dc.setClip(layout["x"][1], layout["y"][1], _secDim[0], _secDim[1]);
-        // dc.setColor(Setting.GetBrightColor(), Setting.GetBackgroundColor());
+        dc.setColor(_colors[Setting.GetTextColor()],
+                    _colors[Setting.GetBackgroundColor()]);
         var font = _fonts[Enumerations.FONT_SMALL];
         dc.drawText(layout["x"][1], layout["y"][1],
                     // layout["font"][1],
@@ -182,7 +178,6 @@ class WatchFaceView extends Ui.WatchFace {
       _lastBg = new Time.Moment(Time.now().value());
     } else if (_lastBg.add(_bgInterval)
                    .lessThan(new Time.Moment(Time.now().value()))) {
-      Sys.println("new bg");
       _lastBg = new Time.Moment(Time.now().value());
       _wfApp.InitBackgroundEvents();
     }
@@ -197,7 +192,6 @@ class WatchFaceView extends Ui.WatchFace {
         funcs = _displayFunctions.method(_funcs[_layouts[i]["func"]])
                     .invoke(_layouts[i]);
       } else {
-        Sys.println("Set funcs empty for: " + i);
         funcs = [ "", "", "", "", "" ];
       }
 

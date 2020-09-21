@@ -46,21 +46,16 @@ class SettingsCache {
     var weatherArray = Setting.GetWeatherStorage();
     weather = new Weather();
     if (weatherArray != null && weatherArray.size() == Enumerations.WVAL_SIZE) {
-      Sys.println("Interpret weather");
       InterpretWeatherData(weatherArray);
     }
   }
 
  public
-  function UpdateWeather(data) {
-    Sys.println("Setting weather -- size : " + data.size());
-    Setting.SetWeatherStorage(data);
-  }
+  function UpdateWeather(data) { Setting.SetWeatherStorage(data); }
 
  protected
   function InterpretWeatherData(weatherArray) {
     weather._city = Setting.GetWeatherCityStorage();
-    Sys.println("City : " + weather._city);
     weather._tempCelcius = weatherArray[Enumerations.WVAL_CURR_TEMP];
     weather._feelsTempCelcius = weatherArray[Enumerations.WVAL_FEEL_TEMP];
     weather._baroPressureBars = weatherArray[Enumerations.WVAL_PRESS];
@@ -90,6 +85,8 @@ class SettingsCache {
     weather._nextNextPrecipitationPercent =
         weatherArray[Enumerations.WVAL_NN_POP];
   }
+
+
 
  public
   var field3;
@@ -127,7 +124,8 @@ class SettingsCache {
   var distanceSystem;
  public
   var altimeterSystem;
-  public var barometricSystem;
+ public
+  var barometricSystem;
   //  public
   //   var showMessage;
   //  public

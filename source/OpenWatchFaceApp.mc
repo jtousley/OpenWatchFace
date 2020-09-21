@@ -59,7 +59,7 @@ using Toybox.Time as Time;
   }
 
   function onBackgroundData(data) {
-    Sys.println("onBackgroundData");
+    // Sys.println("onBackgroundData");
     try {
       if (data != null && data has : toString) {
         var weatherArray = convertReceivedData(data);

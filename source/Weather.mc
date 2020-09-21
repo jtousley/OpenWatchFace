@@ -107,7 +107,6 @@ class Weather {
     var ragged = Enumerations.INTENSITY_NOT_RAGGED;
 
     if (id == null) {
-      Sys.println("ID null");
       return [ icon, intensity, ragged ];
     }
 
