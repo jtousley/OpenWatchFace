@@ -182,7 +182,8 @@ using Toybox.Time as Time;
       Sys.println("Appid : " + _appid);
       if (location == null) {
         Sys.println("Could not get location");
-      } else if (_appid == null || _appid == "") {
+      } else if (_appid == null || (_appid has
+                                    : length && _appid.length() == 0)) {
         Sys.println("Invalid key");
       } else if (false) {  // Accuweather
         if (location != _lastLocation) {

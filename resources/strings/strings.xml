@@ -20,7 +20,9 @@
     <string id = "DisplayCalories">Calories</string>
     <string id = "DisplaySteps">Steps</string>
     <string id = "DisplaySunEvent">Sunrise/Sunset</string>
-    <string id = "DisplaySensorPressure">Sensor Barometric Pressure</string>
+    <string id = "DisplaySensorPressureAmbient">Sensor Barometric Pressure (Ambient)</string>
+    <string id = "DisplaySensorPressureRaw">Sensor Barometric Pressure (Raw)</string>
+    <string id = "DisplaySensorPressureMSL">Sensor Barometric Pressure (Mean Sea Level)</string>
 	
 	<string id = "DisplayHumidity">Humidity</string>
 	<string id = "DisplayDewPoint">Dew Point</string>
@@ -66,7 +68,10 @@
 	<string id="MinColorTitle">Minute Color</string>
 	<string id="TextColorTitle">Text Color</string>
     <string id="IconColorTitle">Icon Color</string>
-    
+    <string id="WeatherCurrentColorTitle">Current Weather Icon Color - when current</string>
+    <string id="WeatherStaleColorTitle">Current Weather Icon Color - when stale</string>
+    <string id="WeatherStaleTimeTitle">Minutes Before Weather Data is Stale</string>
+
     <string id="DateOrderTitle">Date Format</string>
     <string id="DateOrderWDM">WeekDay:Month:Day</string>
     <string id="DateOrderWMD">WeekDay:Day:Month</string>

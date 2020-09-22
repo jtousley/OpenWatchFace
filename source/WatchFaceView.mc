@@ -165,7 +165,7 @@ class WatchFaceView extends Ui.WatchFace {
     // onPartialUpdate(dc);  // No preprocessor???
     // return;
 
-    _displayFunctions.setTime(Gregorian.info(Time.now(), Time.FORMAT_MEDIUM));
+    _displayFunctions.setTime(Time.now());
 
     var info = Activity.getActivityInfo();
 

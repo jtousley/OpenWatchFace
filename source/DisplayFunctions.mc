@@ -30,6 +30,8 @@ class DisplayFunctions {
  protected
   var _gTimeNow;
  protected
+  var _utcTime;
+ protected
   var _settings;
  protected
   var _isInit = false;
@@ -44,7 +46,9 @@ class DisplayFunctions {
     , :DisplayAltitude
     , :DisplayCalories
     , :DisplaySunEvent
-    , :DisplaySensorPressure
+    , :DisplaySensorPressureAmbient
+    , :DisplaySensorPressureRaw
+    , :DisplaySensorPressureMsl
     ];
 
  protected
@@ -59,7 +63,10 @@ class DisplayFunctions {
                         , :DisplayNextPrecipitation
                         , :DisplayNextNextPrecipitation];
 
-  function setTime(time) { _gTimeNow = time; }
+  function setTime(time) {
+    _utcTime = time.value();
+    _gTimeNow = Gregorian.info(time, Time.FORMAT_MEDIUM);
+  }
 
   function setSettings(settings) {
     if (settings == null) {
@@ -354,6 +361,19 @@ class DisplayFunctions {
   }
   function DisplayCurrWeatherIcon(layout) {
     var weather = _settings.weather;
+
+    var now = new Time.Moment(_utcTime );
+    var weatherStaleTime = Setting.GetWeatherStaleTime();
+    var lastEventTime = Setting.GetLastEventTime();
+    layout["col"][0] = Setting.GetWeatherCurrentColor().toNumber();
+    if (weatherStaleTime != null && lastEventTime != null) {
+      var staleDuration = new Time.Duration(weatherStaleTime * 60);
+      var lastEvent = new Time.Moment(lastEventTime);
+      if (lastEvent.add(staleDuration).lessThan(now)) {
+        layout["col"][0] = Setting.GetWeatherStaleColor().toNumber();
+      }
+    }
+
     var data = Weather.convertOpenWeatherIdToIcon(weather._currentId);
     var icon = data[0];
     // var intensity = data[1];
@@ -384,14 +404,14 @@ class DisplayFunctions {
     var sunset = weather._sunsetTime;
     var nextSunrise = weather._nextSunriseTime;
     var currTimeOffset = Sys.getClockTime().timeZoneOffset;
-    if (Time.now().value() < sunrise) {  // next is sunrise
+    if (_utcTime < sunrise) {  // next is sunrise
       var equalizedSunrise = new Time.Moment(sunrise + currTimeOffset);
       var info = Gregorian.utcInfo(equalizedSunrise, Time.FORMAT_SHORT);
       return [
         Enumerations.SUNRISE, info.hour.format("%02u").toString() + ":" +
                                   info.min.format("%02u").toString()
       ];
-    } else if (Time.now().value() < sunset) {  // next is sunset
+    } else if (_utcTime < sunset) {  // next is sunset
       var equalizedSunset = new Time.Moment(sunset + currTimeOffset);
       var info = Gregorian.utcInfo(equalizedSunset, Time.FORMAT_SHORT);
       return [
@@ -496,29 +516,60 @@ class DisplayFunctions {
     return [ Enumerations.CALORIES, calories ];
   }
 
-  // Display the calculated barometric pressure
+  function formatPressure(pressure) {
+    if (_settings.barometricSystem == Enumerations.PRESSURE_MILLIBAR) {
+      pressure = pressure.format("%d");
+    } else if (_settings.barometricSystem == Enumerations.PRESSURE_PASCAL) {
+      pressure = pressure.format("%2.1f");
+    } else if (_settings.barometricSystem == Enumerations.PRESSURE_INCHES) {
+      pressure = pressure.format("%2.1f");
+    }
+    return pressure;
+  }
+
+  // Display the calculated barometric pressure ambient
   //
-  function DisplaySensorPressure(layout) {
+  function DisplaySensorPressureAmbient(layout) {
     var convTable = [ 0.01, 1, 0.0002953 ];  // pascals to
     var pressure = "---";
     var info = Activity.getActivityInfo();
 
     if (info != null && info has
-        : ambientPressure && info.ambientPressure != null && info has
-        : rawAmbientPressure && info.rawAmbientPressure != null && info has
+        : ambientPressure && info.ambientPressure != null) {
+      pressure = formatPressure(info.ambientPressure *
+                                convTable[_settings.barometricSystem]);
+    }
+
+    return [ Enumerations.PRESSURE, pressure ];
+  }
+
+  // Display the calculated barometric pressure raw
+  //
+  function DisplaySensorPressureRaw(layout) {
+    var convTable = [ 0.01, 1, 0.0002953 ];  // pascals to
+    var pressure = "---";
+    var info = Activity.getActivityInfo();
+
+    if (info != null && info has
+        : rawAmbientPressure && info.rawAmbientPressure != null) {
+      pressure = formatPressure(info.rawAmbientPressure *
+                                convTable[_settings.barometricSystem]);
+    }
+
+    return [ Enumerations.PRESSURE, pressure ];
+  }
+
+  // Display the calculated barometric pressure msl
+  //
+  function DisplaySensorPressureMsl(layout) {
+    var convTable = [ 0.01, 1, 0.0002953 ];  // pascals to
+    var pressure = "---";
+    var info = Activity.getActivityInfo();
+
+    if (info != null && info has
         : meanSeaLevelPressure && info.meanSeaLevelPressure != null) {
-      var pressureTypes = [
-        info.ambientPressure, info.rawAmbientPressure, info.meanSeaLevelPressure
-      ];
-      pressure = pressureTypes[_settings.sensorPressureType] *
-                 convTable[_settings.barometricSystem];
-      if (_settings.barometricSystem == Enumerations.PRESSURE_MILLIBAR) {
-        pressure = pressure.format("%d");
-      } else if (_settings.barometricSystem == Enumerations.PRESSURE_PASCAL) {
-        pressure = pressure.format("%2.1f");
-      } else if (_settings.barometricSystem == Enumerations.PRESSURE_INCHES) {
-        pressure = pressure.format("%2.1f");
-      }
+      pressure = formatPressure(info.meanSeaLevelPressure *
+                                convTable[_settings.barometricSystem]);
     }
 
     return [ Enumerations.PRESSURE, pressure ];

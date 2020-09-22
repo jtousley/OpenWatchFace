@@ -69,7 +69,8 @@ using Toybox.Time as Time;
           _settingsCache.UpdateWeather(weatherArray);
           _settingsCache.InitializeWeather();
           // lastEventTime
-          Setting.SetLastEventTime(Time.now().value());
+          var now = Time.now().value();
+          Setting.SetLastEventTime(now);
 
           Ui.requestUpdate();  // ->onUpdate()
         }

@@ -20,8 +20,9 @@
 						1 => Gfx.TEXT_JUSTIFY_CENTER
 						2 => Gfx.TEXT_JUSTIFY_LEFT
 
-		text:		 	0 => use text color TYPE_TEXT
+		type:		 	0 => use text color TYPE_TEXT
 						1 => use icon color	TYPE_ICON
+						2 => NEITHER
 		
 		middle: 120
 	 -->
@@ -47,7 +48,7 @@
 	</jsonData>
 
 	<jsonData id="l_currWeatherIcon">
-		{"x":[165], "y":[60], "col":[7], "font":[105], "jus":[1], "func":19, "type":[1]}
+		{"x":[165], "y":[60], "col":[7], "font":[105], "jus":[1], "func":19}
 	</jsonData>
 	<jsonData id="l_currTemp">
 		{"x":[170], "y":[33], "col":[2], "font":[102], "jus":[1], "func":5, "type":[0]}

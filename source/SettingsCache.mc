@@ -34,7 +34,6 @@ class SettingsCache {
     distanceSystem = Setting.GetDistSystem();
     altimeterSystem = Setting.GetAltimeterSystem();
     barometricSystem = Setting.GetBarometricSystem();
-    sensorPressureType = Setting.GetSensorPressureType();
     // showMessage = Setting.GetShowMessage();
     // showAlarm = Setting.GetShowAlarm();
     dateOrder = Setting.GetDateOrder();
@@ -127,8 +126,6 @@ class SettingsCache {
   var altimeterSystem;
  public
   var barometricSystem;
- public
-  var sensorPressureType;
  public
   var dateOrder;
 }
