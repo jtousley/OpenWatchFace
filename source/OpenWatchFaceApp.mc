@@ -52,10 +52,10 @@ using Toybox.Time as Time;
   // New app settings have been received so trigger a UI update
   //
   function onSettingsChanged() {
-      baseInitApp();
-      InitBackgroundEvents();
-      _watchFaceView.InvalidateLayout();
-      Ui.requestUpdate();
+    baseInitApp();
+    InitBackgroundEvents();
+    _watchFaceView.InvalidateLayout();
+    Ui.requestUpdate();
   }
 
   function onBackgroundData(data) {
@@ -64,13 +64,15 @@ using Toybox.Time as Time;
       if (data != null && data has : toString) {
         var weatherArray = convertReceivedData(data);
         data = null;
-        _settingsCache.UpdateWeather(weatherArray);
-        _settingsCache.InitializeWeather();
+        if (weatherArray != null && weatherArray has
+            : size && weatherArray.size() == Enumerations.WVAL_SIZE) {
+          _settingsCache.UpdateWeather(weatherArray);
+          _settingsCache.InitializeWeather();
+          // lastEventTime
+          Setting.SetLastEventTime(Time.now().value());
 
-        // lastEventTime
-        Setting.SetLastEventTime(Time.now().value());
-
-        Ui.requestUpdate();  // ->onUpdate()
+          Ui.requestUpdate();  // ->onUpdate()
+        }
       }
     } catch (ex) {
       if (ex has : getErrorMessage) {
@@ -122,8 +124,9 @@ using Toybox.Time as Time;
 
     // update weather
     //
-    // var token = Setting.GetOpenWeatherToken() + Setting.GetWeatherProvider();
-    // if (!token.equals(Setting.GetWeatherRefreshToken())) {
+    // var token = Setting.GetOpenWeatherToken() +
+    // Setting.GetWeatherProvider(); if
+    // (!token.equals(Setting.GetWeatherRefreshToken())) {
     //   Setting.SetWeatherRefreshToken(token);
     // }
   }

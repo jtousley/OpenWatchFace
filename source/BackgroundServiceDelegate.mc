@@ -240,16 +240,11 @@ using Toybox.Time as Time;
   }
 
   function OnReceiveOpenWeatherUpdate(responseCode, data) {
-    // Sys.println("OnReceiveOpenWeatherUpdate");
+    Sys.println("OnReceiveOpenWeatherUpdate : " + responseCode);
     try {
       if (responseCode != 200) {
         _received["isErr"] = true;
         Sys.println("API calls exceeded : " + responseCode);
-        if (data != null) {
-          Sys.println("Data : " + data);
-        } else {
-          Sys.println("null");
-        }
       } else {
         ParseReceivedData(data);
         data = null;

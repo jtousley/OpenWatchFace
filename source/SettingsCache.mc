@@ -46,7 +46,8 @@ class SettingsCache {
   function InitializeWeather() {
     var weatherArray = Setting.GetWeatherStorage();
     weather = new Weather();
-    if (weatherArray != null && weatherArray.size() == Enumerations.WVAL_SIZE) {
+    if (weatherArray != null && weatherArray has
+        : size && weatherArray.size() == Enumerations.WVAL_SIZE) {
       InterpretWeatherData(weatherArray);
     }
   }
