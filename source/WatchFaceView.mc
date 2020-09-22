@@ -162,7 +162,7 @@ class WatchFaceView extends Ui.WatchFace {
   // Update the view
   //
   function onUpdate(dc) {
-    onPartialUpdate(dc);  // No preprocessor???
+    // onPartialUpdate(dc);  // No preprocessor???
     // return;
 
     _displayFunctions.setTime(Time.now());

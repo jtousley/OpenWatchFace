@@ -81,7 +81,6 @@ class DisplayFunctions {
     var moonData = WatchData.GetMoonPhase(Time.now());
     data[0] = moonData[0];
 
-    // layout["col"] = _settings.connError ? [3] : [0];
     var deviceSettings = Sys.getDeviceSettings();
     data[1] = (deviceSettings != null && deviceSettings.phoneConnected)
                   ? Enumerations.BLUETOOTH_CONNECTED
@@ -89,7 +88,7 @@ class DisplayFunctions {
 
     if (deviceSettings != null && deviceSettings has : doNotDisturb) {
       layout["col"][2] = deviceSettings.doNotDisturb
-                             ? Enumerations.ColorPaleYellow
+                             ? Enumerations.ColorOrange
                              : Enumerations.ColorLightGray;
       data[2] = Enumerations.DO_NOT_DISTURB;
     }
@@ -579,7 +578,7 @@ class DisplayFunctions {
   //
   function DisplayLocation(layout) {
     var city = _settings.weather._city;
-    var MAX_CITY_LENGTH = 11;
+    var MAX_CITY_LENGTH = 13;
 
     if (city.length() > MAX_CITY_LENGTH) {
       city = city.substring(0, MAX_CITY_LENGTH - 1);

@@ -24,39 +24,31 @@ using Toybox.Activity as Activity;
 using Toybox.Math as Math;
 
 class WatchData {
-
   static function GetMoonPhase(timeNow) {
     var JD = timeNow.value().toDouble() / Gregorian.SECONDS_PER_DAY.toDouble() +
              2440587.500d;
     var IP = Normalize((JD.toDouble() - 2451550.1d) / 29.530588853d);
     var Age = IP * 29.53d;
 
+    Sys.println("Age : " + Age);
     var phase = 0;
     if (Age < 1.84566) {
       phase = Enumerations.NEW_MOON;
-    }  // new moon
-    else if (Age < 5.53699) {
+    } else if (Age < 6.38264) {
       phase = Enumerations.EVENING_CRESCENT;
-    }  // An evening crescent";
-    else if (Age < 9.22831) {
+    } else if (Age < 8.38264) {
       phase = Enumerations.FIRST_QUARTER;
-    }  // A first quarter";
-    else if (Age < 12.91963) {
+    } else if (Age < 13.76529) {
       phase = Enumerations.WAXING_GIBBOUS;
-    }  // A waxing gibbous";
-    else if (Age < 16.61096) {
+    } else if (Age < 15.76529) {
       phase = Enumerations.FULL_MOON;
-    }  // A full moon";
-    else if (Age < 20.30228) {
+    } else if (Age < 21.14794) {
       phase = Enumerations.WANING_GIBBOUS;
-    }  // A waning gibbous";
-    else if (Age < 23.99361) {
+    } else if (Age < 23.14794077932) {
       phase = Enumerations.LAST_QUARTER;
-    }  // A Last quarter";
-    else if (Age < 27.68493) {
+    } else if (Age < 28.53058) {
       phase = Enumerations.MORNING_CRESCENT;
-    }  // A Morning crescent";
-    else {
+    } else {
       phase = Enumerations.NEW_MOON;
     }  // A new moon";
 
