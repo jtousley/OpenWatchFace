@@ -39,17 +39,15 @@ using Toybox.Time as Time;
       var now = new Time.Moment(Time.now().value());
       var lastEventTime = Setting.GetLastEventTime();
       var lastWeather = Setting.GetWeatherStorage();
-      if (lastEventTime == null || lastWeather == null ||
+      var frequency = Setting.GetWeatherUpdateTime();
+      if (lastEventTime == null || lastWeather == null || frequency == null ||
           (lastWeather has
            : size && lastWeather.size() == 0)) {
         doUpdate = true;
       } else {
-        var ONE_HOUR = new Time.Duration(60 * 60);
+        var waitTime = new Time.Duration(frequency * 60);
         var lastEvent = new Time.Moment(lastEventTime);
-        var nextUpdate = lastEvent.add(ONE_HOUR);
-        if (nextUpdate.lessThan(now)) {
-          Sys.println("Update time : " + nextUpdate.value());
-          Sys.println("Now : " + now.value());
+        if (lastEvent.add(waitTime).lessThan(now)) {
           doUpdate = true;
         } else {
           Sys.println("Not enough time elapsed");

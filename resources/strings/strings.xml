@@ -71,6 +71,7 @@
     <string id="WeatherCurrentColorTitle">Current Weather Icon Color - when current</string>
     <string id="WeatherStaleColorTitle">Current Weather Icon Color - when stale</string>
     <string id="WeatherStaleTimeTitle">Minutes Before Weather Data is Stale</string>
+    <string id="WeatherUpdateFrequencyTitle">Minutes To Update Weather Data</string>
 
     <string id="DateOrderTitle">Date Format</string>
     <string id="DateOrderWDM">WeekDay:Month:Day</string>

@@ -162,7 +162,7 @@ class WatchFaceView extends Ui.WatchFace {
   // Update the view
   //
   function onUpdate(dc) {
-    // onPartialUpdate(dc);  // No preprocessor???
+    onPartialUpdate(dc);  // No preprocessor???
     // return;
 
     _displayFunctions.setTime(Time.now());
@@ -187,7 +187,7 @@ class WatchFaceView extends Ui.WatchFace {
     }
 
     dc.clearClip();
-    dc.setColor(Gfx.COLOR_TRANSPARENT, Setting.GetBackgroundColor());
+    dc.setColor(Gfx.COLOR_TRANSPARENT, _colors[Setting.GetBackgroundColor()]);
     dc.clear();
 
     for (var i = 0; i < _layouts.size(); i++) {

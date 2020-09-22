@@ -50,6 +50,7 @@ using Toybox.Application.Storage as Storage;
   static protected var _weatherCurrentColor = "WeatherCurrentColor";
   static protected var _weatherStaleColor = "WeatherStaleColor";
   static protected var _weatherStaleTime = "WeatherStaleTime";
+  static protected var _weatherUpdateTime = "WeatherUpdateFrequency";
   static protected var _hourColor = "HourColor";
   static protected var _minColor = "MinColor";
   static protected var _backgroundColor = "BackgroundColor";
@@ -181,6 +182,17 @@ using Toybox.Application.Storage as Storage;
     var val = App.getApp().getProperty(_weatherStaleColor);
     return (val != null ? val : GetIconColor());
   }
+
+ public
+  static function GetWeatherUpdateTime() {
+    var val = App.getApp().getProperty(  _weatherUpdateTime);
+    if (val != null && val has : toNumber && val.toNumber() > 5) {
+      return val.toNumber();
+    } else {
+      return null;
+    }
+  }
+
  public
   static function GetWeatherStaleTime() {
     var val = App.getApp().getProperty(_weatherStaleTime);

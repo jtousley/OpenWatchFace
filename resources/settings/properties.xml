@@ -10,6 +10,7 @@
     <property id = "WeatherCurrentColor" type = "number">7</property>
     <property id = "WeatherStaleColor" type = "number">13</property>
     <property id = "WeatherStaleTime" type = "string">60</property>
+    <property id = "WeatherUpdateFrequency" type = "string">30</property>
 
     <property id = "field-0" type = "number">7</property>
     <property id = "field-1" type = "number">8</property>
