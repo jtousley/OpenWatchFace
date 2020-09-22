@@ -20,7 +20,7 @@
     <property id = "distSystem" type="number">0</property>
     <property id = "altimeter-system" type = "number">0</property>
     <property id = "barometric-system" type = "number">0</property>
-    <property id = "sensor-barometric-type" type = "number">1</property>
+    <property id = "sensor-barometric-type" type = "number">2</property>
     <property id = "date-order" type = "number">0</property>
 
     <property id = "Open-Weather-API-Token" type = "string"></property>

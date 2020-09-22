@@ -247,8 +247,9 @@ using Toybox.Application.Storage as Storage;
     return (val != null ? val : 0);
   }
 
-  public static function GetSensorPressureType() { 
-   var val = App.getApp().getProperty(_sensorPressureType);
+ public
+  static function GetSensorPressureType() {
+    var val = App.getApp().getProperty(_sensorPressureType);
     return (val != null ? val : 0);
   }
 

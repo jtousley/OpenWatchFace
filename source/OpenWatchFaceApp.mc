@@ -26,14 +26,11 @@ using Toybox.Time as Time;
   var _watchFaceView;
  protected
   var _settingsCache;
- protected
-  var _forceTemporalEvent;
   static protected var _singleton;
 
   function initialize() {
     AppBase.initialize();
     _singleton = self;
-    _forceTemporalEvent = false;
   }
 
   function setSettings(settings) { _settingsCache = settings; }
@@ -55,11 +52,10 @@ using Toybox.Time as Time;
   // New app settings have been received so trigger a UI update
   //
   function onSettingsChanged() {
-    _forceTemporalEvent = true;
-    baseInitApp();
-    InitBackgroundEvents();
-    _watchFaceView.InvalidateLayout();
-    Ui.requestUpdate();
+      baseInitApp();
+      InitBackgroundEvents();
+      _watchFaceView.InvalidateLayout();
+      Ui.requestUpdate();
   }
 
   function onBackgroundData(data) {
@@ -77,8 +73,12 @@ using Toybox.Time as Time;
         Ui.requestUpdate();  // ->onUpdate()
       }
     } catch (ex) {
-      Sys.println(ex.getErrorMessage());
-      Sys.println(ex.printStackTrace());
+      if (ex has : getErrorMessage) {
+        Sys.println(ex.getErrorMessage());
+      }
+      if (ex has : printStackTrace) {
+        Sys.println(ex.printStackTrace());
+      }
     }
   }
 
@@ -93,11 +93,10 @@ using Toybox.Time as Time;
     var FIVE_MINUTES = new Toybox.Time.Duration(5 * 60);
 
     var lastTime = Background.getLastTemporalEventTime();
-    if (lastTime != null && !_forceTemporalEvent) {
+    if (lastTime != null) {
       var nextTime = lastTime.add(FIVE_MINUTES);
       Background.registerForTemporalEvent(nextTime);
     } else {
-      _forceTemporalEvent = false;
       Background.registerForTemporalEvent(Time.now());
     }
   }
