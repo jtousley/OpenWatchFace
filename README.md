@@ -62,7 +62,11 @@ This returns barometric pressure calibrated to sea level. Since pressure varies 
 
 --------------------------------------------------
 ## Changelog
-### version 1.0.13:latest
+### version 1.0.14:latest
+1.0.14
+
+Better precipitation handling
+
 1.0.13
 
 Better lunar handling

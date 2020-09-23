@@ -87,9 +87,9 @@ class DisplayFunctions {
                   : Enumerations.BLUETOOTH_NOT_CONNECTED;
 
     if (deviceSettings != null && deviceSettings has : doNotDisturb) {
-      layout["col"][2] = deviceSettings.doNotDisturb
+      layout["col"][2] = (deviceSettings.doNotDisturb
                              ? Enumerations.ColorOrange
-                             : Enumerations.ColorLightGray;
+                             : Enumerations.ColorLightGray);
       data[2] = Enumerations.DO_NOT_DISTURB;
     }
 
@@ -361,7 +361,7 @@ class DisplayFunctions {
   function DisplayCurrWeatherIcon(layout) {
     var weather = _settings.weather;
 
-    var now = new Time.Moment(_utcTime );
+    var now = new Time.Moment(_utcTime);
     var weatherStaleTime = Setting.GetWeatherStaleTime();
     var lastEventTime = Setting.GetLastEventTime();
     layout["col"][0] = Setting.GetWeatherCurrentColor().toNumber();
@@ -644,7 +644,7 @@ class DisplayFunctions {
   //
   function DisplayTodayPrecipitation(layout) {
     var weather = _settings.weather;
-    var val = weather._todayPrecipitationPercent + "%";
+    var val = (weather._todayPrecipitationPercent * 100).format("%2.1f") + "%";
 
     return [ Enumerations.PRECIPITATION, val ];
   }
@@ -653,7 +653,7 @@ class DisplayFunctions {
   //
   function DisplayNextPrecipitation(layout) {
     var weather = _settings.weather;
-    var val = weather._nextPrecipitationPercent + "%";
+    var val = (weather._nextPrecipitationPercent * 100).format("%2.1f") + "%";
 
     return [ Enumerations.PRECIPITATION, val ];
   }
@@ -662,7 +662,8 @@ class DisplayFunctions {
   //
   function DisplayNextNextPrecipitation(layout) {
     var weather = _settings.weather;
-    var val = weather._nextNextPrecipitationPercent + "%";
+    var val =
+        (weather._nextNextPrecipitationPercent * 100).format("%2.1f") + "%";
 
     return [ Enumerations.PRECIPITATION, val ];
   }

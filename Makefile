@@ -1,7 +1,7 @@
 include properties.mk
 
-#appName = `grep entry manifest.xml | sed 's/.*entry="\([^"]*\).*/\1/'`
-appName = OpenWatchFaceApp
+appName = `grep entry manifest.xml | sed 's/.*entry="\([^"]*\).*/\1/'`
+#appName = OpenWatchFaceApp
 devices = `grep 'iq:product id' manifest.xml | sed 's/.*iq:product id="\([^"]*\).*/\1/'`
 JAVA_OPTIONS = JDK_JAVA_OPTIONS="--add-modules=java.xml.bind"
 

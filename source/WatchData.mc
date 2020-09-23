@@ -30,7 +30,6 @@ class WatchData {
     var IP = Normalize((JD.toDouble() - 2451550.1d) / 29.530588853d);
     var Age = IP * 29.53d;
 
-    Sys.println("Age : " + Age);
     var phase = 0;
     if (Age < 1.84566) {
       phase = Enumerations.NEW_MOON;

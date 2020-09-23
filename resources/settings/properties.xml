@@ -12,12 +12,12 @@
     <property id = "WeatherStaleTime" type = "string">60</property>
     <property id = "WeatherUpdateFrequency" type = "string">30</property>
 
-    <property id = "field-0" type = "number">7</property>
-    <property id = "field-1" type = "number">8</property>
-    <property id = "field-2" type = "number">9</property>
-    <property id = "wfield-0" type = "number">0</property>
-    <property id = "wfield-1" type = "number">1</property>
-    <property id = "wfield-2" type = "number">2</property>
+    <property id = "field-0" type = "number">0</property>
+    <property id = "field-1" type = "number">1</property>
+    <property id = "field-2" type = "number">2</property>
+    <property id = "wfield-0" type = "number">6</property>
+    <property id = "wfield-1" type = "number">0</property>
+    <property id = "wfield-2" type = "number">3</property>
     <property id = "ShowTimeOptions" type = "number">0</property>
     <property id = "tempSystem" type="number">0</property>
     <property id = "windSystem" type="number">1</property>
