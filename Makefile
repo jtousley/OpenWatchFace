@@ -41,9 +41,6 @@ run: build
 test:
 	echo "Device: "$(DEVICE)
 
-deploy: build
-	@cp bin/$(appName).prg $(DEPLOY)
-
 package:
 	@$(SDK_HOME)/bin/monkeyc \
 	--jungles ./release.jungle \

@@ -66,7 +66,11 @@ This returns barometric pressure calibrated to sea level. Since pressure varies 
 
 --------------------------------------------------
 ## Changelog
-### version 1.1.0:latest
+### version 1.2.0:latest
+
+1.2.0
+
+Fix packaging problems with Eclipse
 
 1.1.0
 
