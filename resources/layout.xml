@@ -126,8 +126,8 @@
 	</jsonData>
 
 	<jsonData id="l_top_line">
-		{"x":[85, 120, 155], "y":[10, 5, 10], "col":[14, 2, 2], 
-		"font":[104, 105, 104], "jus":[1, 1, 1], "func":25 }
+		{"x":[85, 120, 155], "y":[10, 5, 10], "col":[14, 3, 2], 
+		"font":[104, 105, 104], "jus":[1, 1, 1], "func":25, "type":[2, 2, 2] }
 	</jsonData>
 
 	<jsonData id="l_horiz_line">

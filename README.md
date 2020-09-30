@@ -7,30 +7,33 @@ To get the weather data, you will need to make an account with OpenWeatherMaps a
 ## Features
 
 City name of location
-Date
-Time
+Date (WDM, WMD, DMW, DMW)
+Time (12, 24)
 AM/PM/Seconds
-Current temp
-Current feels temp
+Current temp (F, C)
+Current feels temp (F, C)
 Current weather icon
-Today max temp
-Today min temp
-Tomorrow max temp
-Tomorrow min temp
-Day after max temp
-Day after min temp
+Today weather icon*
+Today max temp (F, C)
+Today min temp (F, C)
+Tomorrow weather icon*
+Tomorrow max temp (F, C)
+Tomorrow min temp (F, C)
+Day after weather icon*
+Day after max temp (F, C)
+Day after min temp (F, C)
 --------------------------------------------------
 Activities! - Choose 3:
 Pulse
-Distance
+Distance (km, mi, steps)
 Steps (km, mi, steps)
 Floors
 Altitude (m, ft)
-Calories
-Sunrise/Sunset
-Sensor pressure ambient* (mBar, Pa, in)
-Sensor pressure raw* (mBar, Pa, in)
-Sensor pressure mean sea level* (mBar, Pa, in)
+Calories (kcal)
+Next Sunrise/Sunset
+Sensor pressure ambient** (mBar, Pa, in)
+Sensor pressure raw** (mBar, Pa, in)
+Sensor pressure mean sea level** (mBar, Pa, in)
 --------------------------------------------------
 Weather! - Choose 3:
 Humidity (%)
@@ -44,13 +47,15 @@ Tomorrow precipitation (%)
 Day after precipitation (%)
 --------------------------------------------------
 Coming soon:
-Images for better description
 Support for more devices
 
 Please contact me with any suggestions or problems!
 
 
-*Sensor Pressure:
+*These icons support intensity values for certain types of weather:
+'' = none/light intensity, '.' = medium intensity, '..' = high intensity, '...' = extreme intensity, '~' = "ragged"
+
+**Sensor Pressure:
 1. Ambient Pressure
 This returns ambient (local) barometric pressure as measured by the pressure sensor. The data is smoothed by a two-stage filter to reduce noise and instantaneous variation.
 2. Raw Ambient Pressure
@@ -58,11 +63,16 @@ This returns ambient (local) barometric pressure as measured by the internal pre
 3. Sea Level Pressure
 This returns barometric pressure calibrated to sea level. Since pressure varies dues to several factors, a GPS-based altitude must first be obtained, then the ambient (local) pressure is measured by the pressure sensor before conversion to a calibrated barometric pressure value.
 
-## Screenshots
 
 --------------------------------------------------
 ## Changelog
-### version 1.0.14:latest
+### version 1.1.0:latest
+
+1.1.0
+
+Add support for fr245m
+Fix precipitation (again)
+
 1.0.14
 
 Better precipitation handling

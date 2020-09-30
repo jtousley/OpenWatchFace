@@ -7,7 +7,7 @@ JAVA_OPTIONS = JDK_JAVA_OPTIONS="--add-modules=java.xml.bind"
 
 build:
 	$(SDK_HOME)/bin/monkeyc \
-	--jungles ./monkey.jungle \
+	--jungles ./release.jungle \
 	--device $(DEVICE) \
 	--output bin/$(appName).prg \
 	--private-key $(PRIVATE_KEY) \
@@ -18,7 +18,7 @@ buildall:
 		echo "-----"; \
 		echo "Building for" $$device; \
     $(SDK_HOME)/bin/monkeyc \
-		--jungles ./monkey.jungle \
+		--jungles ./release.jungle \
 		--device $$device \
 		--output bin/$(appName)-$$device.prg \
 		--private-key $(PRIVATE_KEY) \
@@ -46,9 +46,9 @@ deploy: build
 
 package:
 	@$(SDK_HOME)/bin/monkeyc \
-	--jungles ./monkey.jungle \
+	--jungles ./release.jungle \
 	--package-app \
 	--release \
-	--output bin/$(appName).iq \
+	--output DEPLOY/$(appName).iq \
 	--private-key $(PRIVATE_KEY) \
 	--warn

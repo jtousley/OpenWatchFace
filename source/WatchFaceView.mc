@@ -159,11 +159,18 @@ class WatchFaceView extends Ui.WatchFace {
     }
   }
 
+  // No preprocessor???
+  (:debug) 
+  function onUpdateHelper(dc) { onPartialUpdate(dc); }
+
+  // No preprocessor???
+  (:production) 
+  function onUpdateHelper(dc) {}
+
   // Update the view
   //
   function onUpdate(dc) {
-    // onPartialUpdate(dc);  // No preprocessor???
-    // return;
+    onUpdateHelper(dc);
 
     _displayFunctions.setTime(Time.now());
 
@@ -202,10 +209,11 @@ class WatchFaceView extends Ui.WatchFace {
       for (var j = 0; j < _layouts[i]["x"].size(); j++) {
         // Sys.println("Setting color for: " + _layouts[i]["x"]);
         var color = _colors[_layouts[i]["col"][j]];
-        if (_layouts[i] has :hasKey && _layouts[i].hasKey("type")) {
+        if (_layouts[i] has : hasKey && _layouts[i].hasKey("type")) {
           if (_layouts[i]["type"][j] == Enumerations.TYPE_TEXT) {  // text color
             color = _colors[Setting.GetTextColor()];
-          } else if (_layouts[i]["type"][j] == Enumerations.TYPE_ICON) { // icon color
+          } else if (_layouts[i]["type"][j] ==
+                     Enumerations.TYPE_ICON) {  // icon color
             color = _colors[Setting.GetIconColor()];
           }
         }

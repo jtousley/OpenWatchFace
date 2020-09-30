@@ -82,14 +82,17 @@ class DisplayFunctions {
     data[0] = moonData[0];
 
     var deviceSettings = Sys.getDeviceSettings();
-    data[1] = (deviceSettings != null && deviceSettings.phoneConnected)
-                  ? Enumerations.BLUETOOTH_CONNECTED
-                  : Enumerations.BLUETOOTH_NOT_CONNECTED;
+    data[1] = Enumerations.BLUETOOTH_NOT_CONNECTED;
+    // layout["col"][1] = Enumerations.ColorRed;
+    if (deviceSettings != null && deviceSettings.phoneConnected) {
+      data[1] = Enumerations.BLUETOOTH_CONNECTED;
+      // layout["col"][1] = Enumerations.ColorBlue;
+    }
 
     if (deviceSettings != null && deviceSettings has : doNotDisturb) {
-      layout["col"][2] = (deviceSettings.doNotDisturb
-                             ? Enumerations.ColorOrange
-                             : Enumerations.ColorLightGray);
+      layout["col"][2] =
+          (deviceSettings.doNotDisturb ? Enumerations.ColorYellow
+                                       : Enumerations.ColorWhite);
       data[2] = Enumerations.DO_NOT_DISTURB;
     }
 
@@ -434,16 +437,21 @@ class DisplayFunctions {
     var distance =
         (info != null && info.distance != null) ? info.distance.toFloat() : 0;
     var steps = (info != null && info.steps != null) ? info.steps : 0;
+    if (steps > 9999) {
+      steps = (steps / 1000.0).format("%d") + "k";  // 10k
+    } else {
+      steps = steps.format("%d");
+    }
     var distanceValues = [
       (distance / 100000).format("%2.1f"),
-      (distance / 160934.4).format("%2.1f"), steps.format("%d")
+      (distance / 160934.4).format("%2.1f"),
+      steps
     ];
     // var distanceTitles = [ "km", "mi", "st." ];
 
     return [
       // distanceTitles[_settings.distanceSystem],
       Enumerations.DISTANCE, distanceValues[_settings.distanceSystem]
-
     ];
   }
 
@@ -451,17 +459,17 @@ class DisplayFunctions {
   //
   function DisplayFloors(layout) {
     var info = ActivityMonitor.getInfo();
+    var floors = "---";
     if (info != null && info has
         : floorsClimbed && info.floorsClimbed != null) {
-      return [ Enumerations.FLOORS, info.floorsClimbed.format("%d") ];
-    } else {
-      return [ Enumerations.FLOORS, "n/a" ];
+      floors = info.floorsClimbed.format("%d");
     }
+    return [ Enumerations.FLOORS, floors ];
   }
 
   function DisplaySteps(layout) {
     var info = ActivityMonitor.getInfo();
-    var steps = "n/a";
+    var steps = "---";
     if (info != null && info has
         : floorsClimbed && info has
         : steps && info.floorsClimbed != null && info.steps != null) {
@@ -507,7 +515,7 @@ class DisplayFunctions {
   //
   function DisplayCalories(layout) {
     var info = ActivityMonitor.getInfo();
-    var calories = "n/a";
+    var calories = "---";
     if (info != null && info.calories != null) {
       calories = info.calories.format("%d");
     }
@@ -644,7 +652,7 @@ class DisplayFunctions {
   //
   function DisplayTodayPrecipitation(layout) {
     var weather = _settings.weather;
-    var val = (weather._todayPrecipitationPercent * 100).format("%2.1f") + "%";
+    var val = (weather._todayPrecipitationPercent * 100).format("%d") + "%";
 
     return [ Enumerations.PRECIPITATION, val ];
   }
@@ -653,7 +661,7 @@ class DisplayFunctions {
   //
   function DisplayNextPrecipitation(layout) {
     var weather = _settings.weather;
-    var val = (weather._nextPrecipitationPercent * 100).format("%2.1f") + "%";
+    var val = (weather._nextPrecipitationPercent * 100).format("%d") + "%";
 
     return [ Enumerations.PRECIPITATION, val ];
   }
@@ -662,12 +670,11 @@ class DisplayFunctions {
   //
   function DisplayNextNextPrecipitation(layout) {
     var weather = _settings.weather;
-    var val =
-        (weather._nextNextPrecipitationPercent * 100).format("%2.1f") + "%";
+    var val = (weather._nextNextPrecipitationPercent * 100).format("%d") + "%";
 
     return [ Enumerations.PRECIPITATION, val ];
   }
-  // Display battery and connection status
+  // Display battery
   //
   function DisplayWatchStatus(layout) {
     var stats = Sys.getSystemStats();

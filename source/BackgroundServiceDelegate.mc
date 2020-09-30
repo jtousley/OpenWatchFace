@@ -25,7 +25,7 @@ using Toybox.Time as Time;
 //
 ( : background) class BackgroundServiceDelegate extends Sys.ServiceDelegate {
  protected
-  var _received = null;
+  var _received = {};
   var _lastLocation = [];
   var _lastLocationData = null;
   var _locationKey = null;
@@ -66,7 +66,6 @@ using Toybox.Time as Time;
     }
     _received = {};
     if (doUpdate) {
-      _received["isErr"] = true;
       RequestUpdate();
     }
   }
@@ -116,15 +115,12 @@ using Toybox.Time as Time;
                                 : OnReceiveOpenWeatherUpdate));
       }
     } else {
-      // _received.put("isErr", true);
       _received["isErr"] = true;
     }
   }
 
   function RequestOpenWeather() {
     var url = "https://api.openweathermap.org/data/2.5/weather";
-
-    Sys.println("Location : " + _lastLocation[0] + ", " + _lastLocation[1]);
 
     Comm.makeWebRequest(url, 
       // PARAMS
@@ -192,8 +188,6 @@ using Toybox.Time as Time;
         }
       } else {
         _lastLocation = location;
-        // RequestOpenWeatherLocation();
-        // RequestOpenWeatherData();
         RequestOpenWeather();
       }
     } catch (ex) {
@@ -215,11 +209,6 @@ using Toybox.Time as Time;
       if (responseCode != 200) {
         _received["isErr"] = true;
         Sys.println("API calls exceeded : " + responseCode);
-        if (data != null) {
-          Sys.println("Data : " + data);
-        } else {
-          Sys.println("null");
-        }
       } else {
         if (data == null) {
           Sys.println("Failed to get response from weather service");
@@ -235,7 +224,11 @@ using Toybox.Time as Time;
         Sys.println(ex.printStackTrace());
       }
     }
-    RequestOpenWeatherData();
+    if (_received["isErr"]) {
+      Background.exit(_received);
+    } else {
+      RequestOpenWeatherData();
+    }
   }
 
   function OnReceiveOpenWeatherUpdate(responseCode, data) {
@@ -267,7 +260,7 @@ using Toybox.Time as Time;
         Sys.println(ex.printStackTrace());
       }
     }
-    _received = null;
+    _received = {};
   }
 
   function ParseReceivedData(data) {

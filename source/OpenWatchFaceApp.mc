@@ -71,8 +71,6 @@ using Toybox.Time as Time;
           // lastEventTime
           var now = Time.now().value();
           Setting.SetLastEventTime(now);
-
-          Ui.requestUpdate();  // ->onUpdate()
         }
       }
     } catch (ex) {
