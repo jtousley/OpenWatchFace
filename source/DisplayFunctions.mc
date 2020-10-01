@@ -32,8 +32,6 @@ class DisplayFunctions {
  protected
   var _utcTime;
  protected
-  var _lastSteps = "---";
- protected
   var _settings;
  protected
   var _isInit = false;
@@ -438,7 +436,7 @@ class DisplayFunctions {
     var info = ActivityMonitor.getInfo();
     var distance =
         (info != null && info.distance != null) ? info.distance.toFloat() : 0;
-    var steps = (info != null && info.steps != null) ? info.steps : 0;
+    var steps = info.steps;
     if (steps > 9999) {
       steps = (steps / 1000.0).format("%d") + "k";  // 10k
     } else {
@@ -479,10 +477,7 @@ class DisplayFunctions {
       } else {
         steps.format("%d");
       }
-      _lastSteps = steps;
-    } else {
-      steps = _lastSteps;
-    }
+    } 
     return [ Enumerations.STEPS, steps ];
   }
 
@@ -591,7 +586,7 @@ class DisplayFunctions {
   //
   function DisplayLocation(layout) {
     var city = _settings.weather._city;
-    var MAX_CITY_LENGTH = 13;
+    var MAX_CITY_LENGTH = (layout["len"] != null ? layout["len"][0] : 12);
 
     if (city.length() > MAX_CITY_LENGTH) {
       city = city.substring(0, MAX_CITY_LENGTH - 1);

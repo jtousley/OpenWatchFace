@@ -66,7 +66,11 @@ This returns barometric pressure calibrated to sea level. Since pressure varies 
 
 --------------------------------------------------
 ## Changelog
-### version 1.2.2:latest
+### version 1.2.3:latest
+
+1.2.3
+
+Add support for vivoactive4
 
 1.2.2
 

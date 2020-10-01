@@ -236,7 +236,6 @@ using Toybox.Application.Storage as Storage;
  public
   static function SetLastKnownLocation(lastKnownLocation) {
     App.getApp().setProperty(_lastKnownLocation, lastKnownLocation);
-    // Storage.setValue(_lastKnownLocation, lastKnownLocation);
   }
 
  public
