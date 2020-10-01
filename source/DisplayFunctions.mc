@@ -32,6 +32,8 @@ class DisplayFunctions {
  protected
   var _utcTime;
  protected
+  var _lastSteps = "---";
+ protected
   var _settings;
  protected
   var _isInit = false;
@@ -474,7 +476,12 @@ class DisplayFunctions {
       steps = info.steps;
       if (steps > 9999) {
         steps = (steps / 1000.0).format("%d") + "k";  // x.yk
+      } else {
+        steps.format("%d");
       }
+      _lastSteps = steps;
+    } else {
+      steps = _lastSteps;
     }
     return [ Enumerations.STEPS, steps ];
   }

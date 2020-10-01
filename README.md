@@ -66,7 +66,11 @@ This returns barometric pressure calibrated to sea level. Since pressure varies 
 
 --------------------------------------------------
 ## Changelog
-### version 1.2.1:latest
+### version 1.2.2:latest
+
+1.2.2
+
+Assistance for users with intermittent steps
 
 1.2.1
 
