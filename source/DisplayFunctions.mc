@@ -470,9 +470,7 @@ class DisplayFunctions {
   function DisplaySteps(layout) {
     var info = ActivityMonitor.getInfo();
     var steps = "---";
-    if (info != null && info has
-        : floorsClimbed && info has
-        : steps && info.floorsClimbed != null && info.steps != null) {
+    if (info != null && info has : steps && info.steps != null) {
       steps = info.steps;
       if (steps > 9999) {
         steps = (steps / 1000.0).format("%d") + "k";  // x.yk

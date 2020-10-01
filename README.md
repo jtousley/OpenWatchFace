@@ -66,7 +66,11 @@ This returns barometric pressure calibrated to sea level. Since pressure varies 
 
 --------------------------------------------------
 ## Changelog
-### version 1.2.0:latest
+### version 1.2.1:latest
+
+1.2.1
+
+Fix steps for fr245m
 
 1.2.0
 
