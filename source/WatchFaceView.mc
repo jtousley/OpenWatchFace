@@ -58,27 +58,26 @@ class WatchFaceView extends Ui.WatchFace {
                 , :DisplayNextMinTemp          // = 10
                 , :DisplayNextNextMaxTemp      // = 11
                 , :DisplayNextNextMinTemp      // = 12
-                , :DisplayWeatherOption1       // = 13
-                , :DisplayWeatherOption2       // = 14
-                , :DisplayWeatherOption3       // = 15
-                , :DisplayTodayWeatherIcon     // = 16
-                , :DisplayNextWeatherIcon      // = 17
-                , :DisplayNextNextWeatherIcon  // = 18
-                , :DisplayCurrWeatherIcon      // = 19
-                , :LoadField3                  // = 20
-                , :LoadField4                  // = 21
-                , :LoadField5                  // = 22
-                , :DisplayWatchStatus          // = 23
-                , :DisplayBottomLine           // = 24
-                , :DisplayTopLine              // = 25
+                , :DisplayThirdMaxTemp         // = 13
+                , :DisplayThirdMinTemp         // = 14
+                , :DisplayWeatherOption1       // = 15
+                , :DisplayWeatherOption2       // = 16
+                , :DisplayWeatherOption3       // = 17
+                , :DisplayTodayWeatherIcon     // = 18
+                , :DisplayNextWeatherIcon      // = 19
+                , :DisplayNextNextWeatherIcon  // = 20
+                , :DisplayThirdWeatherIcon     // = 21
+                , :DisplayCurrWeatherIcon      // = 22
+                , :LoadField3                  // = 23
+                , :LoadField4                  // = 24
+                , :LoadField5                  // = 25
+                , :DisplayWatchStatus          // = 26
+                , :DisplayBottomLine           // = 27
+                , :DisplayTopLine              // = 28
   ];
 
  protected
   var _wfApp;
-  //  protected
-  //   var _secDim;
-  //  protected
-  //   var _is90 = false;
  protected
   var _displayFunctions = new DisplayFunctions();
  protected
@@ -109,33 +108,19 @@ class WatchFaceView extends Ui.WatchFace {
     }
     // Setting.SetAccuWeatherToken(
     //     Ui.loadResource(Rez.Strings.AccuWeatherApiKeyValue));
-    Setting.SetDeviceName(Ui.loadResource(Rez.Strings.DeviceName));
   }
 
   // Load your resources here
   //
-  function onLayout(dc) {
-    // _secDim = [
-    //   dc.getTextWidthInPixels("000", _fonts[Enumerations.FONT_SMALL]),
-    //   dc.getFontHeight(_fonts[Enumerations.FONT_SMALL])
-    // ];  // Font latoBlack_small
-
-    InvalidateLayout();
-  }
+  function onLayout(dc) { InvalidateLayout(); }
 
   // calls every second for partial update
   //
   function onPartialUpdate(dc) {
-    // Sys.println("On partial update");
     if (Setting.GetIsShowSeconds()) {
-      // dc.setClip(_layouts[Enumerations.LAYOUT_SEC]["x"][0] - _secDim[0],
-      //            _layouts[Enumerations.LAYOUT_SEC]["y"][0],
-      //            _layouts[Enumerations.LAYOUT_SEC]["x"][0] + 1, _secDim[1]);
       dc.setColor(_colors[Setting.GetTextColor()],
                   _colors[Setting.GetBackgroundColor()]);
       var font = _fonts[Enumerations.FONT_SMALL];
-      // var font = _layouts[Enumerations.LAYOUT_SEC]["font"][0];
-      // font = ((font > 100) ? _fonts[font - 100] : _fonts[font]);
       dc.drawText(_layouts[Enumerations.LAYOUT_SEC]["x"][0],
                   _layouts[Enumerations.LAYOUT_SEC]["y"][0], font,
                   Sys.getClockTime().sec.format("%02d"),
@@ -146,9 +131,7 @@ class WatchFaceView extends Ui.WatchFace {
       var layout =
           _layouts[Enumerations.LAYOUT_FIELD_3 + Setting.GetPulseField()];
       var pulseData = _displayFunctions.DisplayPulse(layout);
-
       if (pulseData[2]) {
-        // dc.setClip(layout["x"][1], layout["y"][1], _secDim[0], _secDim[1]);
         dc.setColor(_colors[Setting.GetTextColor()],
                     _colors[Setting.GetBackgroundColor()]);
         var font = _fonts[Enumerations.FONT_SMALL];
@@ -160,12 +143,10 @@ class WatchFaceView extends Ui.WatchFace {
   }
 
   // No preprocessor???
-  (:debug) 
-  function onUpdateHelper(dc) { onPartialUpdate(dc); }
+  ( : debug) function onUpdateHelper(dc) { onPartialUpdate(dc); }
 
   // No preprocessor???
-  (:production) 
-  function onUpdateHelper(dc) {}
+  ( : production) function onUpdateHelper(dc) {}
 
   // Update the view
   //
@@ -208,6 +189,10 @@ class WatchFaceView extends Ui.WatchFace {
 
       for (var j = 0; j < _layouts[i]["x"].size(); j++) {
         // Sys.println("Setting color for: " + _layouts[i]["x"]);
+        // Do not display layout elements with "hide" property set
+        if (_layouts[i]["hide"] != null && _layouts[i]["hide"][j] == 1) {
+          continue;
+        }
         var color = _colors[_layouts[i]["col"][j]];
         if (_layouts[i] has : hasKey && _layouts[i].hasKey("type")) {
           if (_layouts[i]["type"][j] == Enumerations.TYPE_TEXT) {  // text color
@@ -269,41 +254,56 @@ class WatchFaceView extends Ui.WatchFace {
 
     _layouts = [];
 
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_time));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_date));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_top_line));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_sec));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_pmam));
-
-    // if (!Sys.getDeviceSettings().is24Hour) {
-    //   _layouts.put("pmam", Ui.loadResource(
-    //                            // _is90 ? Rez.JsonData.l_pmam_f90 :
-    //                            Rez.JsonData.l_pmam));
-    // }
-
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_currTemp));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_currFeelsTemp));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_todayMaxTemp));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_todayMinTemp));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_nextMaxTemp));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_nextMinTemp));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_nextNextMaxTemp));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_nextNextMinTemp));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_weatherOption1));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_weatherOption2));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_weatherOption3));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_todayWeatherIcon));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_currWeatherIcon));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_nextWeatherIcon));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_nextNextWeatherIcon));
-
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_city_left));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_field3));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_field4));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_field5));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_battery));
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_bottom_line1));
-
-    // _displayFunctions = new DisplayFunctions();
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_city_left));      // DisplayLocation  0
+    _layouts.add(Ui.loadResource(Rez.JsonData.l_date));  // DisplayDate  1
+    _layouts.add(Ui.loadResource(Rez.JsonData.l_time));  // DisplayTime  2
+    _layouts.add(Ui.loadResource(Rez.JsonData.l_pmam));  // DisplayPmAm  3
+    _layouts.add(Ui.loadResource(Rez.JsonData.l_sec));   // DisplaySeconds  4
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_currTemp));  // DisplayCurrentTemp  5
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_currFeelsTemp));  // DisplayFeelsTemp 6
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_todayMaxTemp));  // DisplayTodayMaxTemp 7
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_todayMinTemp));  // DisplayTodayMinTemp 8
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_nextMaxTemp));  // DisplayNextMaxTemp 9
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_nextMinTemp));  // DisplayNextMinTemp 10
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_nn_maxTemp));  // DisplayNextNextMaxTemp       11
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_nn_minTemp));  // DisplayNextNextMinTemp       12
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_thd_maxTemp));  // DisplayThirdMaxTemp 13
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_thd_minTemp));  // DisplayThirdMinTemp 14
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_weatherOption1));  // DisplayWeatherOption1        15
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_weatherOption2));  // DisplayWeatherOption2        16
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_weatherOption3));  // DisplayWeatherOption3        17
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_t_weatherIcon));  // DisplayTodayWeatherIcon      18
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_n_weatherIcon));  // DisplayNextWeatherIcon = 19
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_nn_weatherIcon));  // DisplayNextNextWeatherIcon   20
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_thirdWeatherIcon));  // DisplayThirdWeatherIcon      21
+    _layouts.add(Ui.loadResource(
+        Rez.JsonData.l_currWeatherIcon));  // DisplayCurrWeatherIcon 22
+    _layouts.add(Ui.loadResource(Rez.JsonData.l_field3));  // LoadField3  23
+    _layouts.add(Ui.loadResource(Rez.JsonData.l_field4));  // LoadField4  24
+    _layouts.add(Ui.loadResource(Rez.JsonData.l_field5));  // LoadField5  25
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_battery));  // DisplayWatchStatus  26
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_bottom_line1));  // DisplayBottomLine  27
+    _layouts.add(
+        Ui.loadResource(Rez.JsonData.l_top_line));  // DisplayTopLine 28
   }
 }

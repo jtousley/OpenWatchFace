@@ -61,17 +61,14 @@ using Toybox.Time as Time;
   function onBackgroundData(data) {
     // Sys.println("onBackgroundData");
     try {
-      if (data != null && data has : toString) {
-        var weatherArray = convertReceivedData(data);
-        data = null;
-        if (weatherArray != null && weatherArray has
-            : size && weatherArray.size() == Enumerations.WVAL_SIZE) {
-          _settingsCache.UpdateWeather(weatherArray);
-          _settingsCache.InitializeWeather();
-          // lastEventTime
-          var now = Time.now().value();
-          Setting.SetLastEventTime(now);
-        }
+      if (data != null && data has
+          : size && data.size() == Enumerations.WVAL_SIZE) {
+        Sys.println("Data valid : " + data.toString());
+        _settingsCache.UpdateWeather(data);
+        _settingsCache.InitializeWeather();
+        // lastEventTime
+        var now = Time.now().value();
+        Setting.SetLastEventTime(now);
       }
     } catch (ex) {
       if (ex has : getErrorMessage) {
@@ -86,11 +83,6 @@ using Toybox.Time as Time;
   function getServiceDelegate() { return [new BackgroundServiceDelegate()]; }
 
   function InitBackgroundEvents() {
-    Setting.SetConError(false);
-    // var time = System.getClockTime();
-    // Sys.println(Lang.format("callback happened $1$:$2$:$3$", [time.hour,
-    // time.min, time.sec]));
-
     var FIVE_MINUTES = new Toybox.Time.Duration(5 * 60);
 
     var lastTime = Background.getLastTemporalEventTime();
@@ -128,135 +120,5 @@ using Toybox.Time as Time;
     // (!token.equals(Setting.GetWeatherRefreshToken())) {
     //   Setting.SetWeatherRefreshToken(token);
     // }
-  }
-
-  function convertReceivedData(data) {
-    // Sys.println("on bg data : " + data.toString());
-
-    var weatherArray = [];
-
-    if (data has : hasKey && data["city"] != null) {
-      Setting.SetWeatherCityStorage(data["city"]);
-    }
-
-    if (data has : hasKey && data["curr_temp"] != null) {
-      weatherArray.add(data["curr_temp"]);
-    }
-
-    if (data has : hasKey && data["feels_temp"] != null) {
-      weatherArray.add(data["feels_temp"]);
-    }
-
-    if (data has : hasKey && data["pressure"] != null) {
-      weatherArray.add(data["pressure"]);
-    }
-
-    if (data has : hasKey && data["humidity"] != null) {
-      weatherArray.add(data["humidity"]);
-    }
-
-    if (data has : hasKey && data["wind_speed"] != null) {
-      weatherArray.add(data["wind_speed"]);
-    }
-
-    if (data has : hasKey && data["wind_deg"] != null) {
-      weatherArray.add(data["wind_deg"]);
-    }
-
-    if (data has : hasKey && data["uvi"] != null) {
-      weatherArray.add(data["uvi"]);
-    }
-
-    if (data has : hasKey && data["sunrise"] != null) {
-      weatherArray.add(data["sunrise"]);
-    }
-
-    if (data has : hasKey && data["sunset"] != null) {
-      weatherArray.add(data["sunset"]);
-    }
-
-    if (data has : hasKey && data["nextSunrise"] != null) {
-      weatherArray.add(data["nextSunrise"]);
-    }
-
-    if (data has : hasKey && data["dew_point"] != null) {
-      weatherArray.add(data["dew_point"]);
-    }
-
-    if (data has : hasKey && data["current_id"] != null) {
-      weatherArray.add(data["current_id"]);
-    }
-
-    if (data has : hasKey && data["dt"] != null) {
-      weatherArray.add(data["dt"]);
-    }
-
-    // TODAY
-
-    if (data has : hasKey && data["today_min"] != null) {
-      weatherArray.add(data["today_min"]);
-    }
-
-    if (data has : hasKey && data["today_max"] != null) {
-      weatherArray.add(data["today_max"]);
-    }
-
-    if (data has : hasKey && data["today_id"] != null) {
-      weatherArray.add(data["today_id"]);
-    }
-
-    if (data has : hasKey && data["today_clouds"] != null) {
-      weatherArray.add(data["today_clouds"]);
-    }
-
-    if (data has : hasKey && data["today_clouds"] != null) {
-      weatherArray.add(data["today_pop"]);
-    }
-
-    // NEXT DAY
-
-    if (data has : hasKey && data["next_min"] != null) {
-      weatherArray.add(data["next_min"]);
-    }
-
-    if (data has : hasKey && data["next_max"] != null) {
-      weatherArray.add(data["next_max"]);
-    }
-
-    if (data has : hasKey && data["next_id"] != null) {
-      weatherArray.add(data["next_id"]);
-    }
-
-    if (data has : hasKey && data["next_clouds"] != null) {
-      weatherArray.add(data["next_clouds"]);
-    }
-
-    if (data has : hasKey && data["next_pop"] != null) {
-      weatherArray.add(data["next_pop"]);
-    }
-
-    // NEXT NEXT DAY
-
-    if (data has : hasKey && data["nextNext_min"] != null) {
-      weatherArray.add(data["nextNext_min"]);
-    }
-
-    if (data has : hasKey && data["nextNext_max"] != null) {
-      weatherArray.add(data["nextNext_max"]);
-    }
-
-    if (data has : hasKey && data["nextNext_id"] != null) {
-      weatherArray.add(data["nextNext_id"]);
-    }
-
-    if (data has : hasKey && data["nextNext_clouds"] != null) {
-      weatherArray.add(data["nextNext_clouds"]);
-    }
-
-    if (data has : hasKey && data["nextNext_pop"] != null) {
-      weatherArray.add(data["nextNext_pop"]);
-    }
-
-    return weatherArray;
   }
 }

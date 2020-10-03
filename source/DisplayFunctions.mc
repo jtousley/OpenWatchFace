@@ -61,7 +61,8 @@ class DisplayFunctions {
                         , :DisplayUVI
                         , :DisplayTodayPrecipitation
                         , :DisplayNextPrecipitation
-                        , :DisplayNextNextPrecipitation];
+                        , :DisplayNextNextPrecipitation
+                        , :DisplaySmartWeather];
 
   function setTime(time) {
     _utcTime = time.value();
@@ -78,7 +79,7 @@ class DisplayFunctions {
   function DisplayTopLine(layout) {
     var data = [ "", "", "" ];
 
-    var moonData = WatchData.GetMoonPhase(Time.now());
+    var moonData = GetMoonPhase(Time.now());
     data[0] = moonData[0];
 
     var deviceSettings = Sys.getDeviceSettings();
@@ -217,9 +218,9 @@ class DisplayFunctions {
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
+    // temperature = 123;
 
     return [temperature];
-    // }
   }
 
   function DisplayFeelsTemp(layout) {
@@ -231,6 +232,7 @@ class DisplayFunctions {
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
+    // temperature = 456;
 
     return [temperature];
   }
@@ -313,6 +315,32 @@ class DisplayFunctions {
     return [temperature];
   }
 
+  function DisplayThirdMaxTemp(layout) {
+    var weather = _settings.weather;
+
+    var temperature = weather._nextNextMaxTempCelcius;
+    if (_settings.weatherTempSystem ==
+        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+      temperature = temperature * 1.8 + 32;
+    }
+    temperature = temperature.format("%d");
+
+    return [temperature];
+  }
+
+  function DisplayThirdMinTemp(layout) {
+    var weather = _settings.weather;
+
+    var temperature = weather._nextNextMinTempCelcius;
+    if (_settings.weatherTempSystem ==
+        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+      temperature = temperature * 1.8 + 32;
+    }
+    temperature = temperature.format("%d");
+
+    return [temperature];
+  }
+
   function DisplayWeatherOption1(layout) {
     if (_settings.weatherField0 < _weatherFuncs.size() &&
         _settings.weatherField0 >= 0 &&
@@ -361,18 +389,25 @@ class DisplayFunctions {
 
     return data;
   }
+  function DisplayThirdWeatherIcon(layout) {
+    var weather = _settings.weather;
+    var data = Weather.convertOpenWeatherIdToIcon(weather._thirdPrimaryId);
+
+    return data;
+  }
+
   function DisplayCurrWeatherIcon(layout) {
     var weather = _settings.weather;
 
     var now = new Time.Moment(_utcTime);
     var weatherStaleTime = Setting.GetWeatherStaleTime();
     var lastEventTime = Setting.GetLastEventTime();
-    layout["col"][0] = Setting.GetWeatherCurrentColor().toNumber();
+    layout["col"][0] = Setting.GetAlertColor().toNumber();
     if (weatherStaleTime != null && lastEventTime != null) {
       var staleDuration = new Time.Duration(weatherStaleTime * 60);
       var lastEvent = new Time.Moment(lastEventTime);
-      if (lastEvent.add(staleDuration).lessThan(now)) {
-        layout["col"][0] = Setting.GetWeatherStaleColor().toNumber();
+      if (!lastEvent.add(staleDuration).lessThan(now)) {
+        layout["col"][0] = Setting.GetWeatherCurrentColor().toNumber();
       }
     }
 
@@ -436,30 +471,21 @@ class DisplayFunctions {
     var info = ActivityMonitor.getInfo();
     var distance =
         (info != null && info.distance != null) ? info.distance.toFloat() : 0;
-    var steps = info.steps;
-    if (steps > 9999) {
-      steps = (steps / 1000.0).format("%d") + "k";  // 10k
-    } else {
-      steps = steps.format("%d");
-    }
-    var distanceValues = [
-      (distance / 100000).format("%2.1f"),
-      (distance / 160934.4).format("%2.1f"),
-      steps
-    ];
-    // var distanceTitles = [ "km", "mi", "st." ];
 
-    return [
-      // distanceTitles[_settings.distanceSystem],
-      Enumerations.DISTANCE, distanceValues[_settings.distanceSystem]
-    ];
+    if (_settings.distanceSystem == Enumerations.DISTANCE_KM) {
+      distance = (distance / 100000).format("%2.1f");
+    } else {
+      distance = (distance / 160934.4).format("%2.1f");
+    }
+
+    return [ Enumerations.DISTANCE, distance ];
   }
 
   // Display the number of floors climbed for the current day.
   //
   function DisplayFloors(layout) {
     var info = ActivityMonitor.getInfo();
-    var floors = "---";
+    var floors = 0;
     if (info != null && info has
         : floorsClimbed && info.floorsClimbed != null) {
       floors = info.floorsClimbed.format("%d");
@@ -469,7 +495,7 @@ class DisplayFunctions {
 
   function DisplaySteps(layout) {
     var info = ActivityMonitor.getInfo();
-    var steps = "---";
+    var steps = 0;
     if (info != null && info has : steps && info.steps != null) {
       steps = info.steps;
       if (steps > 9999) {
@@ -477,7 +503,7 @@ class DisplayFunctions {
       } else {
         steps.format("%d");
       }
-    } 
+    }
     return [ Enumerations.STEPS, steps ];
   }
 
@@ -582,16 +608,29 @@ class DisplayFunctions {
     return [ Enumerations.PRESSURE, pressure ];
   }
 
+  function trimString(str, length) {
+    var ret = "";
+    if (str != null && str.length() > length) {
+      str = str.substring(0, length - 1);
+      ret = str + "~";
+    }
+    return ret;
+  }
   // Display current city name based on known GPS location
   //
   function DisplayLocation(layout) {
-    var city = _settings.weather._city;
     var MAX_CITY_LENGTH = (layout["len"] != null ? layout["len"][0] : 12);
 
-    if (city.length() > MAX_CITY_LENGTH) {
-      city = city.substring(0, MAX_CITY_LENGTH - 1);
-      city = city + "~";
+    if (_settings.weather._alertExists == 1) {
+      var alertName = trimString(_settings.weather._alertName, MAX_CITY_LENGTH);
+      layout["col"][0] = Setting.GetAlertColor();
+      return [alertName];
+    } else {
+      layout["col"][0] = Setting.GetTextColor();
     }
+    // var tmp = city.toCharArray();
+    // Sys.println("Val : " + tmp[0].toNumber());
+    var city = trimString(_settings.weather._city, MAX_CITY_LENGTH);
 
     return [city];
   }
@@ -653,6 +692,7 @@ class DisplayFunctions {
   function DisplayTodayPrecipitation(layout) {
     var weather = _settings.weather;
     var val = (weather._todayPrecipitationPercent * 100).format("%d") + "%";
+    // var val = "100%";
 
     return [ Enumerations.PRECIPITATION, val ];
   }
@@ -674,16 +714,157 @@ class DisplayFunctions {
 
     return [ Enumerations.PRECIPITATION, val ];
   }
+
+  // Display the most important water value
+  //
+  function DisplaySmartWeather(layout) {
+    var weather = _settings.weather;
+    var rain = weather._rainDepth_mm;
+    if (rain > 0) {
+      // if the user like his distances in stupid, he probably likes his
+      // precipitation the same way
+      if (_settings.distanceSystem != Enumerations.DISTANCE_KM) {
+        rain = (rain / 25.4);
+      }
+      return [ Enumerations.WEATHER_RAIN, rain.format("%1.2f") ];
+    }
+
+    var snow = weather._snowDepth_mm;
+    if (snow > 0) {
+      // if the user like his distances in stupid, he probably likes his
+      // precipitation the same way
+      if (_settings.distanceSystem != Enumerations.DISTANCE_KM) {
+        snow = (snow / 25.4);
+      }
+      return [ Enumerations.WEATHER_SNOW, snow.format("%1.2f") ];
+    }
+
+    var wind = weather._windGust_meterSecs;
+    if (wind > 0) {
+      var windTable = [ 3.6, 1.94384, 1, 2.23694 ];
+      var windMultiplier = windTable[_settings.weatherWindSystem];
+      var windSpeed = wind * windMultiplier;
+      var formattedWindSpeed = windSpeed.format("%2.1f");
+
+      return [ Enumerations.WEATHER_WIND, formattedWindSpeed ];
+    }
+
+    var humidity = weather._humidityPercentage;
+    if (humidity > 50) {
+      return [ Enumerations.HUMIDITY, humidity + "%" ];
+    }
+
+    var uv = weather._uvIndex;
+
+    return [ Enumerations.UV_INDEX, uv.format("%2.1f") ];
+  }
+
   // Display battery
   //
   function DisplayWatchStatus(layout) {
     var stats = Sys.getSystemStats();
     var batteryLevel = (stats != null) ? (stats.battery).toNumber() : 0;
 
-    // set red color if battery level too low
-    //
-    // layout["col"] = batteryLevel <= 20 ? [3] : [0];
+    // set alert color if battery level too low
+    if (batteryLevel < 25) {
+      layout["col"][0] = Setting.GetAlertColor();
+      layout["col"][1] = Setting.GetAlertColor();
+    } else {
+      layout["col"][0] = Setting.GetIconColor();
+      layout["col"][1] = Setting.GetTextColor();
+    }
 
     return [ Enumerations.ELECTRICITY, batteryLevel.format("%d") ];
+  }
+
+  function GetMoonPhase(timeNow) {
+    var JD = timeNow.value().toDouble() / Gregorian.SECONDS_PER_DAY.toDouble() +
+             2440587.500d;
+    var IP = Normalize((JD.toDouble() - 2451550.1d) / 29.530588853d);
+    var Age = IP * 29.53d;
+
+    var phase = 0;
+    if (Age < 1.84566) {
+      phase = Enumerations.NEW_MOON;
+    } else if (Age < 6.38264) {
+      phase = Enumerations.EVENING_CRESCENT;
+    } else if (Age < 8.38264) {
+      phase = Enumerations.FIRST_QUARTER;
+    } else if (Age < 13.76529) {
+      phase = Enumerations.WAXING_GIBBOUS;
+    } else if (Age < 15.76529) {
+      phase = Enumerations.FULL_MOON;
+    } else if (Age < 21.14794) {
+      phase = Enumerations.WANING_GIBBOUS;
+    } else if (Age < 23.14794077932) {
+      phase = Enumerations.LAST_QUARTER;
+    } else if (Age < 28.53058) {
+      phase = Enumerations.MORNING_CRESCENT;
+    } else {
+      phase = Enumerations.NEW_MOON;
+    }  // A new moon";
+
+    IP = IP * 2d * Math.PI;  // Convert phase to radians
+
+    // calculate moon's distance
+    //
+    var DP = 2d * Math.PI * Normalize((JD - 2451562.2d) / 27.55454988d);
+
+    // calculate moon's ecliptic longitude
+    //
+    var RP = Normalize((JD - 2451555.8d) / 27.321582241d);
+    var LO = 360d * RP + 6.3d * Math.sin(DP) + 1.3d * Math.sin(2d * IP - DP) +
+             0.7d * Math.sin(2d * IP);
+
+    var zodiac = 0;
+    if (LO < 33.18) {
+      zodiac = 0;
+    }  // Pisces
+    else if (LO < 51.16) {
+      zodiac = 1;
+    }  // Aries"
+    else if (LO < 93.44) {
+      zodiac = 2;
+    }  // Taurus"
+    else if (LO < 119.48) {
+      zodiac = 3;
+    }  // Gemini"
+    else if (LO < 135.30) {
+      zodiac = 4;
+    }  // Cancer"
+    else if (LO < 173.34) {
+      zodiac = 5;
+    }  // Leo"
+    else if (LO < 224.17) {
+      zodiac = 6;
+    }  // Virgo"
+    else if (LO < 242.57) {
+      zodiac = 7;
+    }  // Libra"
+    else if (LO < 271.26) {
+      zodiac = 8;
+    }  // Scorpio"
+    else if (LO < 302.49) {
+      zodiac = 9;
+    }  // Sagittarius"
+    else if (LO < 311.72) {
+      zodiac = 10;
+    }  // Capricorn"
+    else if (LO < 348.58) {
+      zodiac = 11;
+    }  // Aquarius"
+    else {
+      zodiac = 0;
+    }  //  Pisces"
+
+    return [ phase, zodiac ];
+  }
+
+  function Normalize(value) {
+    var nValue = value - Math.floor(value);
+    if (nValue < 0) {
+      nValue = nValue + 1;
+    }
+    return nValue;
   }
 }

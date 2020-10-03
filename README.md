@@ -7,6 +7,7 @@ To get the weather data, you will need to make an account with OpenWeatherMaps a
 ## Features
 
 City name of location
+Alert name for location, when applicable (instead of city)
 Date (WDM, WMD, DMW, DMW)
 Time (12, 24)
 AM/PM/Seconds
@@ -19,6 +20,7 @@ Today min temp (F, C)
 Tomorrow weather icon*
 Tomorrow max temp (F, C)
 Tomorrow min temp (F, C)
+(218x218 devices do not get this):
 Day after weather icon*
 Day after max temp (F, C)
 Day after min temp (F, C)
@@ -45,6 +47,7 @@ UV index
 Today precipitation (%)
 Tomorrow precipitation (%)
 Day after precipitation (%)
+Smart weather (see note)
 --------------------------------------------------
 Coming soon:
 Support for more devices
@@ -63,10 +66,38 @@ This returns ambient (local) barometric pressure as measured by the internal pre
 3. Sea Level Pressure
 This returns barometric pressure calibrated to sea level. Since pressure varies dues to several factors, a GPS-based altitude must first be obtained, then the ambient (local) pressure is measured by the pressure sensor before conversion to a calibrated barometric pressure value.
 
+***Smart weather
+Displays the following data, when available:
+1. Rainfall amount (mm/in)
+2. Snowfall amount (mm/in)
+3. Wind gust (km/h, knots, m/s, mph)
+4. Humidty percentage, if greater than 50
+5. UV index
 
 --------------------------------------------------
 ## Changelog
-### version 1.2.3:latest
+### version 1.2.4:latest
+Date:   Fri Oct 2 21:50:25 2020 -0400
+
+1.2.4
+
+Provide weather option: smart weather
+Provide weather alerts
+Weather stale color is now alert color and used for:
+        Stale weather
+        Weather alerts (displayed instead of location, when applicable)
+        Low battery
+
+Add support for:
+Approach S62
+Vivoactive 3M
+Vivoactive 3M LTE
+Vivoactive 4
+Vivoactive 4S
+legacysagarey
+legacysagadarthvader
+legacyherofirstavenger
+legacyherocaptainmarvel
 
 1.2.3
 

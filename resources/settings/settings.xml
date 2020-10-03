@@ -133,7 +133,7 @@
         </settingConfig>
     </setting>
 
-    <setting propertyKey="@Properties.WeatherStaleColor" title="@Strings.WeatherStaleColorTitle">
+    <setting propertyKey="@Properties.AlertColor" title="@Strings.AlertColorTitle">
         <settingConfig type="list">
             <listEntry value="0">@Strings.ColorBlack</listEntry>
             <listEntry value="1">@Strings.ColorDarkGray</listEntry>
@@ -244,6 +244,7 @@
             <listEntry value = "6">@Strings.DisplayTodayPrecipitation</listEntry>
             <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
             <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
+            <listEntry value = "9">@Strings.DisplaySmartWeather</listEntry>
         </settingConfig>
     </setting>
 
@@ -258,6 +259,7 @@
             <listEntry value = "6">@Strings.DisplayTodayPrecipitation</listEntry>
             <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
             <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
+            <listEntry value = "9">@Strings.DisplaySmartWeather</listEntry>
         </settingConfig>
     </setting>
 
@@ -272,6 +274,7 @@
             <listEntry value = "6">@Strings.DisplayTodayPrecipitation</listEntry>
             <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
             <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
+            <listEntry value = "9">@Strings.DisplaySmartWeather</listEntry>
         </settingConfig>
     </setting>
 
@@ -279,7 +282,6 @@
         <settingConfig type="list">
             <listEntry value="0">@Strings.Kilometers</listEntry>
             <listEntry value="1">@Strings.Miles</listEntry>
-            <listEntry value="2">@Strings.Steps</listEntry>
         </settingConfig>
     </setting>
 

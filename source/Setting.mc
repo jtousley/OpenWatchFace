@@ -24,11 +24,7 @@ using Toybox.Application.Storage as Storage;
   static protected var _isTest = "isTest";
   static protected var _pulseField = "pulse-field";
   static protected var _appVersion = "appVersion";
-  static protected var _conError = "conError";
-  static protected var _authError = "authError";
-  static protected var _deviceName = "device-name";
   static protected var _weather = "weather-v2";
-  static protected var _weatherCity = "city-v1";
   static protected var _openWeatherApiToken = "Open-Weather-API-Token";
   static protected var _accuWeatherApiToken = "accu-weather-api-token";
   static protected var _weatherProvider = "weather-provider";
@@ -48,7 +44,7 @@ using Toybox.Application.Storage as Storage;
   static protected var _wfield2 = "wfield-2";
   static protected var _iconColor = "IconColor";
   static protected var _weatherCurrentColor = "WeatherCurrentColor";
-  static protected var _weatherStaleColor = "WeatherStaleColor";
+  static protected var _alertColor = "AlertColor";
   static protected var _weatherStaleTime = "WeatherStaleTime";
   static protected var _weatherUpdateTime = "WeatherUpdateFrequency";
   static protected var _hourColor = "HourColor";
@@ -65,24 +61,12 @@ using Toybox.Application.Storage as Storage;
  public
   static function GetWeatherStorage() {
     var val = App.getApp().getProperty(_weather);
-    // return (val != null ? val : null);
     return val;
   }
 
  public
   static function SetWeatherStorage(weather) {
     App.getApp().setProperty(_weather, weather);
-  }
-
- public
-  static function GetWeatherCityStorage() {
-    var val = App.getApp().getProperty(_weatherCity);
-    return (val != null ? val : "UNKNOWN_CITY");
-  }
-
- public
-  static function SetWeatherCityStorage(city) {
-    App.getApp().setProperty(_weatherCity, city);
   }
 
   //  public
@@ -95,19 +79,6 @@ using Toybox.Application.Storage as Storage;
   //   static function SetWeatherProvider(weatherProvider) {
   //     App.getApp().setProperty(_weatherProvider, weatherProvider);
   //   }
-
- public
-  static function SetDeviceName(deviceNme) {
-    // Storage.setValue(_deviceName, deviceNme);
-    App.getApp().setProperty(_deviceName, deviceNme);
-  }
-
- public
-  static function GetDeviceName() {
-    // return Storage.getValue(_deviceName);
-    var tmp = App.getApp().getProperty(_deviceName);
-    return tmp != null ? tmp : "unknown";
-  }
 
  public
   static function GetOpenWeatherToken() {
@@ -130,19 +101,6 @@ using Toybox.Application.Storage as Storage;
  public
   static function SetAccuWeatherToken(accuWeatherApiToken) {
     return App.getApp().setProperty(_accuWeatherApiToken, accuWeatherApiToken);
-  }
-
- public
-  static function GetConError() {
-    // return Storage.getValue(_conError);
-    var val = App.getApp().getProperty(_conError);
-    return (val != null ? val : "");
-  }
-
- public
-  static function SetConError(conError) {
-    // Storage.setValue(_conError, conError);
-    var val = App.getApp().setProperty(_conError, conError);
   }
 
  public
@@ -178,14 +136,14 @@ using Toybox.Application.Storage as Storage;
     return (val != null ? val : GetIconColor());
   }
  public
-  static function GetWeatherStaleColor() {
-    var val = App.getApp().getProperty(_weatherStaleColor);
+  static function GetAlertColor() {
+    var val = App.getApp().getProperty(_alertColor);
     return (val != null ? val : GetIconColor());
   }
 
  public
   static function GetWeatherUpdateTime() {
-    var val = App.getApp().getProperty(  _weatherUpdateTime);
+    var val = App.getApp().getProperty(_weatherUpdateTime);
     if (val != null && val has : toNumber && val.toNumber() > 5) {
       return val.toNumber();
     } else {
@@ -323,12 +281,12 @@ using Toybox.Application.Storage as Storage;
  public
   static function GetField(id) {
     var val = App.getApp().getProperty("field-" + id).toNumber();
-    return (val != null ? val : "");
+    return (val != null ? val : 0);
   }
 
  public
   static function GetWField(id) {
     var val = App.getApp().getProperty("wfield-" + id).toNumber();
-    return (val != null ? val : "");
+    return (val != null ? val : 0);
   }
 }

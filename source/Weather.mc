@@ -67,16 +67,12 @@ class Weather {
   var _nextNextMinTempCelcius = 0;
  public
   var _nextNextMaxTempCelcius = 0;
+ public
+  var _thirdMinTempCelcius = 0;
+ public
+  var _thirdMaxTempCelcius = 0;
 
   // Etc Weather
-
-  // Cloud percentage
- public
-  var _todayCloudPercent = 0;
- public
-  var _nextCloudPercent = 0;
- public
-  var _nextNextCloudPercent = 0;
 
   // Precipitation probability
  public
@@ -95,12 +91,22 @@ class Weather {
   var _nextPrimaryId = 0;
  public
   var _nextNextPrimaryId = 0;
+ public
+  var _thirdPrimaryId = 0;
+  
 
-  // static public var _weatherIcons;
+ public
+  var _rainDepth_mm = 0;
+ public
+  var _snowDepth_mm = 0;
+ public
+  var _windGust_meterSecs = 0;
+ public
+  var _alertExists = 0;
+ public
+  var _alertName = "Unknown";
 
-  function initialize() {
-    // _weatherIcons = ["A", "B"];
-  }
+  function initialize() {}
 
  public
   static function convertOpenWeatherIdToIcon(id) {

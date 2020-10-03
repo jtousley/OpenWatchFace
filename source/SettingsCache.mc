@@ -22,7 +22,7 @@ class SettingsCache {
     weatherField0 = Setting.GetWField(0);
     weatherField1 = Setting.GetWField(1);
     weatherField2 = Setting.GetWField(2);
-    connError = Setting.GetConError();
+    // connError = Setting.GetConError();
     lastKnownLocation = Setting.GetLastKnownLocation();
     // weatherProvider = Setting.GetWeatherProvider();
     // weatherApiKey = Setting.GetOpenWeatherToken();
@@ -56,7 +56,7 @@ class SettingsCache {
 
  protected
   function InterpretWeatherData(weatherArray) {
-    weather._city = Setting.GetWeatherCityStorage();
+    weather._city = weatherArray[Enumerations.WVAL_CITY_NAME];
     weather._tempCelcius = weatherArray[Enumerations.WVAL_CURR_TEMP];
     weather._feelsTempCelcius = weatherArray[Enumerations.WVAL_FEEL_TEMP];
     weather._baroPressureBars = weatherArray[Enumerations.WVAL_PRESS];
@@ -73,19 +73,24 @@ class SettingsCache {
     weather._minTempCelcius = weatherArray[Enumerations.WVAL_T_MIN];
     weather._maxTempCelcius = weatherArray[Enumerations.WVAL_T_MAX];
     weather._todayPrimaryId = weatherArray[Enumerations.WVAL_T_ID];
-    weather._todayCloudPercent = weatherArray[Enumerations.WVAL_T_CLOUD];
     weather._todayPrecipitationPercent = weatherArray[Enumerations.WVAL_T_POP];
     weather._nextMinTempCelcius = weatherArray[Enumerations.WVAL_N_MIN];
     weather._nextMaxTempCelcius = weatherArray[Enumerations.WVAL_N_MAX];
     weather._nextPrimaryId = weatherArray[Enumerations.WVAL_N_ID];
-    weather._nextCloudPercent = weatherArray[Enumerations.WVAL_N_CLOUD];
     weather._nextPrecipitationPercent = weatherArray[Enumerations.WVAL_N_POP];
     weather._nextNextMinTempCelcius = weatherArray[Enumerations.WVAL_NN_MIN];
     weather._nextNextMaxTempCelcius = weatherArray[Enumerations.WVAL_NN_MAX];
     weather._nextNextPrimaryId = weatherArray[Enumerations.WVAL_NN_ID];
-    weather._nextNextCloudPercent = weatherArray[Enumerations.WVAL_NN_CLOUD];
     weather._nextNextPrecipitationPercent =
         weatherArray[Enumerations.WVAL_NN_POP];
+    weather._thirdPrimaryId = weatherArray[Enumerations.WVAL_TRD_ID];
+    weather._thirdMinTempCelcius = weatherArray[Enumerations.WVAL_TRD_MIN];
+    weather._thirdMaxTempCelcius = weatherArray[Enumerations.WVAL_TRD_MAX];
+    weather._rainDepth_mm = weatherArray[Enumerations.WVAL_RAIN_DPT];
+    weather._snowDepth_mm = weatherArray[Enumerations.WVAL_SNOW_DPT];
+    weather._windGust_meterSecs = weatherArray[Enumerations.WVAL_WIND_GUST];
+    weather._alertExists = weatherArray[Enumerations.WVAL_ALRT];
+    weather._alertName = weatherArray[Enumerations.WVAL_ALERT_NAME];
   }
 
  public

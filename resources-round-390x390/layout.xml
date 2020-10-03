@@ -2,104 +2,149 @@
 	<!-- Default -->
 	<!-- 
 		layout constants
-		color:	0 => black
-				1 => white
-				2 => text
+		color "col":	0 => black
+						1 => white
+						2 => text
 				
-		font:	0 => Gfx.FONT_NUMBER_XTINY
-				1 => Gfx.FONT_NUMBER_TINY
-				7 => Gfx.FONT_NUMBER_HOT
-				100 => latoBlack_tiny
-				101 => latoBlack_small
-				102 => latoBlack_medium
-				103 => latoBlack_large
-				104 => small_icons
-				105 => large_icons
+		font "font":	0 => Gfx.FONT_NUMBER_XTINY
+						1 => Gfx.FONT_NUMBER_TINY
+						7 => Gfx.FONT_NUMBER_HOT
+						100 => latoBlack_tiny
+						101 => latoBlack_small
+						102 => latoBlack_medium
+						103 => latoBlack_large
+						104 => small_icons
+						105 => large_icons
 				
-		align:	0 => Gfx.TEXT_JUSTIFY_RIGHT
-				1 => Gfx.TEXT_JUSTIFY_CENTER
-				2 => Gfx.TEXT_JUSTIFY_LEFT
+		align "jus":	0 => Gfx.TEXT_JUSTIFY_RIGHT
+						1 => Gfx.TEXT_JUSTIFY_CENTER
+						2 => Gfx.TEXT_JUSTIFY_LEFT
 
-		middle: 120
+		type:		 	0 => use text color TYPE_TEXT
+						1 => use icon color	TYPE_ICON
+						2 => NEITHER
+		
+		middle: 195
 	 -->
-	<jsonData id="l_city_left">{"x":[150], "y":[155], "col":[2], "font":[101], "jus":[2], "func":0}</jsonData>
+	<jsonData id="l_city_left">
+		{"x":[20], "y":[63], "col":[2], "font":[101], "jus":[2], "func":0, "type":[2], "len":[15]}
+	</jsonData>
 
-	<jsonData id="l_date">{"x":[30], "y":[175], "col":[2], "font":[101], "jus":[2], "func":3}</jsonData>
+	<jsonData id="l_date">
+		{"x":[30], "y":[160], "col":[3], "font":[101], "jus":[2], "func":1, "type":[0]}
+	</jsonData>
 
-	<jsonData id="l_time">{"x":[120], "y":[190], "col":[1], "font":[103], "jus":[1], "func":4, "tb":null}</jsonData>
+	<jsonData id="l_time">
+		{"x":[165, 195, 225], "y":[168, 165, 168], "col":[1, 3, 1], 
+		"font":[103, 103, 103], "jus":[1, 1, 1], "func":2}
+	</jsonData>
 
-	<!-- <jsonData id="l_pmam">{"x":[115], "y":[90], "col":[0], "font":[100], "jus":[0], "func":5}</jsonData> -->
+	<jsonData id="l_pmam">
+		{"x":[200], "y":[180], "col":[1], "font":[101], "jus":[1], "func":3, "type":[0]}
+	</jsonData>
 
 	<jsonData id="l_sec">
-		{"x":[184], "y":[205], "col":[1], "font":[101], "jus":[0], "func":6}
+		{"x":[200], "y":[180], "col":[1], "font":[101], "jus":[1], "func":4, "type":[0]}
 	</jsonData>
-
 
 	<jsonData id="l_currTemp">
-		{"x":[160], "y":[60], "col":[2], "font":[102], "jus":[1], "func":7}
+		{"x":[170], "y":[33], "col":[2], "font":[102], "jus":[1], "func":5, "type":[0]}
 	</jsonData>
 	<jsonData id="l_currFeelsTemp">
-		{"x":[200], "y":[60], "col":[2], "font":[102], "jus":[1], "func":8}
+		{"x":[205], "y":[58], "col":[2], "font":[102], "jus":[1], "func":6, "type":[0]}
 	</jsonData>
 	<jsonData id="l_todayMaxTemp">
-		{"x":[95], "y":[115], "col":[2], "font":[101], "jus":[1], "func":9}
+		{"x":[95], "y":[115], "col":[2], "font":[101], "jus":[1], "func":7, "type":[0]}
 	</jsonData>
 	<jsonData id="l_todayMinTemp">
-		{"x":[95], "y":[135], "col":[2], "font":[101], "jus":[1], "func":10}
+		{"x":[95], "y":[135], "col":[2], "font":[101], "jus":[1], "func":8, "type":[0]}
 	</jsonData>
 	<jsonData id="l_nextMaxTemp">
-		{"x":[125], "y":[115], "col":[2], "font":[101], "jus":[1], "func":11}
+		{"x":[128], "y":[115], "col":[2], "font":[101], "jus":[1], "func":9, "type":[0]}
 	</jsonData>
 	<jsonData id="l_nextMinTemp">
-		{"x":[125], "y":[135], "col":[2], "font":[101], "jus":[1], "func":12}
+		{"x":[128], "y":[135], "col":[2], "font":[101], "jus":[1], "func":10, "type":[0]}
 	</jsonData>
-	<jsonData id="l_nextNextMaxTemp">
-		{"x":[155], "y":[115], "col":[2], "font":[101], "jus":[1], "func":13}
+	<jsonData id="l_nn_maxTemp">
+		{"x":[161], "y":[115], "col":[2], "font":[101], "jus":[1], "func":11, "type":[0]}
 	</jsonData>
-	<jsonData id="l_nextNextMinTemp">
-		{"x":[155], "y":[135], "col":[2], "font":[101], "jus":[1], "func":14}
+	<jsonData id="l_nn_minTemp">
+		{"x":[161], "y":[135], "col":[2], "font":[101], "jus":[1], "func":12, "type":[0]}
+	</jsonData>
+	<jsonData id="l_thd_maxTemp">
+		{"x":[194], "y":[115], "col":[2], "font":[101], "jus":[1], "func":13, "type":[0]}
+	</jsonData>
+	<jsonData id="l_thd_minTemp">
+		{"x":[194], "y":[135], "col":[2], "font":[101], "jus":[1], "func":14, "type":[0]}
 	</jsonData>
 	<jsonData id="l_weatherOption1">
-		{"x":[175, 200], "y":[95, 95], "col":[2, 2], "font":[104, 101], "jus":[2, 2], "func":15}
+		{"x":[320, 340], "y":[95, 95], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
+		"func":15, "type":[1, 0]}
 	</jsonData>
 	<jsonData id="l_weatherOption2">
-		{"x":[175, 200], "y":[115, 115], "col":[2, 2], "font":[104, 101], "jus":[2, 2], "func":16}
+		{"x":[200, 220], "y":[115, 115], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
+		"func":16, "type":[1,0]}
 	</jsonData>
 	<jsonData id="l_weatherOption3">
-		{"x":[175, 200], "y":[135, 135], "col":[2, 2], "font":[104, 101], "jus":[2, 2], "func":17}
+		{"x":[200, 220], "y":[135, 135], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
+		"func":17, "type":[1,0]}
+	</jsonData>
+	<jsonData id="l_t_weatherIcon">
+		{"x":[95], "y":[90], "col":[7], 
+		"font":[105], "jus":[1], "func":18, "type":[1]}
+	</jsonData>
+	<jsonData id="l_n_weatherIcon">
+		{"x":[128], "y":[90], "col":[7], 
+		"font":[105], "jus":[1], 
+		"func":19, "type":[1]}
+	</jsonData>
+	<jsonData id="l_nn_weatherIcon">
+		{"x":[161], "y":[90], "col":[7], 
+		"font":[105], "jus":[1], 
+		"func":20, "type":[1]}
+	</jsonData>
+	<jsonData id="l_thirdWeatherIcon">
+		{"x":[194], "y":[90], "col":[7], 
+		"font":[105], "jus":[1], 
+		"func":21, "type":[1]}
 	</jsonData>
 	<jsonData id="l_currWeatherIcon">
-		{"x":[170], "y":[35], "col":[2], "font":[105], "jus":[1], "func":21}
-	</jsonData>
-	<jsonData id="l_todayWeatherIcon">
-		{"x":[95, 95], "y":[92, 75], "col":[2, 2], "font":[105, 101], "jus":[1, 1], "func":18, "tb":null}
-	</jsonData>
-	<jsonData id="l_nextWeatherIcon">
-		{"x":[125, 125], "y":[92, 75], "col":[2, 2], "font":[105, 101], "jus":[1, 1], "func":19, "tb":null}
-	</jsonData>
-	<jsonData id="l_nextNextWeatherIcon">
-		{"x":[155, 155], "y":[92, 75], "col":[2, 2], "font":[105, 101], "jus":[1, 1], "func":20, "tb":null}
+		{"x":[165], "y":[60], "col":[7], "font":[105], "jus":[1], "func":22}
 	</jsonData>
 
-	<!-- <jsonData id="l_wind">
-		{"x":[20, 35], "y":[55, 55], "col":[0, 0], "font":[101, 104], "jus":[2, 2], "func":21, "cor": [null, 2, 7]}
-	</jsonData> -->
+	<jsonData id="l_field3">
+		{"x":[5, 25], "y":[95, 95], "col":[7, 2], "font":[104, 101], 
+		"jus":[2, 2], "func":23, "type":[1,0]}
+	</jsonData>
+	<jsonData id="l_field4">
+		{"x":[5, 25], "y":[115, 115], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
+		"func":24, "type":[1,0]}
+	</jsonData>
+	<jsonData id="l_field5">
+		{"x":[5, 25], "y":[135, 135], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
+		"func":25, "type":[1,0]}
+	</jsonData>
 
-
-	<jsonData id="l_field3">{"x":[10, 30], "y":[94, 94], "col":[2, 2], "font":[104, 101], "jus":[2, 2], "func":22, "tb":null, "lcor" : 3}</jsonData>
-	<jsonData id="l_field4">{"x":[10, 30], "y":[113, 113], "col":[2, 2], "font":[104, 101], "jus":[2, 2], "func":23, "tb":null, "lcor" : 3}</jsonData>
-	<jsonData id="l_field5">{"x":[10, 30], "y":[132, 132], "col":[2, 2], "font":[104, 101], "jus":[2, 2], "func":24, "tb":null, "lcor" : 3}</jsonData>
-
-	<jsonData id="l_battery">{"x":[114, 132], "y":[223, 225], "col":[2, 2], "font":[104, 100], "jus":[1, 1], "func":25, "tb":null}</jsonData>
+	<jsonData id="l_battery">
+		{"x":[114, 132], "y":[220, 220], "col":[7, 2], "font":[104, 100], "jus":[1, 1], 
+		"func":26, "type":[2, 2]}
+	</jsonData>
 
 	<jsonData id="l_bottom_line1">
-		{"x":[124, 143, 160, 178], "y":[175, 175, 175, 175], 
-		"col":[2, 2, 2, 2], "font":[104, 101, 104, 101], 
-		"jus":[2, 2, 2, 2], "func":26, "tb":null}
+		{"x":[144, 163, 180, 198], "y":[160, 160, 160, 160], 
+		"col":[7, 2, 7, 2], "font":[104, 101, 104, 101], 
+		"jus":[2, 2, 2, 2], "func":27, "type":[1, 0, 1, 0]}
 	</jsonData>
 
-	<jsonData id="l_top_line">{"x":[95, 130, 165], "y":[10, 10, 10], "col":[2, 2, 2], "font":[104, 104, 104], "jus":[0, 0, 0], "func":27}</jsonData>
+	<jsonData id="l_top_line">
+		{"x":[130, 195, 260], "y":[10, 5, 10], "col":[14, 3, 2], 
+		"font":[104, 105, 104], "jus":[1, 1, 1], "func":28, "type":[2, 2, 2] }
+	</jsonData>
 
-	<jsonData id="l_horiz_line">{"x":[0, 240],"y":[155, 155]}</jsonData>
-	<jsonData id="l_vert_line">{"x":[80, 80],"y":[100, 155]}</jsonData>
+	<jsonData id="l_horiz_line">
+		{"x":[0, 240],"y":[160, 160]}
+	</jsonData>
+	<jsonData id="l_vert_line">
+		{"x":[75, 75],"y":[90, 160]}
+	</jsonData>
 </resources>
