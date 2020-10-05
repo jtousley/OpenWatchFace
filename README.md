@@ -77,7 +77,13 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.2.5:latest
+### version 1.2.6:latest
+
+1.2.6
+
+Add most international characters (ASCII)
+Unavailable characters will be '_'
+
 
 1.2.5
 

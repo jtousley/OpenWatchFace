@@ -8,13 +8,31 @@
         <settingConfig type="alphaNumeric"></settingConfig>
     </setting>
 
-    <setting propertyKey="@Properties.ShowTimeOptions" title="@Strings.showTimeOptionsTitle">
+    <setting propertyKey="@Properties.WeatherStaleTime" title="@Strings.WeatherStaleTimeTitle">
+        <settingConfig type="alphaNumeric"></settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.WeatherUpdateFrequency" title="@Strings.WeatherUpdateFrequencyTitle">
+        <settingConfig type="alphaNumeric"></settingConfig>
+    </setting>
+
+      <setting propertyKey="@Properties.ShowTimeOptions" title="@Strings.showTimeOptionsTitle">
         <settingConfig type="list">
             <listEntry value="0">@Strings.TimeOptionSeconds</listEntry>
             <listEntry value="1">@Strings.TimeOptionAmPm</listEntry>
             <listEntry value="2">@Strings.TimeOptionDecline</listEntry>
         </settingConfig>
     </setting>
+
+    <setting propertyKey="@Properties.date-order" title="@Strings.DateOrderTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.DateOrderWDM</listEntry>
+            <listEntry value="1">@Strings.DateOrderWMD</listEntry>
+            <listEntry value="2">@Strings.DateOrderDMW</listEntry>
+            <listEntry value="3">@Strings.DateOrderMDW</listEntry>
+        </settingConfig>
+    </setting>
+
 
     <setting propertyKey="@Properties.BackgroundColor" title="@Strings.BackgroundColorTitle">
         <settingConfig type="list">
@@ -155,39 +173,6 @@
         </settingConfig>
     </setting>
 
-    <setting propertyKey="@Properties.WeatherStaleTime" title="@Strings.WeatherStaleTimeTitle">
-        <settingConfig type="alphaNumeric"></settingConfig>
-    </setting>
-
-    <setting propertyKey="@Properties.WeatherUpdateFrequency" title="@Strings.WeatherUpdateFrequencyTitle">
-        <settingConfig type="alphaNumeric"></settingConfig>
-    </setting>
-    
-    <setting propertyKey="@Properties.date-order" title="@Strings.DateOrderTitle">
-        <settingConfig type="list">
-            <listEntry value="0">@Strings.DateOrderWDM</listEntry>
-            <listEntry value="1">@Strings.DateOrderWMD</listEntry>
-            <listEntry value="2">@Strings.DateOrderDMW</listEntry>
-            <listEntry value="3">@Strings.DateOrderMDW</listEntry>
-        </settingConfig>
-    </setting>
-
-    <setting propertyKey="@Properties.tempSystem" title="@Strings.TempSystemTitle">
-        <settingConfig type="list">
-            <listEntry value="0">@Strings.Celsius</listEntry>
-            <listEntry value="1">@Strings.Farenheit</listEntry>
-        </settingConfig>
-    </setting>
-
-    <setting propertyKey="@Properties.windSystem" title="@Strings.WindSystemTitle">
-        <settingConfig type="list">
-            <listEntry value="0">@Strings.KilometersPh</listEntry>
-            <listEntry value="1">@Strings.Knots</listEntry>
-            <listEntry value="2">@Strings.Meters</listEntry>
-            <listEntry value="3">@Strings.MilesPh</listEntry>
-        </settingConfig>
-    </setting>
-
     <setting propertyKey = "@Properties.field-0" title = "@Strings.field_0_title">
         <settingConfig type = "list">
             <listEntry value = "0">@Strings.DisplayPulse</listEntry>
@@ -275,6 +260,23 @@
             <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
             <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
             <listEntry value = "9">@Strings.DisplaySmartWeather</listEntry>
+        </settingConfig>
+    </setting>
+
+
+    <setting propertyKey="@Properties.tempSystem" title="@Strings.TempSystemTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.Celsius</listEntry>
+            <listEntry value="1">@Strings.Farenheit</listEntry>
+        </settingConfig>
+    </setting>
+
+    <setting propertyKey="@Properties.windSystem" title="@Strings.WindSystemTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.KilometersPh</listEntry>
+            <listEntry value="1">@Strings.Knots</listEntry>
+            <listEntry value="2">@Strings.Meters</listEntry>
+            <listEntry value="3">@Strings.MilesPh</listEntry>
         </settingConfig>
     </setting>
 

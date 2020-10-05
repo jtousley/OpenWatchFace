@@ -20,14 +20,13 @@ using Toybox.Application.Storage as Storage;
 ///
 ( : background) class Setting {
   static protected var _lastKnownLocation = "lastKnownLocation";
-  // static protected var _etz = "etz";
   static protected var _isTest = "isTest";
   static protected var _pulseField = "pulse-field";
   static protected var _appVersion = "appVersion";
   static protected var _weather = "weather-v2";
   static protected var _openWeatherApiToken = "Open-Weather-API-Token";
-  static protected var _accuWeatherApiToken = "accu-weather-api-token";
-  static protected var _weatherProvider = "weather-provider";
+  // static protected var _accuWeatherApiToken = "accu-weather-api-token";
+  // static protected var _weatherProvider = "weather-provider";
   static protected var _dateOrder = "date-order";
   static protected var _textColor = "TextColor";
   static protected var _lastTemporalEventTime = "LastEventTime";
@@ -92,16 +91,16 @@ using Toybox.Application.Storage as Storage;
     return App.getApp().setProperty(_openWeatherApiToken, openWeatherApiToken);
   }
 
- public
-  static function GetAccuWeatherToken() {
-    var val = App.getApp().getProperty(_accuWeatherApiToken);
-    return (val != null ? val : "");
-  }
+//  public
+//   static function GetAccuWeatherToken() {
+//     var val = App.getApp().getProperty(_accuWeatherApiToken);
+//     return (val != null ? val : "");
+//   }
 
- public
-  static function SetAccuWeatherToken(accuWeatherApiToken) {
-    return App.getApp().setProperty(_accuWeatherApiToken, accuWeatherApiToken);
-  }
+//  public
+//   static function SetAccuWeatherToken(accuWeatherApiToken) {
+//     return App.getApp().setProperty(_accuWeatherApiToken, accuWeatherApiToken);
+//   }
 
  public
   static function SetTextColor(color) {

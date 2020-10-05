@@ -68,7 +68,7 @@
 	<string id="MinColorTitle">Minute Color</string>
 	<string id="TextColorTitle">Text Color</string>
     <string id="IconColorTitle">Icon Color</string>
-    <string id="WeatherCurrentColorTitle">Current Weather Icon Color - when current</string>
+    <string id="WeatherCurrentColorTitle">Current Weather Icon Color</string>
     <string id="AlertColorTitle">Alert color (stale weather, low battery, advisories)</string>
     <string id="WeatherStaleTimeTitle">Minutes Before Weather Data is Stale</string>
     <string id="WeatherUpdateFrequencyTitle">Minutes To Update Weather Data</string>

@@ -630,7 +630,8 @@ class DisplayFunctions {
     // var tmp = city.toCharArray();
     // Sys.println("Val : " + tmp[0].toNumber());
     // _settings.weather._city = "Johannesburgenointen";
-    var city = trimString(_settings.weather._city.toString(), MAX_CITY_LENGTH);
+    var city = trimString(_settings.weather._city, MAX_CITY_LENGTH);
+    // Sys.println("Display: " + city);
 
     return [city];
   }

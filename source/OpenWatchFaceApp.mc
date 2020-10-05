@@ -20,6 +20,7 @@ using Toybox.System as Sys;
 using Toybox.Timer as Timer;
 using Toybox.Lang as Lang;
 using Toybox.Time as Time;
+using Toybox.StringUtil;
 
 ( : background) class OpenWatchFaceApp extends App.AppBase {
  protected
@@ -81,6 +82,8 @@ using Toybox.Time as Time;
 
   function setWeatherData(data) {
     // Sys.println("Data valid : " + data.toString());
+    data[Enumerations.WVAL_CITY_NAME] =
+        makeCityNameInternational(data[Enumerations.WVAL_CITY_NAME]);
     _settingsCache.UpdateWeather(data);
     _settingsCache.InitializeWeather();
     // lastEventTime
@@ -128,5 +131,25 @@ using Toybox.Time as Time;
     // (!token.equals(Setting.GetWeatherRefreshToken())) {
     //   Setting.SetWeatherRefreshToken(token);
     // }
+  }
+
+  function makeCityNameInternational(city) {
+// Sys.println("city : " + city);
+
+    var cityArray = city.toCharArray();
+    // var byteArray = StringUtil.convertEncodedString(city, options);
+    var internationalName = new[cityArray.size()];
+    for (var i = 0; i < cityArray.size(); i++) {
+      var num = cityArray[i].toNumber();
+      if (num > 255) {
+        num = 95; // Underscore '_'
+      }
+      internationalName[i] = num.toChar();
+    }
+    // Sys.println("array : " + cityArray);
+    // Sys.println("bytes : " + internationalName);
+    // Sys.println("Name : " + StringUtil.charArrayToString(internationalName));
+    // Sys.println("Int name : " +
+    return StringUtil.charArrayToString(internationalName);
   }
 }
