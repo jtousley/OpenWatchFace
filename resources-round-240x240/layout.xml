@@ -116,15 +116,15 @@
 
 	<jsonData id="l_field3">
 		{"x":[5, 25], "y":[95, 95], "col":[7, 2], "font":[104, 101], 
-		"jus":[2, 2], "func":23, "type":[1,0]}
+		"jus":[2, 2], "func":23, "type":[2, 0]}
 	</jsonData>
 	<jsonData id="l_field4">
 		{"x":[5, 25], "y":[115, 115], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
-		"func":24, "type":[1,0]}
+		"func":24, "type":[2, 0]}
 	</jsonData>
 	<jsonData id="l_field5">
 		{"x":[5, 25], "y":[135, 135], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
-		"func":25, "type":[1,0]}
+		"func":25, "type":[2, 0]}
 	</jsonData>
 
 	<jsonData id="l_battery">

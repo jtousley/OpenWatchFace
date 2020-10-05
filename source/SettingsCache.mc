@@ -19,6 +19,9 @@ class SettingsCache {
     field3 = Setting.GetField(0);
     field4 = Setting.GetField(1);
     field5 = Setting.GetField(2);
+    fieldcolor3 = Setting.GetFieldColor(0);
+    fieldcolor4 = Setting.GetFieldColor(1);
+    fieldcolor5 = Setting.GetFieldColor(2);
     weatherField0 = Setting.GetWField(0);
     weatherField1 = Setting.GetWField(1);
     weatherField2 = Setting.GetWField(2);
@@ -99,6 +102,12 @@ class SettingsCache {
   var field4;
  public
   var field5;
+ public
+  var fieldcolor3;
+ public
+  var fieldcolor4;
+ public
+  var fieldcolor5;
  public
   var weatherField0;
  public

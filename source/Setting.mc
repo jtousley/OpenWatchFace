@@ -35,12 +35,12 @@ using Toybox.Application.Storage as Storage;
   static protected var _distSystem = "distSystem";
   static protected var _altimeterSystem = "altimeter-system";
   static protected var _barometricSystem = "barometric-system";
-  static protected var _field0 = "field-0";
-  static protected var _field1 = "field-1";
-  static protected var _field2 = "field-2";
-  static protected var _wfield0 = "wfield-0";
-  static protected var _wfield1 = "wfield-1";
-  static protected var _wfield2 = "wfield-2";
+  // static protected var _field0 = "field-0";
+  // static protected var _field1 = "field-1";
+  // static protected var _field2 = "field-2";
+  // static protected var _wfield0 = "wfield-0";
+  // static protected var _wfield1 = "wfield-1";
+  // static protected var _wfield2 = "wfield-2";
   static protected var _iconColor = "IconColor";
   static protected var _weatherCurrentColor = "WeatherCurrentColor";
   static protected var _alertColor = "AlertColor";
@@ -286,6 +286,13 @@ using Toybox.Application.Storage as Storage;
  public
   static function GetField(id) {
     var val = App.getApp().getProperty("field-" + id).toNumber();
+    return (val != null ? val : 0);
+  }
+
+
+ public
+  static function GetFieldColor(id) {
+    var val = App.getApp().getProperty("fieldcolor-" + id).toNumber();
     return (val != null ? val : 0);
   }
 

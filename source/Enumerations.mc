@@ -141,7 +141,8 @@ class Enumerations {
     ColorYellow = 13,
     ColorPaleYellow = 14,
     ColorYellowRed = 15,
-    ColorOrange = 16
+    ColorOrange = 16,
+    ColorSize = 17
   }
 
   static enum {

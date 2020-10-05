@@ -130,6 +130,11 @@ class DisplayFunctions {
   function LoadField3(layout) {
     if (_settings.field3 < _methods.size() && _settings.field3 >= 0 &&
         self has _methods[_settings.field3]) {
+      var color = _settings.fieldcolor3;
+      if (color >= Enumerations.ColorSize) {
+        color = Setting.GetIconColor();
+      }
+      layout["col"][0] = color;
       return method(_methods[_settings.field3]).invoke(layout);
     } else {
       return [ "", "" ];
@@ -139,6 +144,11 @@ class DisplayFunctions {
   function LoadField4(layout) {
     if (_settings.field4 < _methods.size() && _settings.field4 >= 0 &&
         self has _methods[_settings.field4]) {
+      var color = _settings.fieldcolor4;
+      if (color >= Enumerations.ColorSize) {
+        color = Setting.GetIconColor();
+      }
+      layout["col"][0] = color;
       return method(_methods[_settings.field4]).invoke(layout);
     } else {
       return [ "", "" ];
@@ -148,6 +158,11 @@ class DisplayFunctions {
   function LoadField5(layout) {
     if (_settings.field5 < _methods.size() && _settings.field5 >= 0 &&
         self has _methods[_settings.field5]) {
+      var color = _settings.fieldcolor5;
+      if (color >= Enumerations.ColorSize) {
+        color = Setting.GetIconColor();
+      }
+      layout["col"][0] = color;
       return method(_methods[_settings.field5]).invoke(layout);
     } else {
       return [ "", "" ];
@@ -208,13 +223,13 @@ class DisplayFunctions {
   ///
   function DisplaySeconds(layout) {
     if (Setting.GetIsShowSeconds()) {
-      return ["",Sys.getClockTime().sec.format("%02d")];
+      return [ "", Sys.getClockTime().sec.format("%02d") ];
     } else {
       return [""];
     }
   }
 
-   ///
+  ///
   /// returns [Week#, Day#]
   ///
   // function DisplayWeekDayNumbers(layout) {

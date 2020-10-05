@@ -10,6 +10,9 @@
     <string id = "field_0_title">Show in activity field 1</string>
     <string id = "field_1_title">Show in activity field 2</string>
 	<string id = "field_2_title">Show in activity field 3</string>
+    <string id = "fieldcolor_0_title">Icon for activity field 0</string>
+    <string id = "fieldcolor_1_title">Icon for activity field 1</string>
+    <string id = "fieldcolor_2_title">Icon for activity field 2</string>
 	<string id = "WField_0_Title">Show in weather field 1</string>
     <string id = "WField_1_Title">Show in weather field 2</string>
     <string id = "WField_2_Title">Show in weather field 3</string>

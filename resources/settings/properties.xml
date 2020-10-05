@@ -14,6 +14,10 @@
     <property id = "field-0" type = "number">0</property>
     <property id = "field-1" type = "number">1</property>
     <property id = "field-2" type = "number">2</property>
+    <property id = "fieldcolor-0" type = "number">17</property>
+    <property id = "fieldcolor-1" type = "number">17</property>
+    <property id = "fieldcolor-2" type = "number">17</property>
+    
     <property id = "wfield-0" type = "number">6</property>
     <property id = "wfield-1" type = "number">9</property>
     <property id = "wfield-2" type = "number">3</property>
