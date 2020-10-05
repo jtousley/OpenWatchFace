@@ -184,7 +184,7 @@ class WatchFaceView extends Ui.WatchFace {
         funcs = _displayFunctions.method(_funcs[_layouts[i]["func"]])
                     .invoke(_layouts[i]);
       } else {
-        funcs = [ "", "", "", "", "" ];
+        continue;
       }
 
       for (var j = 0; j < _layouts[i]["x"].size(); j++) {

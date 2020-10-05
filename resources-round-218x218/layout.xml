@@ -27,7 +27,7 @@
 		middle: 109
 	 -->
 	<jsonData id="l_city_left">
-		{"x":[20], "y":[40], "col":[2], "font":[101], "jus":[2], "func":0, "type":[2], "len":[8]}
+		{"x":[20], "y":[40], "col":[2], "font":[101], "jus":[2], "func":0, "type":[2], "len":[12]}
 	</jsonData>
 
 	<jsonData id="l_date">

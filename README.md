@@ -49,6 +49,7 @@ Tomorrow precipitation (%)
 Day after precipitation (%)
 Smart weather (see note)
 --------------------------------------------------
+
 Coming soon:
 Support for more devices
 
@@ -76,8 +77,12 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.2.4:latest
-Date:   Fri Oct 2 21:50:25 2020 -0400
+### version 1.2.5:latest
+
+1.2.5
+
+Fix city names
+Match date descriptions with functionality
 
 1.2.4
 

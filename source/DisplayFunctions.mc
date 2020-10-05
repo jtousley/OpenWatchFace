@@ -609,10 +609,9 @@ class DisplayFunctions {
   }
 
   function trimString(str, length) {
-    var ret = "";
-    if (str != null && str.length() > length) {
-      str = str.substring(0, length - 1);
-      ret = str + "~";
+    var ret = str;
+    if (str != null && str instanceof String && str.length() > length) {
+      ret = str.substring(0, length - 1) + "~";
     }
     return ret;
   }
@@ -630,7 +629,8 @@ class DisplayFunctions {
     }
     // var tmp = city.toCharArray();
     // Sys.println("Val : " + tmp[0].toNumber());
-    var city = trimString(_settings.weather._city, MAX_CITY_LENGTH);
+    // _settings.weather._city = "Johannesburgenointen";
+    var city = trimString(_settings.weather._city.toString(), MAX_CITY_LENGTH);
 
     return [city];
   }
@@ -724,9 +724,11 @@ class DisplayFunctions {
       // if the user like his distances in stupid, he probably likes his
       // precipitation the same way
       if (_settings.distanceSystem != Enumerations.DISTANCE_KM) {
-        rain = (rain / 25.4);
+        rain = (rain / 25.4).format("%1.2f");
+      } else {
+        rain = rain.format("%2.1f");
       }
-      return [ Enumerations.WEATHER_RAIN, rain.format("%1.2f") ];
+      return [ Enumerations.WEATHER_RAIN, rain ];
     }
 
     var snow = weather._snowDepth_mm;
@@ -734,9 +736,11 @@ class DisplayFunctions {
       // if the user like his distances in stupid, he probably likes his
       // precipitation the same way
       if (_settings.distanceSystem != Enumerations.DISTANCE_KM) {
-        snow = (snow / 25.4);
+        snow = (snow / 25.4).format("%1.2f");
+      } else {
+        snow = snow.format("%2.1f");
       }
-      return [ Enumerations.WEATHER_SNOW, snow.format("%1.2f") ];
+      return [ Enumerations.WEATHER_SNOW, snow ];
     }
 
     var wind = weather._windGust_meterSecs;

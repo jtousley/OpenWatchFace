@@ -74,8 +74,8 @@
     <string id="WeatherUpdateFrequencyTitle">Minutes To Update Weather Data</string>
 
     <string id="DateOrderTitle">Date Format</string>
-    <string id="DateOrderWDM">WeekDay:Month:Day</string>
-    <string id="DateOrderWMD">WeekDay:Day:Month</string>
+    <string id="DateOrderWMD">WeekDay:Month:Day</string>
+    <string id="DateOrderWDM">WeekDay:Day:Month</string>
     <string id="DateOrderDMW">Day:Month:WeekDay</string>
 	<string id="DateOrderMDW">Month:Day:WeekDay</string>
 	

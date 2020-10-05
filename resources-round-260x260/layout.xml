@@ -27,7 +27,7 @@
 		middle: 130
 	 -->
 	<jsonData id="l_city_left">
-		{"x":[20], "y":[63], "col":[2], "font":[101], "jus":[2], "func":0, "type":[2], "len":[12]}
+		{"x":[20], "y":[63], "col":[2], "font":[101], "jus":[2], "func":0, "type":[2], "len":[14]}
 	</jsonData>
 
 	<jsonData id="l_date">
@@ -109,7 +109,7 @@
 		"func":21, "type":[1], "hide": [1]}
 	</jsonData>
 	<jsonData id="l_currWeatherIcon">
-		{"x":[165], "y":[60], "col":[7], "font":[105], "jus":[1], "func":22}
+		{"x":[175], "y":[60], "col":[7], "font":[105], "jus":[1], "func":22}
 	</jsonData>
 
 	<jsonData id="l_field3">

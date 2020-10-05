@@ -27,6 +27,11 @@ using Toybox.Time as Time;
  protected
   var _settingsCache;
   static protected var _singleton;
+ protected
+  var _lastLocation = [];
+ protected
+  var _appid = null;
+  var _received = null;
 
   function initialize() {
     AppBase.initialize();
@@ -36,6 +41,10 @@ using Toybox.Time as Time;
   function setSettings(settings) { _settingsCache = settings; }
 
   static public function getOpenWatchFaceApp() { return _singleton; }
+
+  ( : debug) function printMessage(msg) { Sys.println(msg); }
+
+  ( : production) function printMessage(msg) {}
 
   // Return the initial view of your application here
   //
@@ -60,24 +69,23 @@ using Toybox.Time as Time;
 
   function onBackgroundData(data) {
     // Sys.println("onBackgroundData");
-    try {
-      if (data != null && data has
-          : size && data.size() == Enumerations.WVAL_SIZE) {
-        Sys.println("Data valid : " + data.toString());
-        _settingsCache.UpdateWeather(data);
-        _settingsCache.InitializeWeather();
-        // lastEventTime
-        var now = Time.now().value();
-        Setting.SetLastEventTime(now);
-      }
-    } catch (ex) {
-      if (ex has : getErrorMessage) {
-        Sys.println(ex.getErrorMessage());
-      }
-      if (ex has : printStackTrace) {
-        Sys.println(ex.printStackTrace());
+
+    if (data != null && data has
+        : size && data.size() == Enumerations.WVAL_SIZE) {
+      if (data[Enumerations.WVAL_ERROR] == 200) {
+        printMessage("Got new weather data");
+        setWeatherData(data);
       }
     }
+  }
+
+  function setWeatherData(data) {
+    // Sys.println("Data valid : " + data.toString());
+    _settingsCache.UpdateWeather(data);
+    _settingsCache.InitializeWeather();
+    // lastEventTime
+    var now = Time.now().value();
+    Setting.SetLastEventTime(now);
   }
 
   function getServiceDelegate() { return [new BackgroundServiceDelegate()]; }
