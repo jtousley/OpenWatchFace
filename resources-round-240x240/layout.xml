@@ -29,7 +29,7 @@
 
 	<jsonData id="l_city_left">
 		{"x":[35, 20], "y":[40, 63], "col":[2, 2], "font":[101, 101], "jus":[2, 2], 
-		"func":0, "type":[2, 2], "len":[130, 135], "hide":[0, 0]}
+		"func":0, "type":[2, 2], "len":[130, 130], "hide":[0, 0]}
 	</jsonData>
 
 	<jsonData id="l_date">

@@ -45,8 +45,7 @@ class Enumerations {
 
   static enum {
     PRESSURE_MILLIBAR = 0,
-    PRESSURE_PASCAL = 1,
-    PRESSURE_INCHES = 2
+    PRESSURE_INCHES = 1
   }
 
   static enum {

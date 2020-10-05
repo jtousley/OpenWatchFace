@@ -53,6 +53,7 @@ class DisplayFunctions {
     , :DisplaySensorPressureAmbient
     , :DisplaySensorPressureRaw
     , :DisplaySensorPressureMsl
+    , :DisplayWeatherUpdateTime
     ];
 
  protected
@@ -436,7 +437,7 @@ class DisplayFunctions {
 
     var now = new Time.Moment(_utcTime);
     var weatherStaleTime = Setting.GetWeatherStaleTime();
-    var lastEventTime = Setting.GetLastEventTime();
+    var lastEventTime = weather._weatherDateTime;
     layout["col"][0] = Setting.GetAlertColor().toNumber();
     if (weatherStaleTime != null && lastEventTime != null) {
       var staleDuration = new Time.Duration(weatherStaleTime * 60);
@@ -587,9 +588,7 @@ class DisplayFunctions {
   function formatPressure(pressure) {
     if (_settings.barometricSystem == Enumerations.PRESSURE_MILLIBAR) {
       pressure = pressure.format("%d");
-    } else if (_settings.barometricSystem == Enumerations.PRESSURE_PASCAL) {
-      pressure = pressure.format("%2.1f");
-    } else if (_settings.barometricSystem == Enumerations.PRESSURE_INCHES) {
+    } else {
       pressure = pressure.format("%2.1f");
     }
     return pressure;
@@ -598,7 +597,7 @@ class DisplayFunctions {
   // Display the calculated barometric pressure ambient
   //
   function DisplaySensorPressureAmbient(layout) {
-    var convTable = [ 0.01, 1, 0.0002953 ];  // pascals to
+    var convTable = [ 0.01, 0.0002953 ];  // pascals to
     var pressure = "---";
     var info = Activity.getActivityInfo();
 
@@ -614,7 +613,7 @@ class DisplayFunctions {
   // Display the calculated barometric pressure raw
   //
   function DisplaySensorPressureRaw(layout) {
-    var convTable = [ 0.01, 1, 0.0002953 ];  // pascals to
+    var convTable = [ 0.01, 0.0002953 ];  // pascals to
     var pressure = "---";
     var info = Activity.getActivityInfo();
 
@@ -630,7 +629,7 @@ class DisplayFunctions {
   // Display the calculated barometric pressure msl
   //
   function DisplaySensorPressureMsl(layout) {
-    var convTable = [ 0.01, 1, 0.0002953 ];  // pascals to
+    var convTable = [ 0.01, 0.0002953 ];  // pascals to
     var pressure = "---";
     var info = Activity.getActivityInfo();
 
@@ -641,6 +640,25 @@ class DisplayFunctions {
     }
 
     return [ Enumerations.PRESSURE, pressure ];
+  }
+
+  // Display the time of the last weather update
+  //
+  function DisplayWeatherUpdateTime(layout) {
+    var weather = _settings.weather;
+    var updateTime = "--:--";
+
+    var now = new Time.Moment(_utcTime);
+    var lastEventTime = weather._weatherDateTime;
+    if (lastEventTime != null && lastEventTime > 0) {
+      var currTimeOffset = Sys.getClockTime().timeZoneOffset;
+      var equalizedTime = new Time.Moment(lastEventTime + currTimeOffset);
+      var info = Gregorian.utcInfo(equalizedTime, Time.FORMAT_SHORT);
+      updateTime = info.hour.format("%02u").toString() + ":" +
+                   info.min.format("%02u").toString();
+    }
+
+    return [ Enumerations.REFRESH, updateTime ];
   }
 
   // function trimString(str, start, length) {
@@ -659,7 +677,7 @@ class DisplayFunctions {
     var width = 0;
     var charArray = str.toCharArray();
     var i = startIndex;
-    for (; i < str.length(); i++) {
+    for (; i < charArray.size(); i++) {
       var c = charArray[i];
       width = width + _dc.getTextWidthInPixels(c.toString(), _fonts[fontIndex]);
       if (width > pixelWidth) {
@@ -730,16 +748,9 @@ class DisplayFunctions {
   //
   function DisplayWeatherPressure(layout) {
     var weather = _settings.weather;
-    var convTable = [ 1, 100, 0.02953 ];  // millibars to
-    var val = weather._baroPressureBars * convTable[_settings.barometricSystem];
-
-    if (_settings.barometricSystem == Enumerations.PRESSURE_MILLIBAR) {
-      val = val.format("%d");
-    } else if (_settings.barometricSystem == Enumerations.PRESSURE_PASCAL) {
-      val = val.format("%2.1f");
-    } else if (_settings.barometricSystem == Enumerations.PRESSURE_INCHES) {
-      val = val.format("%2.1f");
-    }
+    var convTable = [ 1, 0.02953 ];  // millibars to
+    var val = formatPressure(weather._baroPressureBars *
+                             convTable[_settings.barometricSystem]);
 
     return [ Enumerations.PRESSURE, val ];
   }

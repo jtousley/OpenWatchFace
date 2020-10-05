@@ -26,6 +26,7 @@
     <string id = "DisplaySensorPressureAmbient">Sensor Barometric Pressure (Ambient)</string>
     <string id = "DisplaySensorPressureRaw">Sensor Barometric Pressure (Raw)</string>
     <string id = "DisplaySensorPressureMSL">Sensor Barometric Pressure (Mean Sea Level)</string>
+    <string id = "DisplayWeatherUpdateTime">Time of Last Weather Update</string>
 	
 	<string id = "DisplayHumidity">Humidity</string>
 	<string id = "DisplayDewPoint">Dew Point</string>
