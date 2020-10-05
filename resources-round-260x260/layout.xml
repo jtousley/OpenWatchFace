@@ -27,7 +27,8 @@
 		middle: 130
 	 -->
 	<jsonData id="l_city_left">
-		{"x":[20], "y":[63], "col":[2], "font":[101], "jus":[2], "func":0, "type":[2], "len":[14]}
+		{"x":[35, 20], "y":[40, 63], "col":[2, 2], "font":[101, 101], "jus":[2, 2], 
+		"func":0, "type":[2, 2], "len":[140, 145], "hide":[0, 0]}
 	</jsonData>
 
 	<jsonData id="l_date">
@@ -78,15 +79,15 @@
 		{"x":[161], "y":[135], "col":[2], "font":[101], "jus":[1], "func":14, "type":[0], "hide":[1]}
 	</jsonData>
 	<jsonData id="l_weatherOption1">
-		{"x":[188, 208], "y":[95, 95], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
+		{"x":[185, 208], "y":[95, 95], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
 		"func":15, "type":[1, 0]}
 	</jsonData>
 	<jsonData id="l_weatherOption2">
-		{"x":[188, 208], "y":[115, 115], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
+		{"x":[185, 208], "y":[115, 115], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
 		"func":16, "type":[1,0]}
 	</jsonData>
 	<jsonData id="l_weatherOption3">
-		{"x":[188, 208], "y":[135, 135], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
+		{"x":[185, 208], "y":[135, 135], "col":[7, 2], "font":[104, 101], "jus":[2, 2], 
 		"func":17, "type":[1,0]}
 	</jsonData>
 	<jsonData id="l_t_weatherIcon">

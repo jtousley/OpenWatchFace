@@ -1,8 +1,6 @@
 # OpenWatchFace
 
-Do NOT use Connect IQ or Garmin Express to configure the settings! You must use the Garmin Connect app.
-
-To get the weather data, you will need to make an account with OpenWeatherMaps and add your API key to the device settings.
+IMPORTANT! : To get the weather data, you will need to make an account with OpenWeatherMaps and add your API key to the device settings.
 
 ## Features
 

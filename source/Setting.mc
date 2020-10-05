@@ -277,6 +277,12 @@ using Toybox.Application.Storage as Storage;
     return (val != null ? val : false);
   }
 
+//  public
+//   static function GetIsShowWeekDayNumbers() {
+//     var val = App.getApp().getProperty(_showTimeOptions) == 2;
+//     return (val != null ? val : false);
+//   }
+
  public
   static function GetField(id) {
     var val = App.getApp().getProperty("field-" + id).toNumber();

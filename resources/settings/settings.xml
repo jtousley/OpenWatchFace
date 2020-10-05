@@ -16,10 +16,11 @@
         <settingConfig type="alphaNumeric"></settingConfig>
     </setting>
 
-      <setting propertyKey="@Properties.ShowTimeOptions" title="@Strings.showTimeOptionsTitle">
+    <setting propertyKey="@Properties.ShowTimeOptions" title="@Strings.showTimeOptionsTitle">
         <settingConfig type="list">
             <listEntry value="0">@Strings.TimeOptionSeconds</listEntry>
             <listEntry value="1">@Strings.TimeOptionAmPm</listEntry>
+            <!-- <listEntry value="2">@Strings.TimeOptionWeekPlusDay</listEntry> -->
             <listEntry value="2">@Strings.TimeOptionDecline</listEntry>
         </settingConfig>
     </setting>

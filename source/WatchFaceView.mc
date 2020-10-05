@@ -74,6 +74,7 @@ class WatchFaceView extends Ui.WatchFace {
                 , :DisplayWatchStatus          // = 26
                 , :DisplayBottomLine           // = 27
                 , :DisplayTopLine              // = 28
+                // , :DisplayWeekDayNumbers       // = 29
   ];
 
  protected
@@ -95,6 +96,7 @@ class WatchFaceView extends Ui.WatchFace {
 
     _wfApp.setSettings(_settingsCache);
     _displayFunctions.setSettings(_settingsCache);
+    _displayFunctions.setFonts(_fonts);
 
     Setting.SetAppVersion(Ui.loadResource(Rez.Strings.AppVersionValue));
     // Setting.SetWatchServerToken(Ui.loadResource(Rez.Strings.WatchServerTokenValue));
@@ -154,6 +156,7 @@ class WatchFaceView extends Ui.WatchFace {
     onUpdateHelper(dc);
 
     _displayFunctions.setTime(Time.now());
+    _displayFunctions.setDisplayContext(dc);
 
     var info = Activity.getActivityInfo();
 
@@ -305,5 +308,7 @@ class WatchFaceView extends Ui.WatchFace {
         Ui.loadResource(Rez.JsonData.l_bottom_line1));  // DisplayBottomLine  27
     _layouts.add(
         Ui.loadResource(Rez.JsonData.l_top_line));  // DisplayTopLine 28
+    // _layouts.add(Ui.loadResource(
+    //     Rez.JsonData.l_weekplusday));  // DisplayWeekDayNumbers 29
   }
 }

@@ -214,6 +214,7 @@ class Enumerations {
     LAYOUT_BATTERY = 26,
     LAYOUT_BOTTOM = 27,
     LAYOUT_TOP = 28,
+    // LAYOUT_WEEK_PLUS_DAY = 29,
     LAYOUT_SIZE = 29
   }
 

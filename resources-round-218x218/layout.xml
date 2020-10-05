@@ -26,12 +26,14 @@
 		
 		middle: 109
 	 -->
+
 	<jsonData id="l_city_left">
-		{"x":[20], "y":[40], "col":[2], "font":[101], "jus":[2], "func":0, "type":[2], "len":[12]}
+		{"x":[35, 20], "y":[20, 40], "col":[2, 2], "font":[101, 101], "jus":[2, 2], 
+		"func":0, "type":[2, 2], "len":[0, 125], "hide":[1, 0]}
 	</jsonData>
 
 	<jsonData id="l_date">
-		{"x":[30], "y":[137], "col":[3], "font":[101], "jus":[2], "func":1, "type":[0]}
+		{"x":[10], "y":[137], "col":[3], "font":[101], "jus":[2], "func":1, "type":[0]}
 	</jsonData>
 
 	<jsonData id="l_time">
@@ -40,18 +42,20 @@
 	</jsonData>
 
 	<jsonData id="l_pmam">
-		{"x":[200], "y":[180], "col":[1], "font":[101], "jus":[1], "func":3, "type":[0]}
+		{"x":[200], "y":[180], "col":[1], "font":[101], 
+		"jus":[1], "func":3, "type":[0]}
 	</jsonData>
 
 	<jsonData id="l_sec">
-		{"x":[200], "y":[180], "col":[1], "font":[101], "jus":[1], "func":4, "type":[0]}
+		{"x":[200], "y":[180], "col":[1], "font":[101], 
+		"jus":[1], "func":4, "type":[0]}
 	</jsonData>
 
 	<jsonData id="l_currTemp">
-		{"x":[150], "y":[30], "col":[2], "font":[101], "jus":[1], "func":5, "type":[0]}
+		{"x":[170], "y":[27], "col":[2], "font":[101], "jus":[1], "func":5, "type":[0]}
 	</jsonData>
 	<jsonData id="l_currFeelsTemp">
-		{"x":[155], "y":[50], "col":[2], "font":[101], "jus":[1], "func":6, "type":[0]}
+		{"x":[190], "y":[50], "col":[2], "font":[101], "jus":[1], "func":6, "type":[0]}
 	</jsonData>
 	<jsonData id="l_todayMaxTemp">
 		{"x":[95], "y":[92], "col":[2], "font":[101], "jus":[1], "func":7, "type":[0]}
@@ -109,7 +113,7 @@
 		"func":21, "type":[1], "hide":[1]}
 	</jsonData>
 	<jsonData id="l_currWeatherIcon">
-		{"x":[190], "y":[45], "col":[7], "font":[105], "jus":[1], "func":22}
+		{"x":[160], "y":[45], "col":[7], "font":[105], "jus":[1], "func":22}
 	</jsonData>
 
 	<jsonData id="l_field3">
@@ -140,6 +144,11 @@
 		{"x":[79, 109, 139], "y":[10, 5, 10], "col":[14, 3, 2], 
 		"font":[104, 105, 104], "jus":[1, 1, 1], "func":28, "type":[2, 2, 2] }
 	</jsonData>
+
+	<!-- <jsonData id="l_weekplusday">
+		{"x":[139, 139], "y":[5, 20], "col":[1, 1], "font":[100, 100], "jus":[1, 1], 
+		"func":29, "type":[0, 0]}
+	</jsonData> -->
 
 	<jsonData id="l_horiz_line">
 		{"x":[0, 218],"y":[137, 137]}

@@ -35,6 +35,10 @@ class DisplayFunctions {
   var _settings;
  protected
   var _isInit = false;
+ protected
+  var _dc = null;
+ protected
+  var _fonts = null;
 
  protected
   var _methods = [
@@ -75,6 +79,10 @@ class DisplayFunctions {
     }
     _settings = settings;
   }
+
+  function setFonts(fonts) { _fonts = fonts; }
+
+  function setDisplayContext(dc) { _dc = dc; }
 
   function DisplayTopLine(layout) {
     var data = [ "", "", "" ];
@@ -200,11 +208,22 @@ class DisplayFunctions {
   ///
   function DisplaySeconds(layout) {
     if (Setting.GetIsShowSeconds()) {
-      return [Sys.getClockTime().sec.format("%02d")];
+      return ["",Sys.getClockTime().sec.format("%02d")];
     } else {
       return [""];
     }
   }
+
+   ///
+  /// returns [Week#, Day#]
+  ///
+  // function DisplayWeekDayNumbers(layout) {
+  //   if (Setting.GetIsShowWeekDayNumbers()) {
+  //     return ["W32", "D123"];
+  //   } else {
+  //     return ["",""];
+  //   }
+  // }
 
   ///
   /// returns temperature
@@ -298,6 +317,7 @@ class DisplayFunctions {
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
+    // temperature = 789;
 
     return [temperature];
   }
@@ -608,32 +628,69 @@ class DisplayFunctions {
     return [ Enumerations.PRESSURE, pressure ];
   }
 
-  function trimString(str, length) {
-    var ret = str;
-    if (str != null && str instanceof String && str.length() > length) {
-      ret = str.substring(0, length - 1) + "~";
+  // function trimString(str, start, length) {
+  //   if (str == null || !(str instanceof String)) {
+  //     return "";
+  //   }
+
+  //   var ret = str.substring(start, start + length + 1);
+  //   if (str.length() > (start + length + 1)) {
+  //     ret = ret + "~";
+  //   }
+  //   return ret;
+  // }
+
+  function trimStringByWidth(str, startIndex, pixelWidth, fontIndex) {
+    var width = 0;
+    var charArray = str.toCharArray();
+    var i = startIndex;
+    for (; i < str.length(); i++) {
+      var c = charArray[i];
+      width = width + _dc.getTextWidthInPixels(c.toString(), _fonts[fontIndex]);
+      if (width > pixelWidth) {
+        break;
+      }
     }
-    return ret;
+    var substr = str.substring(startIndex, i - 1);
+    if ((startIndex + i) < str.length()) {
+      substr = substr + "~";
+    } else {
+      substr = substr + str.toCharArray()[i - 1].toString();
+    }
+
+    return [ substr, i ];
   }
   // Display current city name based on known GPS location
   //
   function DisplayLocation(layout) {
-    var MAX_CITY_LENGTH = (layout["len"] != null ? layout["len"][0] : 12);
+    layout["col"][0] = Setting.GetTextColor();
+    layout["col"][1] = Setting.GetTextColor();
+    var MAX_ROW1_LENGTH = (layout["len"] != null ? layout["len"][0] : 12);
+    var MAX_ROW2_LENGTH = (layout["len"] != null ? layout["len"][1] : 12);
+    var fontIndex = (layout["font"][0] > 100 ? (layout["font"][0] - 100)
+                                             : layout["font"][0]);
+
+    var fullAlert = _settings.weather._alertName;
+    var row1 = "";
+    var row2 = trimStringByWidth(_settings.weather._city, 0, MAX_ROW2_LENGTH,
+                                 fontIndex)[0];
 
     if (_settings.weather._alertExists == 1) {
-      var alertName = trimString(_settings.weather._alertName, MAX_CITY_LENGTH);
       layout["col"][0] = Setting.GetAlertColor();
-      return [alertName];
-    } else {
-      layout["col"][0] = Setting.GetTextColor();
+      var row1data =
+          trimStringByWidth(fullAlert, 0, MAX_ROW1_LENGTH, fontIndex);
+      row1 = row1data[0];
+      var trimIndex = row1data[1];
+      // arbitarily must be 4 extra characters to make it worthwhile to not show
+      // city
+      if (fullAlert.length() > (trimIndex + 5)) {
+        row2 = trimStringByWidth(fullAlert, trimIndex, MAX_ROW2_LENGTH,
+                                 fontIndex)[0];
+        layout["col"][1] = Setting.GetAlertColor();
+      }
     }
-    // var tmp = city.toCharArray();
-    // Sys.println("Val : " + tmp[0].toNumber());
-    // _settings.weather._city = "Johannesburgenointen";
-    var city = trimString(_settings.weather._city, MAX_CITY_LENGTH);
-    // Sys.println("Display: " + city);
 
-    return [city];
+    return [ row1, row2 ];
   }
 
   // Display current humidity
