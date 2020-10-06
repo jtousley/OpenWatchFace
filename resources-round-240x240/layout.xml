@@ -41,10 +41,10 @@
 		"font":[103, 103, 103], "jus":[1, 1, 1], "func":2}
 	</jsonData>
 
+	<!-- Combine these two -->
 	<jsonData id="l_pmam">
 		{"x":[200], "y":[180], "col":[1], "font":[101], "jus":[1], "func":3, "type":[0]}
 	</jsonData>
-
 	<jsonData id="l_sec">
 		{"x":[200], "y":[180], "col":[1], "font":[101], "jus":[1], "func":4, "type":[0]}
 	</jsonData>

@@ -25,22 +25,30 @@ class SettingsCache {
     weatherField0 = Setting.GetWField(0);
     weatherField1 = Setting.GetWField(1);
     weatherField2 = Setting.GetWField(2);
-    // connError = Setting.GetConError();
     lastKnownLocation = Setting.GetLastKnownLocation();
     // weatherProvider = Setting.GetWeatherProvider();
     // weatherApiKey = Setting.GetOpenWeatherToken();
     weatherTempSystem = Setting.GetTempSystem();
     weatherWindSystem = Setting.GetWindSystem();
-    // extraTimeZone = Setting.GetExtraTimeZone();
-    // exchangeRate = Setting.GetExchangeRate();
-    // targetCurrency = Setting.GetTargetCurrency();
     distanceSystem = Setting.GetDistSystem();
     altimeterSystem = Setting.GetAltimeterSystem();
     barometricSystem = Setting.GetBarometricSystem();
-    // showMessage = Setting.GetShowMessage();
-    // showAlarm = Setting.GetShowAlarm();
     dateOrder = Setting.GetDateOrder();
-    // isShowMoon = Setting.GetShowMoon();
+    backgroundColor = Setting.GetBackgroundColor();
+    pulseField = Setting.GetPulseField();
+
+    showSeconds = Setting.GetIsShowSeconds();
+    showAmPm = Setting.GetIsShowAmPm();
+    showWeekNumber = Setting.GetIsShowWeekNumber();
+    iconColor = Setting.GetIconColor();
+    textColor = Setting.GetTextColor();
+    hourColor = Setting.GetHourColor();
+    minuteColor = Setting.GetMinuteColor();
+    alertColor = Setting.GetAlertColor();
+    disturbColor = Setting.GetDoNotDisturbColor();
+    weatherStaleTime = Setting.GetWeatherStaleTime();
+    weatherCurrentColor = Setting.GetWeatherCurrentColor();
+
     InitializeWeather();
   }
 
@@ -128,12 +136,6 @@ class SettingsCache {
   var weatherTempSystem;
  public
   var weatherWindSystem;
-  //  public
-  //   var extraTimeZone;
-  //  public
-  //   var exchangeRate;
-  //  public
-  //   var targetCurrency;
  public
   var distanceSystem;
  public
@@ -142,4 +144,30 @@ class SettingsCache {
   var barometricSystem;
  public
   var dateOrder;
+ public
+  var showSeconds;
+ public
+  var showAmPm;
+ public
+  var showWeekNumber;
+ public
+  var backgroundColor;
+ public
+  var iconColor;
+ public
+  var textColor;
+ public
+  var hourColor;
+ public
+  var minuteColor;
+ public
+  var alertColor;
+ public
+  var disturbColor;
+ public
+  var weatherStaleTime;
+ public
+  var weatherCurrentColor;
+ public
+  var pulseField;
 }

@@ -8,6 +8,7 @@
     <property id="MinColor" type="number">12</property>
     <property id = "WeatherCurrentColor" type = "number">7</property>
     <property id = "AlertColor" type = "number">13</property>
+    <property id = "DoNotDisturbColor" type = "number">13</property>
     <property id = "WeatherStaleTime" type = "string">60</property>
     <property id = "WeatherUpdateFrequency" type = "string">30</property>
 

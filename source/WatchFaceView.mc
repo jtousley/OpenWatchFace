@@ -119,9 +119,9 @@ class WatchFaceView extends Ui.WatchFace {
   // calls every second for partial update
   //
   function onPartialUpdate(dc) {
-    if (Setting.GetIsShowSeconds()) {
-      dc.setColor(_colors[Setting.GetTextColor()],
-                  _colors[Setting.GetBackgroundColor()]);
+    if (_settingsCache.showSeconds) {
+      dc.setColor(_colors[_settingsCache.textColor],
+                  _colors[_settingsCache.backgroundColor]);
       var font = _fonts[Enumerations.FONT_SMALL];
       dc.drawText(_layouts[Enumerations.LAYOUT_SEC]["x"][0],
                   _layouts[Enumerations.LAYOUT_SEC]["y"][0], font,
@@ -129,13 +129,13 @@ class WatchFaceView extends Ui.WatchFace {
                   _layouts[Enumerations.LAYOUT_SEC]["jus"][0]);
     }
 
-    if (Setting.GetPulseField() < 3) {
+    if (_settingsCache.pulseField < 3) {
       var layout =
-          _layouts[Enumerations.LAYOUT_FIELD_3 + Setting.GetPulseField()];
+          _layouts[Enumerations.LAYOUT_FIELD_3 + _settingsCache.pulseField];
       var pulseData = _displayFunctions.DisplayPulse(layout);
       if (pulseData[2]) {
-        dc.setColor(_colors[Setting.GetTextColor()],
-                    _colors[Setting.GetBackgroundColor()]);
+        dc.setColor(_colors[_settingsCache.textColor],
+                    _colors[_settingsCache.backgroundColor]);
         var font = _fonts[Enumerations.FONT_SMALL];
         dc.drawText(layout["x"][1], layout["y"][1],
                     // layout["font"][1],
@@ -178,7 +178,7 @@ class WatchFaceView extends Ui.WatchFace {
     }
 
     dc.clearClip();
-    dc.setColor(Gfx.COLOR_TRANSPARENT, _colors[Setting.GetBackgroundColor()]);
+    dc.setColor(Gfx.COLOR_TRANSPARENT, _colors[_settingsCache.backgroundColor]);
     dc.clear();
 
     for (var i = 0; i < _layouts.size(); i++) {
@@ -199,10 +199,10 @@ class WatchFaceView extends Ui.WatchFace {
         var color = _colors[_layouts[i]["col"][j]];
         if (_layouts[i] has : hasKey && _layouts[i].hasKey("type")) {
           if (_layouts[i]["type"][j] == Enumerations.TYPE_TEXT) {  // text color
-            color = _colors[Setting.GetTextColor()];
+            color = _colors[_settingsCache.textColor];
           } else if (_layouts[i]["type"][j] ==
                      Enumerations.TYPE_ICON) {  // icon color
-            color = _colors[Setting.GetIconColor()];
+            color = _colors[_settingsCache.iconColor];
           }
         }
         dc.setColor(color, Gfx.COLOR_TRANSPARENT);
@@ -219,19 +219,13 @@ class WatchFaceView extends Ui.WatchFace {
     }
 
     dc.setPenWidth(2);
-    dc.setColor(_colors[Setting.GetTextColor()], Gfx.COLOR_TRANSPARENT);
+    dc.setColor(_colors[_settingsCache.textColor], Gfx.COLOR_TRANSPARENT);
     var horiz_line = Ui.loadResource(Rez.JsonData.l_horiz_line);
     dc.drawLine(horiz_line["x"][0], horiz_line["y"][0], horiz_line["x"][1],
                 horiz_line["y"][1]);
     var vert_line = Ui.loadResource(Rez.JsonData.l_vert_line);
     dc.drawLine(vert_line["x"][0], vert_line["y"][0], vert_line["x"][1],
                 vert_line["y"][1]);
-
-    if (Setting.GetIsTest()) {
-      dc.setColor(_colors[Setting.GetTextColor()], Gfx.COLOR_TRANSPARENT);
-      dc.drawText(dc.getWidth() / 2, dc.getHeight() - 20, _fonts[0],
-                  Setting.GetAppVersion(), Gfx.TEXT_JUSTIFY_CENTER);
-    }
   }
 
   function InvalidateLayout() {

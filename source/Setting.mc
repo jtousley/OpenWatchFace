@@ -44,6 +44,7 @@ using Toybox.Application.Storage as Storage;
   static protected var _iconColor = "IconColor";
   static protected var _weatherCurrentColor = "WeatherCurrentColor";
   static protected var _alertColor = "AlertColor";
+  static protected var _disturbColor = "DoNotDisturbColor";
   static protected var _weatherStaleTime = "WeatherStaleTime";
   static protected var _weatherUpdateTime = "WeatherUpdateFrequency";
   static protected var _hourColor = "HourColor";
@@ -91,16 +92,17 @@ using Toybox.Application.Storage as Storage;
     return App.getApp().setProperty(_openWeatherApiToken, openWeatherApiToken);
   }
 
-//  public
-//   static function GetAccuWeatherToken() {
-//     var val = App.getApp().getProperty(_accuWeatherApiToken);
-//     return (val != null ? val : "");
-//   }
+  //  public
+  //   static function GetAccuWeatherToken() {
+  //     var val = App.getApp().getProperty(_accuWeatherApiToken);
+  //     return (val != null ? val : "");
+  //   }
 
-//  public
-//   static function SetAccuWeatherToken(accuWeatherApiToken) {
-//     return App.getApp().setProperty(_accuWeatherApiToken, accuWeatherApiToken);
-//   }
+  //  public
+  //   static function SetAccuWeatherToken(accuWeatherApiToken) {
+  //     return App.getApp().setProperty(_accuWeatherApiToken,
+  //     accuWeatherApiToken);
+  //   }
 
  public
   static function SetTextColor(color) {
@@ -137,6 +139,11 @@ using Toybox.Application.Storage as Storage;
  public
   static function GetAlertColor() {
     var val = App.getApp().getProperty(_alertColor);
+    return (val != null ? val : GetIconColor());
+  }
+ public
+  static function GetDoNotDisturbColor() {
+    var val = App.getApp().getProperty(_disturbColor);
     return (val != null ? val : GetIconColor());
   }
 
@@ -277,18 +284,17 @@ using Toybox.Application.Storage as Storage;
     return (val != null ? val : false);
   }
 
-//  public
-//   static function GetIsShowWeekDayNumbers() {
-//     var val = App.getApp().getProperty(_showTimeOptions) == 2;
-//     return (val != null ? val : false);
-//   }
+ public
+  static function GetIsShowWeekNumber() {
+    var val = App.getApp().getProperty(_showTimeOptions) == 2;
+    return (val != null ? val : false);
+  }
 
  public
   static function GetField(id) {
     var val = App.getApp().getProperty("field-" + id).toNumber();
     return (val != null ? val : 0);
   }
-
 
  public
   static function GetFieldColor(id) {

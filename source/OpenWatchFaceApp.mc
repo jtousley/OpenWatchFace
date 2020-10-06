@@ -73,7 +73,8 @@ using Toybox.StringUtil;
 
     if (data != null && data has
         : size && data.size() == Enumerations.WVAL_SIZE) {
-      if (data[Enumerations.WVAL_ERROR] == 200) {
+      if (data[Enumerations.WVAL_ERROR] instanceof
+          Number && data[Enumerations.WVAL_ERROR] == 200) {
         printMessage("Got new weather data");
         setWeatherData(data);
       }
@@ -82,8 +83,10 @@ using Toybox.StringUtil;
 
   function setWeatherData(data) {
     // Sys.println("Data valid : " + data.toString());
-    data[Enumerations.WVAL_CITY_NAME] =
-        makeCityNameInternational(data[Enumerations.WVAL_CITY_NAME]);
+    if (data[Enumerations.WVAL_CITY_NAME] instanceof String) {
+      data[Enumerations.WVAL_CITY_NAME] =
+          makeCityNameInternational(data[Enumerations.WVAL_CITY_NAME]);
+    }
     _settingsCache.UpdateWeather(data);
     _settingsCache.InitializeWeather();
     // lastEventTime
@@ -134,7 +137,7 @@ using Toybox.StringUtil;
   }
 
   function makeCityNameInternational(city) {
-// Sys.println("city : " + city);
+    // Sys.println("city : " + city);
 
     var cityArray = city.toCharArray();
     // var byteArray = StringUtil.convertEncodedString(city, options);
@@ -142,7 +145,7 @@ using Toybox.StringUtil;
     for (var i = 0; i < cityArray.size(); i++) {
       var num = cityArray[i].toNumber();
       if (num > 255) {
-        num = 95; // Underscore '_'
+        num = 95;  // Underscore '_'
       }
       internationalName[i] = num.toChar();
     }

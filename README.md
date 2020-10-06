@@ -75,7 +75,24 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.2.6:latest
+### version 1.2.8:latest
+
+1.2.8
+
+Add week number
+Add do not disturb color
+Allow hiding activity/weather options
+Fix seconds and AM/PM field for 218x218 devices
+
+1.2.7
+
+Add last update time option
+Remove pascals for pressure
+
+Add color options for activity fields
+
+Formatting for 218x218 devices
+Better displaying of city names and weather advisories
 
 1.2.6
 

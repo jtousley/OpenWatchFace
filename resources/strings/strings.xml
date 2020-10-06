@@ -10,9 +10,9 @@
     <string id = "field_0_title">Show in activity field 1</string>
     <string id = "field_1_title">Show in activity field 2</string>
 	<string id = "field_2_title">Show in activity field 3</string>
-    <string id = "fieldcolor_0_title">Icon for activity field 0</string>
-    <string id = "fieldcolor_1_title">Icon for activity field 1</string>
-    <string id = "fieldcolor_2_title">Icon for activity field 2</string>
+    <string id = "fieldcolor_0_title">Icon color for activity field 0</string>
+    <string id = "fieldcolor_1_title">Icon color for activity field 1</string>
+    <string id = "fieldcolor_2_title">Icon color for activity field 2</string>
 	<string id = "WField_0_Title">Show in weather field 1</string>
     <string id = "WField_1_Title">Show in weather field 2</string>
     <string id = "WField_2_Title">Show in weather field 3</string>
@@ -27,6 +27,7 @@
     <string id = "DisplaySensorPressureRaw">Sensor Barometric Pressure (Raw)</string>
     <string id = "DisplaySensorPressureMSL">Sensor Barometric Pressure (Mean Sea Level)</string>
     <string id = "DisplayWeatherUpdateTime">Time of Last Weather Update</string>
+    <string id = "HideFunction">Hide This Option</string>
 	
 	<string id = "DisplayHumidity">Humidity</string>
 	<string id = "DisplayDewPoint">Dew Point</string>
@@ -74,6 +75,7 @@
     <string id="IconColorTitle">Icon Color</string>
     <string id="WeatherCurrentColorTitle">Current Weather Icon Color</string>
     <string id="AlertColorTitle">Alert color (stale weather, low battery, advisories)</string>
+    <string id="DoNotDisturbColorTitle">Do Not Disturb Icon Color</string>
     <string id="WeatherStaleTimeTitle">Minutes Before Weather Data is Stale</string>
     <string id="WeatherUpdateFrequencyTitle">Minutes To Update Weather Data</string>
 
@@ -86,7 +88,7 @@
 	<string id="TimeOptions">Display Seconds or AM/PM</string>
     <string id="TimeOptionSeconds">Display Seconds</string>
     <string id="TimeOptionAmPm">Display AM/PM</string>
-    <string id="TimeOptionWeekPlusDay">Display Week and Day Numbers</string>
+    <string id="TimeOptionWeekNumber">Display Week Number</string>
     <string id="TimeOptionDecline">Display None</string>
 
     <string id = "ColorBlack">Black</string>

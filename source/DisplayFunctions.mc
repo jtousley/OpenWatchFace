@@ -41,20 +41,19 @@ class DisplayFunctions {
   var _fonts = null;
 
  protected
-  var _methods = [
-    //
-    :DisplayPulse
-    , :DisplayDistance
-    , :DisplaySteps
-    , :DisplayFloors
-    , :DisplayAltitude
-    , :DisplayCalories
-    , :DisplaySunEvent
-    , :DisplaySensorPressureAmbient
-    , :DisplaySensorPressureRaw
-    , :DisplaySensorPressureMsl
-    , :DisplayWeatherUpdateTime
-    ];
+  var _methods = [//
+                    :DisplayPulse
+                   , :DisplayDistance
+                   , :DisplaySteps
+                   , :DisplayFloors
+                   , :DisplayAltitude
+                   , :DisplayCalories
+                   , :DisplaySunEvent
+                   , :DisplaySensorPressureAmbient
+                   , :DisplaySensorPressureRaw
+                   , :DisplaySensorPressureMsl
+                   , :DisplayWeatherUpdateTime
+                   , :HideFunction];
 
  protected
   var _weatherFuncs = [//
@@ -67,7 +66,8 @@ class DisplayFunctions {
                         , :DisplayTodayPrecipitation
                         , :DisplayNextPrecipitation
                         , :DisplayNextNextPrecipitation
-                        , :DisplaySmartWeather];
+                        , :DisplaySmartWeather
+                        , :HideFunction];
 
   function setTime(time) {
     _utcTime = time.value();
@@ -100,9 +100,8 @@ class DisplayFunctions {
     }
 
     if (deviceSettings != null && deviceSettings has : doNotDisturb) {
-      layout["col"][2] =
-          (deviceSettings.doNotDisturb ? Enumerations.ColorYellow
-                                       : Enumerations.ColorWhite);
+      layout["col"][2] = (deviceSettings.doNotDisturb ? Enumerations.ColorYellow
+                                                      : _settings.disturbColor);
       data[2] = Enumerations.DO_NOT_DISTURB;
     }
 
@@ -133,7 +132,7 @@ class DisplayFunctions {
         self has _methods[_settings.field3]) {
       var color = _settings.fieldcolor3;
       if (color >= Enumerations.ColorSize) {
-        color = Setting.GetIconColor();
+        color = _settings.iconColor;
       }
       layout["col"][0] = color;
       return method(_methods[_settings.field3]).invoke(layout);
@@ -147,7 +146,7 @@ class DisplayFunctions {
         self has _methods[_settings.field4]) {
       var color = _settings.fieldcolor4;
       if (color >= Enumerations.ColorSize) {
-        color = Setting.GetIconColor();
+        color = _settings.iconColor;
       }
       layout["col"][0] = color;
       return method(_methods[_settings.field4]).invoke(layout);
@@ -161,7 +160,7 @@ class DisplayFunctions {
         self has _methods[_settings.field5]) {
       var color = _settings.fieldcolor5;
       if (color >= Enumerations.ColorSize) {
-        color = Setting.GetIconColor();
+        color = _settings.iconColor;
       }
       layout["col"][0] = color;
       return method(_methods[_settings.field5]).invoke(layout);
@@ -198,8 +197,8 @@ class DisplayFunctions {
   ///
   function DisplayTime(layout) {
     var deviceSettings = Sys.getDeviceSettings();
-    layout["col"][0] = Setting.GetHourColor();
-    layout["col"][2] = Setting.GetMinuteColor();
+    layout["col"][0] = _settings.hourColor;
+    layout["col"][2] = _settings.minuteColor;
     var hour = (deviceSettings != null && deviceSettings.is24Hour)
                    ? _gTimeNow.hour.format("%02d")
                    : (_gTimeNow.hour % 12 == 0 ? 12 : _gTimeNow.hour % 12)
@@ -212,7 +211,7 @@ class DisplayFunctions {
   /// returns [pm|am]
   ///
   function DisplayPmAm(layout) {
-    if (Setting.GetIsShowAmPm()) {
+    if (_settings.showAmPm) {
       return [_gTimeNow.hour > 11 ? "pm" : "am"];
     } else {
       return [""];
@@ -223,23 +222,31 @@ class DisplayFunctions {
   /// returns [seconds]
   ///
   function DisplaySeconds(layout) {
-    if (Setting.GetIsShowSeconds()) {
-      return [ "", Sys.getClockTime().sec.format("%02d") ];
+    if (_settings.showSeconds) {
+      return [Sys.getClockTime().sec.format("%02d")];
+    } else if (_settings.showWeekNumber) {
+      // var testTime = Gregorian.moment({:year=>2020, :month=>12,:day=>19});
+      var equalizedTime =
+          new Time.Moment(_utcTime + Sys.getClockTime().timeZoneOffset);
+      // testTime;
+      var nowInfo = Gregorian.utcInfo(equalizedTime, Time.FORMAT_SHORT);
+
+      var firstDayOfYear = Gregorian.moment({ :year => nowInfo.year, :month => 1, :day => 1}); // local time
+      var firstDayInfo = Gregorian.utcInfo(firstDayOfYear, Time.FORMAT_SHORT);
+
+      var thisYearsDuration =
+          new Time.Duration(equalizedTime.value() - firstDayOfYear.value());
+      var thisYearsDays = thisYearsDuration.value() / Gregorian.SECONDS_PER_DAY;
+      var thisYearsWeeks = (thisYearsDays + 6) / 7;
+      if (nowInfo.day_of_week <= firstDayInfo.day_of_week) {
+        thisYearsWeeks = thisYearsWeeks + 1;
+      }
+      // Sys.println("Weeks : " + thisYearsWeeks);
+      return [thisYearsWeeks.format("%02d")];
     } else {
       return [""];
     }
   }
-
-  ///
-  /// returns [Week#, Day#]
-  ///
-  // function DisplayWeekDayNumbers(layout) {
-  //   if (Setting.GetIsShowWeekDayNumbers()) {
-  //     return ["W32", "D123"];
-  //   } else {
-  //     return ["",""];
-  //   }
-  // }
 
   ///
   /// returns temperature
@@ -436,14 +443,14 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var now = new Time.Moment(_utcTime);
-    var weatherStaleTime = Setting.GetWeatherStaleTime();
+    var weatherStaleTime = _settings.weatherStaleTime;
     var lastEventTime = weather._weatherDateTime;
-    layout["col"][0] = Setting.GetAlertColor().toNumber();
+    layout["col"][0] = _settings.alertColor;
     if (weatherStaleTime != null && lastEventTime != null) {
       var staleDuration = new Time.Duration(weatherStaleTime * 60);
       var lastEvent = new Time.Moment(lastEventTime);
       if (!lastEvent.add(staleDuration).lessThan(now)) {
-        layout["col"][0] = Setting.GetWeatherCurrentColor().toNumber();
+        layout["col"][0] = _settings.weatherCurrentColor;
       }
     }
 
@@ -569,7 +576,6 @@ class DisplayFunctions {
 
     return [
       Enumerations.ALTITUDE, (altitude != null) ? altitude.format("%d") : "---"
-
     ];
   }
 
@@ -661,6 +667,8 @@ class DisplayFunctions {
     return [ Enumerations.REFRESH, updateTime ];
   }
 
+  function HideFunction(layout) { return [ "", "" ]; }
+
   // function trimString(str, start, length) {
   //   if (str == null || !(str instanceof String)) {
   //     return "";
@@ -696,8 +704,8 @@ class DisplayFunctions {
   // Display current city name based on known GPS location
   //
   function DisplayLocation(layout) {
-    layout["col"][0] = Setting.GetTextColor();
-    layout["col"][1] = Setting.GetTextColor();
+    layout["col"][0] = _settings.textColor;
+    layout["col"][1] = _settings.textColor;
     var MAX_ROW1_LENGTH = (layout["len"] != null ? layout["len"][0] : 12);
     var MAX_ROW2_LENGTH = (layout["len"] != null ? layout["len"][1] : 12);
     var fontIndex = (layout["font"][0] > 100 ? (layout["font"][0] - 100)
@@ -709,7 +717,7 @@ class DisplayFunctions {
                                  fontIndex)[0];
 
     if (_settings.weather._alertExists == 1) {
-      layout["col"][0] = Setting.GetAlertColor();
+      layout["col"][0] = _settings.alertColor;
       var row1data =
           trimStringByWidth(fullAlert, 0, MAX_ROW1_LENGTH, fontIndex);
       row1 = row1data[0];
@@ -719,7 +727,7 @@ class DisplayFunctions {
       if (fullAlert.length() > (trimIndex + 5)) {
         row2 = trimStringByWidth(fullAlert, trimIndex, MAX_ROW2_LENGTH,
                                  fontIndex)[0];
-        layout["col"][1] = Setting.GetAlertColor();
+        layout["col"][1] = _settings.alertColor;
       }
     }
 
@@ -855,11 +863,11 @@ class DisplayFunctions {
 
     // set alert color if battery level too low
     if (batteryLevel < 25) {
-      layout["col"][0] = Setting.GetAlertColor();
-      layout["col"][1] = Setting.GetAlertColor();
+      layout["col"][0] = _settings.alertColor;
+      layout["col"][1] = _settings.alertColor;
     } else {
-      layout["col"][0] = Setting.GetIconColor();
-      layout["col"][1] = Setting.GetTextColor();
+      layout["col"][0] = _settings.iconColor;
+      layout["col"][1] = _settings.textColor;
     }
 
     return [ Enumerations.ELECTRICITY, batteryLevel.format("%d") ];
