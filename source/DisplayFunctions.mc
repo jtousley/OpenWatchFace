@@ -100,8 +100,9 @@ class DisplayFunctions {
     }
 
     if (deviceSettings != null && deviceSettings has : doNotDisturb) {
-      layout["col"][2] = (deviceSettings.doNotDisturb ? Enumerations.ColorYellow
-                                                      : _settings.disturbColor);
+      layout["col"][2] =
+          (deviceSettings.doNotDisturb ? _settings.disturbColor
+                                       : Enumerations.ColorWhite);
       data[2] = Enumerations.WEATHER_NIGHT;
     }
 

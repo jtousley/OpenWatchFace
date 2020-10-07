@@ -74,7 +74,15 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.2.8:latest
+### version 1.2.10:latest
+
+1.2.10
+
+Fix do not disturb color
+
+1.2.9
+
+Add night for current weather after sunset and before sunrise
 
 1.2.8
 
