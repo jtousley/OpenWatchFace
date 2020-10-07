@@ -102,7 +102,7 @@ class DisplayFunctions {
     if (deviceSettings != null && deviceSettings has : doNotDisturb) {
       layout["col"][2] = (deviceSettings.doNotDisturb ? Enumerations.ColorYellow
                                                       : _settings.disturbColor);
-      data[2] = Enumerations.DO_NOT_DISTURB;
+      data[2] = Enumerations.WEATHER_NIGHT;
     }
 
     return data;
@@ -416,25 +416,29 @@ class DisplayFunctions {
 
   function DisplayTodayWeatherIcon(layout) {
     var weather = _settings.weather;
-    var data = Weather.convertOpenWeatherIdToIcon(weather._todayPrimaryId);
+    var data =
+        Weather.convertOpenWeatherIdToIcon(weather._todayPrimaryId, false);
 
     return data;
   }
   function DisplayNextWeatherIcon(layout) {
     var weather = _settings.weather;
-    var data = Weather.convertOpenWeatherIdToIcon(weather._nextPrimaryId);
+    var data =
+        Weather.convertOpenWeatherIdToIcon(weather._nextPrimaryId, false);
 
     return data;
   }
   function DisplayNextNextWeatherIcon(layout) {
     var weather = _settings.weather;
-    var data = Weather.convertOpenWeatherIdToIcon(weather._nextNextPrimaryId);
+    var data =
+        Weather.convertOpenWeatherIdToIcon(weather._nextNextPrimaryId, false);
 
     return data;
   }
   function DisplayThirdWeatherIcon(layout) {
     var weather = _settings.weather;
-    var data = Weather.convertOpenWeatherIdToIcon(weather._thirdPrimaryId);
+    var data =
+        Weather.convertOpenWeatherIdToIcon(weather._thirdPrimaryId, false);
 
     return data;
   }
@@ -454,7 +458,12 @@ class DisplayFunctions {
       }
     }
 
-    var data = Weather.convertOpenWeatherIdToIcon(weather._currentId);
+    var night = false;
+    if ((_utcTime < weather._sunriseTime) || (_utcTime > weather._sunsetTime)) {
+      night = true;
+    }
+
+    var data = Weather.convertOpenWeatherIdToIcon(weather._currentId, night);
     var icon = data[0];
     // var intensity = data[1];
 
@@ -722,8 +731,8 @@ class DisplayFunctions {
           trimStringByWidth(fullAlert, 0, MAX_ROW1_LENGTH, fontIndex);
       row1 = row1data[0];
       var trimIndex = row1data[1];
-      // arbitarily must be 4 extra characters to make it worthwhile to not show
-      // city
+      // arbitarily must be 4 extra characters to make it worthwhile to not
+      // show city
       if (fullAlert.length() > (trimIndex + 5)) {
         row2 = trimStringByWidth(fullAlert, trimIndex, MAX_ROW2_LENGTH,
                                  fontIndex)[0];

@@ -93,7 +93,6 @@ class Weather {
   var _nextNextPrimaryId = 0;
  public
   var _thirdPrimaryId = 0;
-  
 
  public
   var _rainDepth_mm = 0;
@@ -109,7 +108,7 @@ class Weather {
   function initialize() {}
 
  public
-  static function convertOpenWeatherIdToIcon(id) {
+  static function convertOpenWeatherIdToIcon(id, night) {
     var icon = Enumerations.REFRESH;  // Some normal weather
     var intensity = Enumerations.INTENSITY_LIGHT;
     var ragged = Enumerations.INTENSITY_NOT_RAGGED;
@@ -366,21 +365,25 @@ class Weather {
 
       case 800:
         // Clear	clear sky	 01d
-        icon = Enumerations.WEATHER_SUNNY;
+        icon =
+            (night ? Enumerations.WEATHER_NIGHT : Enumerations.WEATHER_SUNNY);
         break;
       case 801:
         // Clouds	few clouds: 11-25%	 02d
-        icon = Enumerations.WEATHER_PARTLY_CLOUDY;
+        icon = (night ? Enumerations.WEATHER_NIGHT_CLOUDY
+                      : Enumerations.WEATHER_SUNNY_CLOUDY);
         intensity = Enumerations.INTENSITY_LIGHT;
         break;
       case 802:
         // Clouds	scattered clouds: 25-50%	 03d
-        icon = Enumerations.WEATHER_PARTLY_CLOUDY;
+        icon = (night ? Enumerations.WEATHER_NIGHT_CLOUDY
+                      : Enumerations.WEATHER_SUNNY_CLOUDY);
         intensity = Enumerations.INTENSITY_MEDIUM;
         break;
       case 803:
         // Clouds	broken clouds: 51-84%	 04d
-        icon = Enumerations.WEATHER_PARTLY_CLOUDY;
+        icon = (night ? Enumerations.WEATHER_NIGHT_CLOUDY
+                      : Enumerations.WEATHER_SUNNY_CLOUDY);
         intensity = Enumerations.INTENSITY_HARD;
         break;
       case 804:

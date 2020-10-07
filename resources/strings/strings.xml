@@ -109,7 +109,7 @@
 	<string id = "ColorYellowRed">Yellow Red</string>
 	<string id = "ColorOrange">Orange</string>
 
-	<string id="showTimeOptionsTitle">Show Seconds or AM/PM</string>
+	<string id="showTimeOptionsTitle">Time Options (Seconds, AM/PM, Week No.)</string>
 	
 	
 </strings>

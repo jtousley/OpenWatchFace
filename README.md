@@ -1,14 +1,12 @@
-# OpenWatchFace
-
 IMPORTANT! : To get the weather data, you will need to make an account with OpenWeatherMaps and add your API key to the device settings.
 
 ## Features
 
-City name of location
-Alert name for location, when applicable (instead of city)
+City name for location
+Weather alert for location, when applicable
 Date (WDM, WMD, DMW, DMW)
 Time (12, 24)
-AM/PM/Seconds
+AM/PM/Seconds/Week number
 Current temp (F, C)
 Current feels temp (F, C)
 Current weather icon
@@ -34,6 +32,7 @@ Next Sunrise/Sunset
 Sensor pressure ambient** (mBar, Pa, in)
 Sensor pressure raw** (mBar, Pa, in)
 Sensor pressure mean sea level** (mBar, Pa, in)
+Last update time
 --------------------------------------------------
 Weather! - Choose 3:
 Humidity (%)
@@ -49,7 +48,7 @@ Smart weather (see note)
 --------------------------------------------------
 
 Coming soon:
-Support for more devices
+You tell me
 
 Please contact me with any suggestions or problems!
 
