@@ -32,4 +32,6 @@
 
     <property id = "Open-Weather-API-Token" type = "string"></property>
 
+    <property id = "isTest" type = "number">0</property>
+
 </properties>

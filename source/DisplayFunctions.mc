@@ -743,6 +743,10 @@ class DisplayFunctions {
       }
     }
 
+    if (_settings.isTest == true) {
+      row1 = _settings.weather._errorCode;
+    }
+
     return [ row1, row2 ];
   }
 

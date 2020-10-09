@@ -81,7 +81,8 @@ using Toybox.Time as Time;
 
   function onTemporalEvent() {
     _received = null;
-    // Sys.println("onTemporalEvent - Memory: " + Sys.getSystemStats().freeMemory +
+    // Sys.println("onTemporalEvent - Memory: " +
+    // Sys.getSystemStats().freeMemory +
     //             "/" + Sys.getSystemStats().totalMemory);
     var doUpdate = false;
 
@@ -98,27 +99,20 @@ using Toybox.Time as Time;
       var lastEvent = new Time.Moment(lastEventTime);
       if (lastEvent.add(waitTime).lessThan(now)) {
         doUpdate = true;
-      } else {
-        printMessage("Not enough time elapsed");
-      }
+      } 
     }
     lastEventTime = null;
     lastWeather = null;
+    var location = Setting.GetLastKnownLocation();
+    _appid = Setting.GetOpenWeatherToken();
 
-    if (doUpdate) {
-      var location = Setting.GetLastKnownLocation();
-      _appid = Setting.GetOpenWeatherToken();
-      printMessage("Appid : " + _appid);
-      if (location == null) {
-        printMessage("Could not get location");
-      } else if (_appid == null || (_appid has
-                                    : length && _appid.length() == 0)) {
-        printMessage("Invalid key");
-      } else {
-        _lastLocation = location;
-        var url = "https://api.openweathermap.org/data/2.5/weather";
+    if (doUpdate && location != null && _appid != null &&
+        (_appid has
+         : length && _appid.length() != 0)) {
+      _lastLocation = location;
+      var url = "https://api.openweathermap.org/data/2.5/weather";
 
-        Comm.makeWebRequest(
+      Comm.makeWebRequest(
             url,
             // PARAMS
             {"lat" => _lastLocation[0], 
@@ -132,14 +126,20 @@ using Toybox.Time as Time;
             :responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
             },
             method(:OnReceiveOpenLocationUpdate));
-      }
+    } else {
+      // printMessage("No update");
+      _received = new[WVAL_SIZE];
+      _received[WVAL_ERROR] = 0;
+      Background.exit(_received);
     }
   }
 
   function OnReceiveOpenLocationUpdate(responseCode, data) {
     if (responseCode != 200) {
       // printMessage("API calls exceeded : " + responseCode);
-      Background.exit(null);
+      _received = new[WVAL_SIZE];
+      _received[WVAL_ERROR] = responseCode;
+      Background.exit(_received);
     } else {
       if (data != null) {
         _city = data["name"];
@@ -176,9 +176,7 @@ using Toybox.Time as Time;
     // initReceived();
     _received = new[WVAL_SIZE];
     var success = false;
-    if (responseCode != 200) {
-      printMessage("API calls exceeded : " + responseCode);
-    } else {
+    if (responseCode == 200) {
       // ParseReceivedData(data);
       var current = "current";
       var daily = "daily";
@@ -300,7 +298,9 @@ using Toybox.Time as Time;
     if (success) {
       Background.exit(_received);
     } else {
-      Background.exit(null);
+      _received = new[WVAL_SIZE];
+      _received[WVAL_ERROR] = responseCode;
+      Background.exit(_received);
     }
   }
 

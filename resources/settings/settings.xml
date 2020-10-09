@@ -400,4 +400,11 @@
         </settingConfig>
     </setting>
 
+    <setting propertyKey="@Properties.isTest" title="@Strings.isTestTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.IsTestOff</listEntry>
+            <listEntry value="1">@Strings.IsTestOn</listEntry>
+        </settingConfig>
+    </setting>
+
 </settings>

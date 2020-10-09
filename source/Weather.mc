@@ -104,6 +104,8 @@ class Weather {
   var _alertExists = 0;
  public
   var _alertName = "Unknown";
+ public
+  var _errorCode = 200;
 
   function initialize() {}
 

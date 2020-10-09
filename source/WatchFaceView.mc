@@ -90,8 +90,7 @@ class WatchFaceView extends Ui.WatchFace {
     Setting.SetAppVersion(Ui.loadResource(Rez.Strings.AppVersionValue));
     // Setting.SetWatchServerToken(Ui.loadResource(Rez.Strings.WatchServerTokenValue));
     // Setting.SetExchangeApiKey(Ui.loadResource(Rez.Strings.ExchangeApiKeyValue));
-    Setting.SetIsTest(Ui.loadResource(Rez.Strings.IsTest).toNumber() == 1);
-
+  
     var openWeatherToken = Ui.loadResource(Rez.Strings.OpenWeatherApiKeyValue);
     if (openWeatherToken != null && openWeatherToken has
         : length && openWeatherToken.length() > 0) {

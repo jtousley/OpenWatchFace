@@ -257,11 +257,6 @@ using Toybox.Application.Storage as Storage;
   }
 
  public
-  static function SetIsTest(isTest) {
-    return App.getApp().setProperty(_isTest, isTest);
-  }
-
- public
   static function GetPulseField() {
     var val = App.getApp().getProperty(_pulseField);
     return (val != null ? val : "");

@@ -77,6 +77,8 @@ using Toybox.StringUtil;
           Number && data[Enumerations.WVAL_ERROR] == 200) {
         printMessage("Got new weather data");
         setWeatherData(data);
+      } else {
+        _settingsCache.weather._errorCode = data[Enumerations.WVAL_ERROR];
       }
     }
   }

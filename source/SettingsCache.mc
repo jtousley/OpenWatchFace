@@ -16,6 +16,7 @@ using Toybox.System as Sys;
 
 class SettingsCache {
   function initialize() {
+    isTest = Setting.GetIsTest();
     field3 = Setting.GetField(0);
     field4 = Setting.GetField(1);
     field5 = Setting.GetField(2);
@@ -102,7 +103,11 @@ class SettingsCache {
     weather._windGust_meterSecs = weatherArray[Enumerations.WVAL_WIND_GUST];
     weather._alertExists = weatherArray[Enumerations.WVAL_ALRT];
     weather._alertName = weatherArray[Enumerations.WVAL_ALERT_NAME];
+    weather._errorCode = weatherArray[Enumerations.WVAL_ERROR];
   }
+
+ public
+  var isTest;
 
  public
   var field3;

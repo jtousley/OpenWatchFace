@@ -74,7 +74,11 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.0:latest
+### version 1.3.1:latest
+
+1.3.1
+
+Add debugging option
 
 1.3.0
 
