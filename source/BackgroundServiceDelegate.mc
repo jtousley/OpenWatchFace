@@ -81,8 +81,8 @@ using Toybox.Time as Time;
 
   function onTemporalEvent() {
     _received = null;
-    // Sys.println("onTemporalEvent - Memory: " +
-    // Sys.getSystemStats().freeMemory);
+    // Sys.println("onTemporalEvent - Memory: " + Sys.getSystemStats().freeMemory +
+    //             "/" + Sys.getSystemStats().totalMemory);
     var doUpdate = false;
 
     var now = new Time.Moment(Time.now().value());

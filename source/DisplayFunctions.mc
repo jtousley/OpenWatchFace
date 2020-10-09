@@ -289,6 +289,7 @@ class DisplayFunctions {
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
+    // temperature = 345;
 
     return [temperature];
   }
@@ -315,6 +316,7 @@ class DisplayFunctions {
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
+    // temperature = 234;
 
     return [temperature];
   }

@@ -74,7 +74,11 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.2.10:latest
+### version 1.3.0:latest
+
+1.3.0
+
+Add venu support (390x390)
 
 1.2.10
 

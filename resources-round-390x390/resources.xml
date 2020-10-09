@@ -1,0 +1,8 @@
+<resources>
+	<font id="latoBlack_tiny" filename="latoBlack_tiny_22.fnt" antialias="true"/>
+	<font id="latoBlack_small" filename="latoBlack_small_32.fnt" antialias="true"/>
+	<font id="latoBlack_medium" filename="latoBlack_medium_42.fnt" antialias="true"/>
+	<font id="latoBlack_large" filename="latoBlack_large_96.fnt" antialias="true"/>
+	<font id="small_icons" filename="icons_small_26.fnt" antialias="true"/>
+	<font id="large_icons" filename="icons_large_40.fnt" antialias="true"/>
+</resources>

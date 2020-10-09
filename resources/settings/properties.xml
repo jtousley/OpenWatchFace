@@ -2,13 +2,13 @@
     <property id="appVersion" type="string"></property>
 
     <property id="BackgroundColor" type="number">0</property>
-    <property id="TextColor" type="number">9</property>
-    <property id="IconColor" type="number">7</property>
-    <property id="HourColor" type="number">7</property>
-    <property id="MinColor" type="number">12</property>
+    <property id="TextColor" type="number">10</property>
+    <property id="IconColor" type="number">11</property>
+    <property id="HourColor" type="number">12</property>
+    <property id="MinColor" type="number">14</property>
     <property id = "WeatherCurrentColor" type = "number">7</property>
     <property id = "AlertColor" type = "number">13</property>
-    <property id = "DoNotDisturbColor" type = "number">13</property>
+    <property id = "DoNotDisturbColor" type = "number">15</property>
     <property id = "WeatherStaleTime" type = "string">60</property>
     <property id = "WeatherUpdateFrequency" type = "string">30</property>
 

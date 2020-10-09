@@ -20,17 +20,6 @@ using Toybox.Lang as Lang;
 using Toybox.Time.Gregorian as Gregorian;
 using Toybox.Time as Time;
 
-// Main WatchFaace view
-// ToDo::
-//        -- 1. Create Wrapper around ObjectStore
-//        -- 2. Move UI logic to functions
-//        -- 3. Fix Timezone Issue
-//		  -- 4. Add option to show city name
-//		  -- 5. Adjust exchange rate output
-//        6. Refactor backround process (error handling)
-//        -- 7. Option to Show weather
-//        8. Refactor resources, name conventions, etc..
-//
 class WatchFaceView extends Ui.WatchFace {
  protected
   var _layouts = [];
