@@ -78,6 +78,12 @@ class WatchFaceView extends Ui.WatchFace {
   var _bgInterval = new Toybox.Time.Duration(59 * 60);  // one hour
  protected
   var _settingsCache = new SettingsCache();
+ protected
+  var _inLowPower = false;
+ protected
+  var _canBurnIn = false;
+ protected
+  var _aodIndex = 0;
 
   function initialize() {
     WatchFace.initialize();
@@ -90,11 +96,18 @@ class WatchFaceView extends Ui.WatchFace {
     Setting.SetAppVersion(Ui.loadResource(Rez.Strings.AppVersionValue));
     // Setting.SetWatchServerToken(Ui.loadResource(Rez.Strings.WatchServerTokenValue));
     // Setting.SetExchangeApiKey(Ui.loadResource(Rez.Strings.ExchangeApiKeyValue));
-  
+
     var openWeatherToken = Ui.loadResource(Rez.Strings.OpenWeatherApiKeyValue);
     if (openWeatherToken != null && openWeatherToken has
         : length && openWeatherToken.length() > 0) {
       Setting.SetOpenWeatherToken(openWeatherToken);
+    }
+
+    var sSettings = Sys.getDeviceSettings();
+    // first check if the setting is availe on the current device
+    if (sSettings has : requiresBurnInProtection) {
+      // get the state of the setting
+      _canBurnIn = sSettings.requiresBurnInProtection;
     }
     // Setting.SetAccuWeatherToken(
     //     Ui.loadResource(Rez.Strings.AccuWeatherApiKeyValue));
@@ -170,6 +183,13 @@ class WatchFaceView extends Ui.WatchFace {
     dc.clear();
 
     for (var i = 0; i < _layouts.size(); i++) {
+      // handle AMOLED (Venu) devices' low power
+      if (_inLowPower && _canBurnIn) {
+        if (i != Enumerations.LAYOUT_TIME && i != Enumerations.LAYOUT_SEC) {
+          continue;
+        }
+      }
+
       var funcs = null;
       if (_displayFunctions has _funcs[_layouts[i]["func"]]) {
         funcs = _displayFunctions.method(_funcs[_layouts[i]["func"]])
@@ -179,11 +199,11 @@ class WatchFaceView extends Ui.WatchFace {
       }
 
       for (var j = 0; j < _layouts[i]["x"].size(); j++) {
-        // Sys.println("Setting color for: " + _layouts[i]["x"]);
         // Do not display layout elements with "hide" property set
         if (_layouts[i]["hide"] != null && _layouts[i]["hide"][j] == 1) {
           continue;
         }
+
         var color = _colors[_layouts[i]["col"][j]];
         if (_layouts[i] has : hasKey && _layouts[i].hasKey("type")) {
           if (_layouts[i]["type"][j] == Enumerations.TYPE_TEXT) {  // text color
@@ -195,25 +215,61 @@ class WatchFaceView extends Ui.WatchFace {
         }
         dc.setColor(color, Gfx.COLOR_TRANSPARENT);
 
+        var x = _layouts[i]["x"][j];
+        var y = _layouts[i]["y"][j];
         var font = _layouts[i]["font"][j] < 100
                        ? _layouts[i]["font"][j]
                        : _fonts[_layouts[i]["font"][j] - 100];
         var text = funcs[j];
         var justification = _layouts[i]["jus"][j];
 
-        dc.drawText(_layouts[i]["x"][j], _layouts[i]["y"][j], font, text,
-                    justification);
+        // handle AMOLED (Venu) devices' low power
+        if (_inLowPower && _canBurnIn) {
+          // WTF are you doing here?
+          // There are 4 items to move around on the screen,
+          // So there are 8 elements in the array -
+          // 4 for the position of each at each position
+          var xArray = [ x + 30, x, x - 30, x - 50, x +30, x, x - 30, x - 50 ];
+          var yArray = [ y - 180, y - 178, y - 180, y - 190, y, y+2, y, y-10 ];
+          var fontArray = [ 1, 1, 1, 0, 1, 1, 1, 0 ];
+          x = xArray[_aodIndex];
+          y = yArray[_aodIndex];
+          font = _fonts[fontArray[_aodIndex]];
+          _aodIndex = _aodIndex + 1;
+          if (_aodIndex == 8) {
+            _aodIndex = 0;
+          }
+          // _settingsCache.showSeconds
+          // _settingsCache.showAmPm
+          // _settingsCache.
+        }
+
+        dc.drawText(x, y, font, text, justification);
       }
     }
 
-    dc.setPenWidth(2);
-    dc.setColor(_colors[_settingsCache.textColor], Gfx.COLOR_TRANSPARENT);
-    var horiz_line = Ui.loadResource(Rez.JsonData.l_horiz_line);
-    dc.drawLine(horiz_line["x"][0], horiz_line["y"][0], horiz_line["x"][1],
-                horiz_line["y"][1]);
-    var vert_line = Ui.loadResource(Rez.JsonData.l_vert_line);
-    dc.drawLine(vert_line["x"][0], vert_line["y"][0], vert_line["x"][1],
-                vert_line["y"][1]);
+    if (!_inLowPower && !_canBurnIn) {
+      dc.setPenWidth(2);
+      dc.setColor(_colors[_settingsCache.textColor], Gfx.COLOR_TRANSPARENT);
+      var horiz_line = Ui.loadResource(Rez.JsonData.l_horiz_line);
+      dc.drawLine(horiz_line["x"][0], horiz_line["y"][0], horiz_line["x"][1],
+                  horiz_line["y"][1]);
+      var vert_line = Ui.loadResource(Rez.JsonData.l_vert_line);
+      dc.drawLine(vert_line["x"][0], vert_line["y"][0], vert_line["x"][1],
+                  vert_line["y"][1]);
+    }
+  }
+
+  function onHide() { }
+
+  function onExitSleep() {
+    _inLowPower = false;
+    Ui.requestUpdate();
+  }
+
+  function onEnterSleep() {
+    _inLowPower = true;
+    Ui.requestUpdate();
   }
 
   function InvalidateLayout() {
@@ -292,5 +348,12 @@ class WatchFaceView extends Ui.WatchFace {
         Ui.loadResource(Rez.JsonData.l_top_line));  // DisplayTopLine 28
     // _layouts.add(Ui.loadResource(
     //     Rez.JsonData.l_weekplusday));  // DisplayWeekDayNumbers 29
+
+    var frequency = Setting.GetWeatherUpdateTime();
+    if (frequency > 5) {
+      _bgInterval = new Toybox.Time.Duration(
+          (frequency * 60) +
+          5);  // slight delay so when bg is triggered it updates
+    }
   }
 }
