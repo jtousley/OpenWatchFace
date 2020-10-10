@@ -239,9 +239,6 @@ class WatchFaceView extends Ui.WatchFace {
           if (_aodIndex == 8) {
             _aodIndex = 0;
           }
-          // _settingsCache.showSeconds
-          // _settingsCache.showAmPm
-          // _settingsCache.
         }
 
         dc.drawText(x, y, font, text, justification);

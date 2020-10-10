@@ -74,7 +74,11 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.2:latest
+### version 1.3.3:latest
+
+1.3.3
+
+Fix weather advisory strings
 
 1.3.2
 

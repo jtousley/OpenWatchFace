@@ -696,7 +696,7 @@ class DisplayFunctions {
   function trimStringByWidth(str, startIndex, pixelWidth, fontIndex) {
     var width = 0;
     var charArray = str.toCharArray();
-    var i = startIndex;
+    var i = (startIndex > 0 ? startIndex : 0);
     for (; i < charArray.size(); i++) {
       var c = charArray[i];
       width = width + _dc.getTextWidthInPixels(c.toString(), _fonts[fontIndex]);
@@ -737,7 +737,7 @@ class DisplayFunctions {
       // arbitarily must be 4 extra characters to make it worthwhile to not
       // show city
       if (fullAlert.length() > (trimIndex + 5)) {
-        row2 = trimStringByWidth(fullAlert, trimIndex, MAX_ROW2_LENGTH,
+        row2 = trimStringByWidth(fullAlert, trimIndex - 1, MAX_ROW2_LENGTH,
                                  fontIndex)[0];
         layout["col"][1] = _settings.alertColor;
       }
