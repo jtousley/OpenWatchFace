@@ -34,21 +34,6 @@ class Enumerations {
   }
 
   static enum {
-    DISTANCE_KM = 0,
-    DISTANCE_MI = 1
-  }
-
-  static enum {
-    TEMPERATURE_CELCIUS = 0,
-    TEMPERATURE_FAHRENHEIT = 1
-  }
-
-  static enum {
-    PRESSURE_MILLIBAR = 0,
-    PRESSURE_INCHES = 1
-  }
-
-  static enum {
     TYPE_TEXT = 0,
     TYPE_ICON = 1,
     TYPE_NEITHER

@@ -29,11 +29,7 @@ class SettingsCache {
     lastKnownLocation = Setting.GetLastKnownLocation();
     // weatherProvider = Setting.GetWeatherProvider();
     // weatherApiKey = Setting.GetOpenWeatherToken();
-    weatherTempSystem = Setting.GetTempSystem();
     weatherWindSystem = Setting.GetWindSystem();
-    distanceSystem = Setting.GetDistSystem();
-    altimeterSystem = Setting.GetAltimeterSystem();
-    barometricSystem = Setting.GetBarometricSystem();
     dateOrder = Setting.GetDateOrder();
     backgroundColor = Setting.GetBackgroundColor();
     pulseField = Setting.GetPulseField();
@@ -138,15 +134,7 @@ class SettingsCache {
   //  public
   //   var weatherApiKey;
  public
-  var weatherTempSystem;
- public
   var weatherWindSystem;
- public
-  var distanceSystem;
- public
-  var altimeterSystem;
- public
-  var barometricSystem;
  public
   var dateOrder;
  public

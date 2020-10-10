@@ -39,6 +39,7 @@ class DisplayFunctions {
   var _dc = null;
  protected
   var _fonts = null;
+  var _sSettings = Sys.getDeviceSettings();
 
  protected
   var _methods = [//
@@ -72,6 +73,7 @@ class DisplayFunctions {
   function setTime(time) {
     _utcTime = time.value();
     _gTimeNow = Gregorian.info(time, Time.FORMAT_MEDIUM);
+    _sSettings = Sys.getDeviceSettings();
   }
 
   function setSettings(settings) {
@@ -91,18 +93,16 @@ class DisplayFunctions {
     var moonData = GetMoonPhase(Time.now());
     data[0] = moonData[0];
 
-    var deviceSettings = Sys.getDeviceSettings();
     data[1] = Enumerations.BLUETOOTH_NOT_CONNECTED;
     // layout["col"][1] = Enumerations.ColorRed;
-    if (deviceSettings != null && deviceSettings.phoneConnected) {
+    if (_sSettings != null && _sSettings.phoneConnected) {
       data[1] = Enumerations.BLUETOOTH_CONNECTED;
       // layout["col"][1] = Enumerations.ColorBlue;
     }
 
-    if (deviceSettings != null && deviceSettings has : doNotDisturb) {
-      layout["col"][2] =
-          (deviceSettings.doNotDisturb ? _settings.disturbColor
-                                       : Enumerations.ColorWhite);
+    if (_sSettings != null && _sSettings has : doNotDisturb) {
+      layout["col"][2] = (_sSettings.doNotDisturb ? _settings.disturbColor
+                                                  : Enumerations.ColorWhite);
       data[2] = Enumerations.WEATHER_NIGHT;
     }
 
@@ -111,18 +111,18 @@ class DisplayFunctions {
 
   function DisplayBottomLine(layout) {
     var data = [ "", "", "", "", "", "" ];
-    var ds = Sys.getDeviceSettings();
 
-    if (ds != null && ds has : alarmCount && ds.alarmCount != null) {
-      data[0] = (ds.alarmCount > 0) ? Enumerations.ALARM_RINGING
-                                    : Enumerations.ALARM_NOT_RINGING;
-      data[1] = ds.alarmCount.format("%d");
+    if (_sSettings != null && _sSettings has
+        : alarmCount && _sSettings.alarmCount != null) {
+      data[0] = (_sSettings.alarmCount > 0) ? Enumerations.ALARM_RINGING
+                                            : Enumerations.ALARM_NOT_RINGING;
+      data[1] = _sSettings.alarmCount.format("%d");
     }
 
-    if (ds != null && ds has
-        : notificationCount && ds.notificationCount != null) {
+    if (_sSettings != null && _sSettings has
+        : notificationCount && _sSettings.notificationCount != null) {
       data[2] = Enumerations.NOTIFICATIONS;
-      data[3] = ds.notificationCount.format("%d");
+      data[3] = _sSettings.notificationCount.format("%d");
     }
 
     return data;
@@ -197,10 +197,9 @@ class DisplayFunctions {
   /// returns [Hour, Min]
   ///
   function DisplayTime(layout) {
-    var deviceSettings = Sys.getDeviceSettings();
     layout["col"][0] = _settings.hourColor;
     layout["col"][2] = _settings.minuteColor;
-    var hour = (deviceSettings != null && deviceSettings.is24Hour)
+    var hour = (_sSettings != null && _sSettings.is24Hour)
                    ? _gTimeNow.hour.format("%02d")
                    : (_gTimeNow.hour % 12 == 0 ? 12 : _gTimeNow.hour % 12)
                          .format("%02d");
@@ -256,8 +255,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._tempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -270,8 +270,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._feelsTempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -284,8 +285,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._maxTempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -298,8 +300,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._minTempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -311,8 +314,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._nextMaxTempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -325,8 +329,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._nextMinTempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -338,8 +343,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._nextNextMaxTempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -352,8 +358,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._nextNextMinTempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -365,8 +372,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._nextNextMaxTempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -378,8 +386,9 @@ class DisplayFunctions {
     var weather = _settings.weather;
 
     var temperature = weather._nextNextMinTempCelcius;
-    if (_settings.weatherTempSystem ==
-        Enumerations.TEMPERATURE_FAHRENHEIT) {  // F
+    if (_sSettings has
+        : temperatureUnits &&
+              _sSettings.temperatureUnits == Sys.UNIT_STATUTE) {  // F
       temperature = temperature * 1.8 + 32;
     }
     temperature = temperature.format("%d");
@@ -527,7 +536,8 @@ class DisplayFunctions {
     var distance =
         (info != null && info.distance != null) ? info.distance.toFloat() : 0;
 
-    if (_settings.distanceSystem == Enumerations.DISTANCE_KM) {
+    if (_sSettings has
+        : distanceUnits && _sSettings.distanceUnits == Sys.UNIT_STATUTE) {
       distance = (distance / 100000).format("%2.1f");
     } else {
       distance = (distance / 160934.4).format("%2.1f");
@@ -582,8 +592,12 @@ class DisplayFunctions {
   function DisplayAltitude(layout) {
     var altitude = null;
     var info = Activity.getActivityInfo();
-    if (info != null && info has : altitude && info.altitude != null) {
-      altitude = info.altitude * (_settings.altimeterSystem == 0 ? 1 : 3.28084);
+
+    if (info != null && info has
+        : altitude && info.altitude != null && _sSettings has
+        : elevationUnits) {
+      altitude = info.altitude *
+                 (_sSettings.elevationUnits == Sys.UNIT_STATUTE ? 3.28084 : 1);
     }
 
     return [
@@ -604,10 +618,11 @@ class DisplayFunctions {
   }
 
   function formatPressure(pressure) {
-    if (_settings.barometricSystem == Enumerations.PRESSURE_MILLIBAR) {
-      pressure = pressure.format("%d");
-    } else {
+    if (_sSettings has
+        : distanceUnits && _sSettings.distanceUnits == Sys.UNIT_STATUTE) {
       pressure = pressure.format("%2.1f");
+    } else {
+      pressure = pressure.format("%d");
     }
     return pressure;
   }
@@ -620,9 +635,10 @@ class DisplayFunctions {
     var info = Activity.getActivityInfo();
 
     if (info != null && info has
-        : ambientPressure && info.ambientPressure != null) {
+        : ambientPressure && info.ambientPressure != null && _sSettings has
+        : distanceUnits) {
       pressure = formatPressure(info.ambientPressure *
-                                convTable[_settings.barometricSystem]);
+                                convTable[_sSettings.distanceUnits]);
     }
 
     return [ Enumerations.PRESSURE, pressure ];
@@ -636,9 +652,11 @@ class DisplayFunctions {
     var info = Activity.getActivityInfo();
 
     if (info != null && info has
-        : rawAmbientPressure && info.rawAmbientPressure != null) {
+        : rawAmbientPressure && info.rawAmbientPressure != null &&
+              _sSettings has
+        : distanceUnits) {
       pressure = formatPressure(info.rawAmbientPressure *
-                                convTable[_settings.barometricSystem]);
+                                convTable[_sSettings.distanceUnits]);
     }
 
     return [ Enumerations.PRESSURE, pressure ];
@@ -652,9 +670,11 @@ class DisplayFunctions {
     var info = Activity.getActivityInfo();
 
     if (info != null && info has
-        : meanSeaLevelPressure && info.meanSeaLevelPressure != null) {
+        : meanSeaLevelPressure && info.meanSeaLevelPressure != null &&
+              _sSettings has
+        : distanceUnits) {
       pressure = formatPressure(info.meanSeaLevelPressure *
-                                convTable[_settings.barometricSystem]);
+                                convTable[_sSettings.distanceUnits]);
     }
 
     return [ Enumerations.PRESSURE, pressure ];
@@ -773,8 +793,9 @@ class DisplayFunctions {
   function DisplayWeatherPressure(layout) {
     var weather = _settings.weather;
     var convTable = [ 1, 0.02953 ];  // millibars to
+
     var val = formatPressure(weather._baroPressureBars *
-                             convTable[_settings.barometricSystem]);
+                             convTable[_sSettings.distanceUnits]);
 
     return [ Enumerations.PRESSURE, val ];
   }
@@ -831,7 +852,8 @@ class DisplayFunctions {
     if (rain > 0) {
       // if the user like his distances in stupid, he probably likes his
       // precipitation the same way
-      if (_settings.distanceSystem != Enumerations.DISTANCE_KM) {
+      if (_sSettings has
+          : distanceUnits && _sSettings.distanceUnits == Sys.UNIT_STATUTE) {
         rain = (rain / 25.4).format("%1.2f");
       } else {
         rain = rain.format("%2.1f");
@@ -843,7 +865,8 @@ class DisplayFunctions {
     if (snow > 0) {
       // if the user like his distances in stupid, he probably likes his
       // precipitation the same way
-      if (_settings.distanceSystem != Enumerations.DISTANCE_KM) {
+      if (_sSettings has
+          : distanceUnits && _sSettings.distanceUnits == Sys.UNIT_STATUTE) {
         snow = (snow / 25.4).format("%1.2f");
       } else {
         snow = snow.format("%2.1f");

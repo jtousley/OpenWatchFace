@@ -363,40 +363,12 @@
         </settingConfig>
     </setting>
 
-    <setting propertyKey="@Properties.tempSystem" title="@Strings.TempSystemTitle">
-        <settingConfig type="list">
-            <listEntry value="0">@Strings.Celsius</listEntry>
-            <listEntry value="1">@Strings.Farenheit</listEntry>
-        </settingConfig>
-    </setting>
-
     <setting propertyKey="@Properties.windSystem" title="@Strings.WindSystemTitle">
         <settingConfig type="list">
             <listEntry value="0">@Strings.KilometersPh</listEntry>
             <listEntry value="1">@Strings.Knots</listEntry>
             <listEntry value="2">@Strings.Meters</listEntry>
             <listEntry value="3">@Strings.MilesPh</listEntry>
-        </settingConfig>
-    </setting>
-
-    <setting propertyKey="@Properties.distSystem" title="@Strings.DistSystemTitle">
-        <settingConfig type="list">
-            <listEntry value="0">@Strings.Kilometers</listEntry>
-            <listEntry value="1">@Strings.Miles</listEntry>
-        </settingConfig>
-    </setting>
-
-    <setting propertyKey="@Properties.altimeter-system" title="@Strings.AltimeterSystemTitle">
-        <settingConfig type="list">
-            <listEntry value="0">@Strings.Meter</listEntry>
-            <listEntry value="1">@Strings.Feet</listEntry>
-        </settingConfig>
-    </setting>
-
-    <setting propertyKey="@Properties.barometric-system" title="@Strings.BarometricSystemTitle">
-        <settingConfig type="list">
-            <listEntry value="0">@Strings.Millibars</listEntry>
-            <listEntry value="1">@Strings.Inches</listEntry>
         </settingConfig>
     </setting>
 

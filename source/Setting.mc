@@ -31,10 +31,6 @@ using Toybox.Application.Storage as Storage;
   static protected var _textColor = "TextColor";
   static protected var _lastTemporalEventTime = "LastEventTime";
   static protected var _windSystem = "windSystem";
-  static protected var _tempSystem = "tempSystem";
-  static protected var _distSystem = "distSystem";
-  static protected var _altimeterSystem = "altimeter-system";
-  static protected var _barometricSystem = "barometric-system";
   // static protected var _field0 = "field-0";
   // static protected var _field1 = "field-1";
   // static protected var _field2 = "field-2";
@@ -218,35 +214,6 @@ using Toybox.Application.Storage as Storage;
  public
   static function GetWindSystem() {
     var val = App.getApp().getProperty(_windSystem);
-    return (val != null ? val : 0);
-  }
-
- public
-  static function SetTempSystem(system) {
-    App.getApp().setProperty(_tempSystem, system);
-  }
-
- public
-  static function GetTempSystem() {
-    var val = App.getApp().getProperty(_tempSystem);
-    return (val != null ? val : 0);
-  }
-
- public
-  static function GetDistSystem() {
-    var val = App.getApp().getProperty(_distSystem);
-    return (val != null ? val : 0);
-  }
-
- public
-  static function GetAltimeterSystem() {
-    var val = App.getApp().getProperty(_altimeterSystem);
-    return (val != null ? val : 0);
-  }
-
- public
-  static function GetBarometricSystem() {
-    var val = App.getApp().getProperty(_barometricSystem);
     return (val != null ? val : 0);
   }
 

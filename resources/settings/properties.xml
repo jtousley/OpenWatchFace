@@ -23,11 +23,7 @@
     <property id = "wfield-1" type = "number">9</property>
     <property id = "wfield-2" type = "number">3</property>
     <property id = "ShowTimeOptions" type = "number">0</property>
-    <property id = "tempSystem" type="number">0</property>
     <property id = "windSystem" type="number">0</property>
-    <property id = "distSystem" type="number">0</property>
-    <property id = "altimeter-system" type = "number">0</property>
-    <property id = "barometric-system" type = "number">2</property>
     <property id = "date-order" type = "number">0</property>
 
     <property id = "Open-Weather-API-Token" type = "string"></property>

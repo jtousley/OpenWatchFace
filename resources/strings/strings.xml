@@ -40,28 +40,11 @@
 	<string id = "DisplayNextNextPrecipitation">Next Day's Precipitation Probability</string>
     <string id = "DisplaySmartWeather">Smart Weather (Rain/snow/wind -> humidity > 50 -> UV)</string>
     
-    <string id="TempSystemTitle">Temperature</string>
-    <string id="Celsius">Celsius</string>
-    <string id="Farenheit">Farenheit</string>
-    
     <string id="WindSystemTitle">Wind</string>
     <string id="Knots">Knots</string>
     <string id="Meters">m/s</string>
     <string id="KilometersPh">km/h</string>
     <string id="MilesPh">mph</string>
-    
-    <string id="DistSystemTitle">Distance</string>
-    <string id="Kilometers">Kilometers</string>
-    <string id="Miles">Miles</string>
-    
-    <string id = "AltimeterSystemTitle">Altitude</string>
-    <string id = "Meter">Meters</string>
-	<string id = "Feet">Feet</string>
-	    
-    <string id = "BarometricSystemTitle">Pressure</string>
-    <string id = "Millibars">Millibars</string>
-    <string id = "Pascals">Pascals</string>
-    <string id = "Inches">Inches</string>
 
     <string id = "SensorBarometricTypeTitle">Sensor Pressure Type (see documentation)</string>
     <string id = "Ambient">Ambient Pressure</string>
