@@ -227,13 +227,8 @@ class WatchFaceView extends Ui.WatchFace {
           // There are 4 items to move around on the screen,
           // So there are 8 elements in the array -
           // 4 for the position of each at each position
-          var xArray = [ x + 30, x, x - 30, x - 50, x + 30, x, x - 30, x - 50 ];
-          var yArray =
-              [ y - 180, y - 178, y - 180, y - 190, y, y + 2, y, y - 10 ];
-          var fontArray = [ 1, 1, 1, 0, 1, 1, 1, 0 ];
-          x = xArray[_aodIndex];
+          var yArray = [ y - 180, y - 180, y - 180, y - 180, y, y, y, y ];
           y = yArray[_aodIndex];
-          font = _fonts[fontArray[_aodIndex]];
           _aodIndex = _aodIndex + 1;
           if (_aodIndex == 8) {
             _aodIndex = 0;

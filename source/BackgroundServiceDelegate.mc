@@ -81,6 +81,13 @@ using Toybox.Time as Time;
 
   function onTemporalEvent() {
     _received = null;
+
+    var connected = true;
+    var sSettings = Sys.getDeviceSettings();
+    if (sSettings has : connectionAvailable) {
+      connected = sSettings.connectionAvailable;
+      // Sys.println("Connected : " + connected);
+    }
     // Sys.println("onTemporalEvent - Memory: " +
     // Sys.getSystemStats().freeMemory +
     //             "/" + Sys.getSystemStats().totalMemory);
@@ -106,7 +113,7 @@ using Toybox.Time as Time;
     var location = Setting.GetLastKnownLocation();
     _appid = Setting.GetOpenWeatherToken();
 
-    if (doUpdate && location != null && _appid != null &&
+    if (connected && doUpdate && location != null && _appid != null &&
         (_appid has
          : length && _appid.length() != 0)) {
       _lastLocation = location;

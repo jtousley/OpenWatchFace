@@ -74,7 +74,12 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.4:latest
+### version 1.3.5:latest
+
+1.3.5
+
+Do not attempt update if no connection is available
+Fix display for AMOLED devices
 
 1.3.4
 

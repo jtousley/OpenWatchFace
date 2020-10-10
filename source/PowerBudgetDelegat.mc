@@ -27,7 +27,7 @@ class PowerBudgetDelegate extends Ui.WatchFaceDelegate
 	
 	function onPowerBudgetExceeded(powerInfo)
 	{
-		Sys.println("Average : " + powerInfo.executionTimeAverage);
-		Sys.println("Allowed : " + powerInfo.executionTimeLimit);
+		// Sys.println("Average : " + powerInfo.executionTimeAverage);
+		// Sys.println("Allowed : " + powerInfo.executionTimeLimit);
 	}
 }
