@@ -74,7 +74,15 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.5:latest
+### version 1.3.7:latest
+
+1.3.7
+
+Don't show seconds for AMOLED
+
+1.3.6
+
+Use built-in device settings for units rather than asking user
 
 1.3.5
 

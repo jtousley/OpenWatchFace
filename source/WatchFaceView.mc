@@ -182,10 +182,8 @@ class WatchFaceView extends Ui.WatchFace {
 
     for (var i = 0; i < _layouts.size(); i++) {
       // handle AMOLED (Venu) devices' low power
-      if (_inLowPower && _canBurnIn) {
-        if (i != Enumerations.LAYOUT_TIME && i != Enumerations.LAYOUT_SEC) {
-          continue;
-        }
+      if (_inLowPower && _canBurnIn && i != Enumerations.LAYOUT_TIME) {
+        continue;
       }
 
       var funcs = null;
@@ -224,13 +222,13 @@ class WatchFaceView extends Ui.WatchFace {
         // handle AMOLED (Venu) devices' low power
         if (_inLowPower && _canBurnIn) {
           // WTF are you doing here?
-          // There are 4 items to move around on the screen,
-          // So there are 8 elements in the array -
-          // 4 for the position of each at each position
-          var yArray = [ y - 180, y - 180, y - 180, y - 180, y, y, y, y ];
+          // There are 3 items to move around on the screen,
+          // So there are 6 elements in the array -
+          // 3 for the position of each at each position
+          var yArray = [ y - 180, y - 180, y - 180, y, y, y ];
           y = yArray[_aodIndex];
           _aodIndex = _aodIndex + 1;
-          if (_aodIndex == 8) {
+          if (_aodIndex == 6) {
             _aodIndex = 0;
           }
         }
