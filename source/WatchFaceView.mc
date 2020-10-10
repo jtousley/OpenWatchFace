@@ -104,9 +104,7 @@ class WatchFaceView extends Ui.WatchFace {
     }
 
     var sSettings = Sys.getDeviceSettings();
-    // first check if the setting is availe on the current device
     if (sSettings has : requiresBurnInProtection) {
-      // get the state of the setting
       _canBurnIn = sSettings.requiresBurnInProtection;
     }
     // Setting.SetAccuWeatherToken(
@@ -229,8 +227,9 @@ class WatchFaceView extends Ui.WatchFace {
           // There are 4 items to move around on the screen,
           // So there are 8 elements in the array -
           // 4 for the position of each at each position
-          var xArray = [ x + 30, x, x - 30, x - 50, x +30, x, x - 30, x - 50 ];
-          var yArray = [ y - 180, y - 178, y - 180, y - 190, y, y+2, y, y-10 ];
+          var xArray = [ x + 30, x, x - 30, x - 50, x + 30, x, x - 30, x - 50 ];
+          var yArray =
+              [ y - 180, y - 178, y - 180, y - 190, y, y + 2, y, y - 10 ];
           var fontArray = [ 1, 1, 1, 0, 1, 1, 1, 0 ];
           x = xArray[_aodIndex];
           y = yArray[_aodIndex];
@@ -245,7 +244,12 @@ class WatchFaceView extends Ui.WatchFace {
       }
     }
 
-    if (!_inLowPower && !_canBurnIn) {
+    if (!(_inLowPower && _canBurnIn)) {
+      //         Burn    Low_Power
+      // show    0       0
+      // show    0       1
+      // show    1       0
+      // hide    1       1
       dc.setPenWidth(2);
       dc.setColor(_colors[_settingsCache.textColor], Gfx.COLOR_TRANSPARENT);
       var horiz_line = Ui.loadResource(Rez.JsonData.l_horiz_line);
@@ -257,7 +261,8 @@ class WatchFaceView extends Ui.WatchFace {
     }
   }
 
-  function onHide() { }
+  function onHide() {}
+  function onShow() {}
 
   function onExitSleep() {
     _inLowPower = false;
@@ -347,10 +352,8 @@ class WatchFaceView extends Ui.WatchFace {
     //     Rez.JsonData.l_weekplusday));  // DisplayWeekDayNumbers 29
 
     var frequency = Setting.GetWeatherUpdateTime();
-    if (frequency > 5) {
-      _bgInterval = new Toybox.Time.Duration(
-          (frequency * 60) +
-          5);  // slight delay so when bg is triggered it updates
-    }
+    _bgInterval = new Toybox.Time.Duration(
+        (frequency * 60) +
+        5);  // slight delay so when bg is triggered it updates
   }
 }

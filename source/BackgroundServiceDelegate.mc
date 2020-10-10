@@ -99,7 +99,7 @@ using Toybox.Time as Time;
       var lastEvent = new Time.Moment(lastEventTime);
       if (lastEvent.add(waitTime).lessThan(now)) {
         doUpdate = true;
-      } 
+      }
     }
     lastEventTime = null;
     lastWeather = null;
@@ -296,6 +296,28 @@ using Toybox.Time as Time;
       data = null;
     }
     if (success) {
+      /*
+      HOURLY data
+      var url = "https://api.openweathermap.org/data/2.5/forecast";
+
+      Comm.makeWebRequest(
+        url,
+        // PARAMS
+        {
+        "lat" => _lastLocation[0],
+        "lon" => _lastLocation[1],
+        "cnt" => 3,
+        "units" => "metric",
+        "appid" => _appid
+        },
+        // OPTIONS
+        {
+        :method => Comm.HTTP_REQUEST_METHOD_GET,
+        :headers => {"Content-Type" => Comm.REQUEST_CONTENT_TYPE_JSON},
+        :responseType => Comm.HTTP_RESPONSE_CONTENT_TYPE_JSON
+        },
+        method(:OnReceiveOpenWeatherUpdate));
+      */
       Background.exit(_received);
     } else {
       _received = new[WVAL_SIZE];
