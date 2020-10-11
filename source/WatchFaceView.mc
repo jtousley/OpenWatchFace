@@ -13,24 +13,23 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
 using Toybox.System as Sys;
 using Toybox.Lang as Lang;
 using Toybox.Time.Gregorian as Gregorian;
 using Toybox.Time as Time;
 
-class WatchFaceView extends Ui.WatchFace {
+class WatchFaceView extends Toybox.WatchUi.WatchFace {
  protected
   var _layouts = [];
  protected
   var _fonts = [
-    Ui.loadResource(Rez.Fonts.latoBlack_tiny),
-    Ui.loadResource(Rez.Fonts.latoBlack_small),
-    Ui.loadResource(Rez.Fonts.latoBlack_medium),
-    Ui.loadResource(Rez.Fonts.latoBlack_large),
-    Ui.loadResource(Rez.Fonts.small_icons),
-    Ui.loadResource(Rez.Fonts.large_icons)
+    WatchUi.loadResource(Rez.Fonts.latoBlack_tiny),
+    WatchUi.loadResource(Rez.Fonts.latoBlack_small),
+    WatchUi.loadResource(Rez.Fonts.latoBlack_medium),
+    WatchUi.loadResource(Rez.Fonts.latoBlack_large),
+    WatchUi.loadResource(Rez.Fonts.small_icons),
+    WatchUi.loadResource(Rez.Fonts.large_icons)
   ];
 
  protected
@@ -93,11 +92,11 @@ class WatchFaceView extends Ui.WatchFace {
     _displayFunctions.setSettings(_settingsCache);
     _displayFunctions.setFonts(_fonts);
 
-    Setting.SetAppVersion(Ui.loadResource(Rez.Strings.AppVersionValue));
-    // Setting.SetWatchServerToken(Ui.loadResource(Rez.Strings.WatchServerTokenValue));
-    // Setting.SetExchangeApiKey(Ui.loadResource(Rez.Strings.ExchangeApiKeyValue));
+    Setting.SetAppVersion(WatchUi.loadResource(Rez.Strings.AppVersionValue));
+    // Setting.SetWatchServerToken(WatchUi.loadResource(Rez.Strings.WatchServerTokenValue));
+    // Setting.SetExchangeApiKey(WatchUi.loadResource(Rez.Strings.ExchangeApiKeyValue));
 
-    var openWeatherToken = Ui.loadResource(Rez.Strings.OpenWeatherApiKeyValue);
+    var openWeatherToken = WatchUi.loadResource(Rez.Strings.OpenWeatherApiKeyValue);
     if (openWeatherToken != null && openWeatherToken has
         : length && openWeatherToken.length() > 0) {
       Setting.SetOpenWeatherToken(openWeatherToken);
@@ -108,7 +107,7 @@ class WatchFaceView extends Ui.WatchFace {
       _canBurnIn = sSettings.requiresBurnInProtection;
     }
     // Setting.SetAccuWeatherToken(
-    //     Ui.loadResource(Rez.Strings.AccuWeatherApiKeyValue));
+    //     WatchUi.loadResource(Rez.Strings.AccuWeatherApiKeyValue));
   }
 
   // Load your resources here
@@ -245,10 +244,10 @@ class WatchFaceView extends Ui.WatchFace {
       // hide    1       1
       dc.setPenWidth(2);
       dc.setColor(_colors[_settingsCache.textColor], Gfx.COLOR_TRANSPARENT);
-      var horiz_line = Ui.loadResource(Rez.JsonData.l_horiz_line);
+      var horiz_line = WatchUi.loadResource(Rez.JsonData.l_horiz_line);
       dc.drawLine(horiz_line["x"][0], horiz_line["y"][0], horiz_line["x"][1],
                   horiz_line["y"][1]);
-      var vert_line = Ui.loadResource(Rez.JsonData.l_vert_line);
+      var vert_line = WatchUi.loadResource(Rez.JsonData.l_vert_line);
       dc.drawLine(vert_line["x"][0], vert_line["y"][0], vert_line["x"][1],
                   vert_line["y"][1]);
     }
@@ -259,12 +258,12 @@ class WatchFaceView extends Ui.WatchFace {
 
   function onExitSleep() {
     _inLowPower = false;
-    Ui.requestUpdate();
+    WatchUi.requestUpdate();
   }
 
   function onEnterSleep() {
     _inLowPower = true;
-    Ui.requestUpdate();
+    WatchUi.requestUpdate();
   }
 
   function InvalidateLayout() {
@@ -291,57 +290,57 @@ class WatchFaceView extends Ui.WatchFace {
     _layouts = [];
 
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_city_left));      // DisplayLocation  0
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_date));  // DisplayDate  1
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_time));  // DisplayTime  2
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_pmam));  // DisplayPmAm  3
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_sec));   // DisplaySeconds  4
+        WatchUi.loadResource(Rez.JsonData.l_city_left));      // DisplayLocation  0
+    _layouts.add(WatchUi.loadResource(Rez.JsonData.l_date));  // DisplayDate  1
+    _layouts.add(WatchUi.loadResource(Rez.JsonData.l_time));  // DisplayTime  2
+    _layouts.add(WatchUi.loadResource(Rez.JsonData.l_pmam));  // DisplayPmAm  3
+    _layouts.add(WatchUi.loadResource(Rez.JsonData.l_sec));   // DisplaySeconds  4
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_currTemp));  // DisplayCurrentTemp  5
+        WatchUi.loadResource(Rez.JsonData.l_currTemp));  // DisplayCurrentTemp  5
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_currFeelsTemp));  // DisplayFeelsTemp 6
+        WatchUi.loadResource(Rez.JsonData.l_currFeelsTemp));  // DisplayFeelsTemp 6
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_todayMaxTemp));  // DisplayTodayMaxTemp 7
+        WatchUi.loadResource(Rez.JsonData.l_todayMaxTemp));  // DisplayTodayMaxTemp 7
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_todayMinTemp));  // DisplayTodayMinTemp 8
+        WatchUi.loadResource(Rez.JsonData.l_todayMinTemp));  // DisplayTodayMinTemp 8
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_nextMaxTemp));  // DisplayNextMaxTemp 9
+        WatchUi.loadResource(Rez.JsonData.l_nextMaxTemp));  // DisplayNextMaxTemp 9
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_nextMinTemp));  // DisplayNextMinTemp 10
-    _layouts.add(Ui.loadResource(
+        WatchUi.loadResource(Rez.JsonData.l_nextMinTemp));  // DisplayNextMinTemp 10
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_nn_maxTemp));  // DisplayNextNextMaxTemp       11
-    _layouts.add(Ui.loadResource(
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_nn_minTemp));  // DisplayNextNextMinTemp       12
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_thd_maxTemp));  // DisplayThirdMaxTemp 13
+        WatchUi.loadResource(Rez.JsonData.l_thd_maxTemp));  // DisplayThirdMaxTemp 13
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_thd_minTemp));  // DisplayThirdMinTemp 14
-    _layouts.add(Ui.loadResource(
+        WatchUi.loadResource(Rez.JsonData.l_thd_minTemp));  // DisplayThirdMinTemp 14
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_weatherOption1));  // DisplayWeatherOption1        15
-    _layouts.add(Ui.loadResource(
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_weatherOption2));  // DisplayWeatherOption2        16
-    _layouts.add(Ui.loadResource(
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_weatherOption3));  // DisplayWeatherOption3        17
-    _layouts.add(Ui.loadResource(
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_t_weatherIcon));  // DisplayTodayWeatherIcon      18
-    _layouts.add(Ui.loadResource(
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_n_weatherIcon));  // DisplayNextWeatherIcon = 19
-    _layouts.add(Ui.loadResource(
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_nn_weatherIcon));  // DisplayNextNextWeatherIcon   20
-    _layouts.add(Ui.loadResource(
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_thirdWeatherIcon));  // DisplayThirdWeatherIcon      21
-    _layouts.add(Ui.loadResource(
+    _layouts.add(WatchUi.loadResource(
         Rez.JsonData.l_currWeatherIcon));  // DisplayCurrWeatherIcon 22
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_field3));  // LoadField3  23
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_field4));  // LoadField4  24
-    _layouts.add(Ui.loadResource(Rez.JsonData.l_field5));  // LoadField5  25
+    _layouts.add(WatchUi.loadResource(Rez.JsonData.l_field3));  // LoadField3  23
+    _layouts.add(WatchUi.loadResource(Rez.JsonData.l_field4));  // LoadField4  24
+    _layouts.add(WatchUi.loadResource(Rez.JsonData.l_field5));  // LoadField5  25
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_battery));  // DisplayWatchStatus  26
+        WatchUi.loadResource(Rez.JsonData.l_battery));  // DisplayWatchStatus  26
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_bottom_line1));  // DisplayBottomLine  27
+        WatchUi.loadResource(Rez.JsonData.l_bottom_line1));  // DisplayBottomLine  27
     _layouts.add(
-        Ui.loadResource(Rez.JsonData.l_top_line));  // DisplayTopLine 28
-    // _layouts.add(Ui.loadResource(
+        WatchUi.loadResource(Rez.JsonData.l_top_line));  // DisplayTopLine 28
+    // _layouts.add(WatchUi.loadResource(
     //     Rez.JsonData.l_weekplusday));  // DisplayWeekDayNumbers 29
 
     var frequency = Setting.GetWeatherUpdateTime();

@@ -6,45 +6,45 @@ City name for location
 Weather alert for location, when applicable
 Date (WDM, WMD, DMW, DMW)
 Time (12, 24)
-AM/PM/Seconds/Week number
+AM/PM/Seconds/Week number*
 Current temp (F, C)
 Current feels temp (F, C)
 Current weather icon
-Today weather icon*
+Today weather icon**
 Today max temp (F, C)
 Today min temp (F, C)
-Tomorrow weather icon*
+Tomorrow weather icon**
 Tomorrow max temp (F, C)
 Tomorrow min temp (F, C)
 (218x218 devices do not get this):
-Day after weather icon*
+Day after weather icon**
 Day after max temp (F, C)
 Day after min temp (F, C)
 --------------------------------------------------
 Activities! - Choose 3:
 Pulse
-Distance (km, mi, steps)
-Steps (km, mi, steps)
+Distance (km, mi)
+Steps 
 Floors
 Altitude (m, ft)
 Calories (kcal)
 Next Sunrise/Sunset
-Sensor pressure ambient** (mBar, Pa, in)
-Sensor pressure raw** (mBar, Pa, in)
-Sensor pressure mean sea level** (mBar, Pa, in)
+Sensor pressure ambient*** (mBar, in)
+Sensor pressure raw*** (mBar, in)
+Sensor pressure mean sea level*** (mBar, in)
 Last update time
 --------------------------------------------------
 Weather! - Choose 3:
 Humidity (%)
-Dew point (C, F)
-Reported pressure (mBar, Pa, in)
+Dew point (F, C)
+Reported pressure (mBar, in)
 Wind speed (km/h, knots, m/s, mph)
 Wind direction (degrees)
 UV index
 Today precipitation (%)
 Tomorrow precipitation (%)
 Day after precipitation (%)
-Smart weather (see note)
+Smart weather****
 --------------------------------------------------
 
 Coming soon:
@@ -52,11 +52,14 @@ You tell me
 
 Please contact me with any suggestions or problems!
 
+*Week numbers are implemented using the ISO 8601 standard, which you can read about here: https://en.wikipedia.org/wiki/ISO_week_date
+First day of week = Monday
+Last week# = (first day of next year is Thursday or later? Yes = 1, No = 53)
 
-*These icons support intensity values for certain types of weather:
+**These icons support intensity values for certain types of weather:
 '' = none/light intensity, '.' = medium intensity, '..' = high intensity, '...' = extreme intensity, '~' = "ragged"
 
-**Sensor Pressure:
+***Sensor Pressure:
 1. Ambient Pressure
 This returns ambient (local) barometric pressure as measured by the pressure sensor. The data is smoothed by a two-stage filter to reduce noise and instantaneous variation.
 2. Raw Ambient Pressure
@@ -64,7 +67,7 @@ This returns ambient (local) barometric pressure as measured by the internal pre
 3. Sea Level Pressure
 This returns barometric pressure calibrated to sea level. Since pressure varies dues to several factors, a GPS-based altitude must first be obtained, then the ambient (local) pressure is measured by the pressure sensor before conversion to a calibrated barometric pressure value.
 
-***Smart weather
+****Smart weather
 Displays the following data, when available:
 1. Rainfall amount (mm/in)
 2. Snowfall amount (mm/in)
@@ -74,7 +77,12 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.7:latest
+### version 1.3.8:latest
+
+1.3.8
+
+Use ISO 8601 for week numbers
+Attempt to fix crashing
 
 1.3.7
 

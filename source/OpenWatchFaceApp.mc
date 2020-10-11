@@ -14,7 +14,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using Toybox.Application as App;
-using Toybox.WatchUi as Ui;
 using Toybox.Background as Background;
 using Toybox.System as Sys;
 using Toybox.Timer as Timer;
@@ -65,7 +64,7 @@ using Toybox.StringUtil;
     baseInitApp();
     InitBackgroundEvents();
     _watchFaceView.InvalidateLayout();
-    Ui.requestUpdate();
+    Toybox.WatchUi.requestUpdate();
   }
 
   function onBackgroundData(data) {

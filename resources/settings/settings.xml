@@ -133,6 +133,15 @@
         </settingConfig>
     </setting>
 
+    <setting propertyKey="@Properties.windSystem" title="@Strings.WindSystemTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.KilometersPh</listEntry>
+            <listEntry value="1">@Strings.Knots</listEntry>
+            <listEntry value="2">@Strings.Meters</listEntry>
+            <listEntry value="3">@Strings.MilesPh</listEntry>
+        </settingConfig>
+    </setting>
+
     <setting propertyKey="@Properties.BackgroundColor" title="@Strings.BackgroundColorTitle">
         <settingConfig type="list">
             <listEntry value="0">@Strings.ColorBlack</listEntry>
@@ -360,15 +369,6 @@
             <listEntry value="15">@Strings.ColorYellowRed</listEntry>
             <listEntry value="16">@Strings.ColorOrange</listEntry>
             <listEntry value="17">@Strings.IconColorTitle</listEntry>
-        </settingConfig>
-    </setting>
-
-    <setting propertyKey="@Properties.windSystem" title="@Strings.WindSystemTitle">
-        <settingConfig type="list">
-            <listEntry value="0">@Strings.KilometersPh</listEntry>
-            <listEntry value="1">@Strings.Knots</listEntry>
-            <listEntry value="2">@Strings.Meters</listEntry>
-            <listEntry value="3">@Strings.MilesPh</listEntry>
         </settingConfig>
     </setting>
 

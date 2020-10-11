@@ -225,24 +225,53 @@ class DisplayFunctions {
     if (_settings.showSeconds) {
       return [Sys.getClockTime().sec.format("%02d")];
     } else if (_settings.showWeekNumber) {
-      // var testTime = Gregorian.moment({:year=>2020, :month=>12,:day=>19});
+      // https://en.wikipedia.org/wiki/ISO_week_date
+      // Algorithm:
+      // Subtract the weekday dow from the ordinal date doy.
+      // Then add 10.
+      // Divide the result by 7.
+      // Ignore the remainder.
+      // The quotient equals the preliminary week number.
+      //  - If the week number thus obtained equals 0, it means that the given
+      //  date belongs to the preceding (week-based) year.
+      //  - If a week number of 53 is obtained, one must check that the date
+      //  is not actually in week 1 of the following year.
+
+      // var testTime =
+      // Gregorian.moment({ : year => 2021, : month => 1, : day => 1});
       var equalizedTime =
           new Time.Moment(_utcTime + Sys.getClockTime().timeZoneOffset);
       // testTime;
       var nowInfo = Gregorian.utcInfo(equalizedTime, Time.FORMAT_SHORT);
 
-      var firstDayOfYear = Gregorian.moment({ :year => nowInfo.year, :month => 1, :day => 1}); // local time
-      var firstDayInfo = Gregorian.utcInfo(firstDayOfYear, Time.FORMAT_SHORT);
-
-      var thisYearsDuration =
-          new Time.Duration(equalizedTime.value() - firstDayOfYear.value());
-      var thisYearsDays = thisYearsDuration.value() / Gregorian.SECONDS_PER_DAY;
-      var thisYearsWeeks = (thisYearsDays + 6) / 7;
-      if (nowInfo.day_of_week <= firstDayInfo.day_of_week) {
-        thisYearsWeeks = thisYearsWeeks + 1;
+      var firstDayOfYear = Gregorian.moment({ :year => nowInfo.year, :month
+      => Gregorian.MONTH_JANUARY, :day => 1}); //  local time
+      // Shift the days of the week so that Monday is the first day
+      var dayOfWeekMonday = nowInfo.day_of_week - 1;
+      if (dayOfWeekMonday == 0) {
+        dayOfWeekMonday = 7;
       }
-      // Sys.println("Weeks : " + thisYearsWeeks);
-      return [thisYearsWeeks.format("%02d")];
+
+      var ordinalDay = ((equalizedTime.value() - firstDayOfYear.value()) /
+                        Gregorian.SECONDS_PER_DAY);
+      // Days of the week are base 1, so add 1
+      var preliminaryWeek = ((ordinalDay - dayOfWeekMonday + 1 + 10) / 7);
+      var week = preliminaryWeek;
+      if (preliminaryWeek < 1) {
+        // Week belongs to last year
+        week = 53;
+      }
+      if (preliminaryWeek > 52) {
+        var lastDayOfYear = Gregorian.moment({ :year => nowInfo.year, 
+        :month => 12, :day => 31}); //  local time
+        var lastDayInfo = Gregorian.utcInfo(lastDayOfYear, Time.FORMAT_SHORT);
+        if (lastDayInfo.day_of_week < Gregorian.DAY_THURSDAY) {
+          // Week belongs to next year
+          week = 1;
+        }
+      }
+      // Sys.println("Week : " + week);
+      return [week.format("%02d")];
     } else {
       return [""];
     }

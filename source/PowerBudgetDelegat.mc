@@ -14,11 +14,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 using Toybox.System as Sys;
-using Toybox.WatchUi as Ui;
 
 // Handle power budget events
 //
-class PowerBudgetDelegate extends Ui.WatchFaceDelegate
+class PowerBudgetDelegate extends Toybox.WatchUi.WatchFaceDelegate
 {
 	function initialize()
 	{
