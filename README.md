@@ -1,5 +1,7 @@
 IMPORTANT! : To get the weather data, you will need to make an account with OpenWeatherMaps and add your API key to the device settings.
 
+Please contact me with any suggestions or problems!
+
 ## Features
 
 City name for location
@@ -47,11 +49,6 @@ Day after precipitation (%)
 Smart weather****
 --------------------------------------------------
 
-Coming soon:
-You tell me
-
-Please contact me with any suggestions or problems!
-
 *Week numbers are implemented using the ISO 8601 standard, which you can read about here: https://en.wikipedia.org/wiki/ISO_week_date
 First day of week = Monday
 Last week# = (first day of next year is Thursday or later? Yes = 1, No = 53)
@@ -77,7 +74,12 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.8:latest
+### version 1.3.10:latest
+
+1.3.10
+
+Try to resolve empty API keys and crashes
+Upgrade to CIQ 3.2.3
 
 1.3.8
 

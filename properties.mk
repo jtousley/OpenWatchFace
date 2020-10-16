@@ -1,4 +1,5 @@
 DEVICE = fr645m
+#SDK_HOME = ${HOME}/.Garmin/ConnectIQ/Sdks/connectiq-sdk-lin-3.2.3-2020-10-13-c14e609bd
 #SDK_HOME = ${HOME}/.Garmin/ConnectIQ/Sdks/connectiq-sdk-lin-3.2.2-2020-08-28-a50584d55
 #SDK_HOME = ${HOME}/.Garmin/ConnectIQ/Sdks/connectiq-sdk-lin-3.2.1-2020-08-20-56ff593b7
 #SDK_HOME= ${HOME}/.Garmin/ConnectIQ/Sdks/connectiq-sdk-lin-3.1.9-2020-06-24-1cc9d3a70

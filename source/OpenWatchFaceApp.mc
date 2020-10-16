@@ -72,7 +72,7 @@ using Toybox.StringUtil;
 
     if (data != null && data has
         : size && data.size() == Enumerations.WVAL_SIZE) {
-      if (data[Enumerations.WVAL_ERROR] instanceof
+      if (data instanceof Array && data[Enumerations.WVAL_ERROR] instanceof
           Number && data[Enumerations.WVAL_ERROR] == 200) {
         // printMessage("Got new weather data");
         setWeatherData(data);
@@ -85,8 +85,8 @@ using Toybox.StringUtil;
   function setWeatherData(data) {
     // Sys.println("Data valid : " + data.toString());
     if (data[Enumerations.WVAL_CITY_NAME] instanceof String) {
-      data[Enumerations.WVAL_CITY_NAME] =
-          makeCityNameInternational(data[Enumerations.WVAL_CITY_NAME]);
+      var val = data[Enumerations.WVAL_CITY_NAME].toString();
+      data[Enumerations.WVAL_CITY_NAME] = makeCityNameInternational(val);
     }
     _settingsCache.UpdateWeather(data);
     _settingsCache.InitializeWeather();
