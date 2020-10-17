@@ -74,7 +74,11 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.11:latest
+### version 1.3.12:latest
+
+1.3.12
+
+Try to fix API keys on IOS
 
 1.3.11
 

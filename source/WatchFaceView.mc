@@ -88,6 +88,16 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
  protected
   var _vertLine = null;
 
+  ( : debug) function loadApiKey() {
+    var openWeatherToken =
+        WatchUi.loadResource(Rez.Strings.OpenWeatherApiKeyValue);
+    if (openWeatherToken != null && openWeatherToken has
+        : length && openWeatherToken.length() > 0) {
+      Setting.SetOpenWeatherToken(openWeatherToken);
+    }
+  }
+  ( : production) function loadApiKey() {}
+
   function initialize() {
     WatchFace.initialize();
     _wfApp = OpenWatchFaceApp.getOpenWatchFaceApp();
@@ -100,12 +110,7 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
     // Setting.SetWatchServerToken(WatchUi.loadResource(Rez.Strings.WatchServerTokenValue));
     // Setting.SetExchangeApiKey(WatchUi.loadResource(Rez.Strings.ExchangeApiKeyValue));
 
-    var openWeatherToken =
-        WatchUi.loadResource(Rez.Strings.OpenWeatherApiKeyValue);
-    if (openWeatherToken != null && openWeatherToken has
-        : length && openWeatherToken.length() > 16) {
-      Setting.SetOpenWeatherToken(openWeatherToken);
-    }
+    loadApiKey();
 
     var sSettings = Sys.getDeviceSettings();
     if (sSettings has : requiresBurnInProtection) {
