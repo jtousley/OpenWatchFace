@@ -74,7 +74,11 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.10:latest
+### version 1.3.11:latest
+
+1.3.11
+
+Attempt 3 to prevent intermittent crashing
 
 1.3.10
 

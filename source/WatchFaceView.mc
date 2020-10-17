@@ -83,6 +83,10 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
   var _canBurnIn = false;
  protected
   var _aodIndex = 0;
+ protected
+  var _horizLine = null;
+ protected
+  var _vertLine = null;
 
   function initialize() {
     WatchFace.initialize();
@@ -176,7 +180,7 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
       _wfApp.InitBackgroundEvents();
     }
 
-    dc.clearClip();
+    // dc.clearClip();
     dc.setColor(Gfx.COLOR_TRANSPARENT, _colors[_settingsCache.backgroundColor]);
     dc.clear();
 
@@ -225,7 +229,7 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
           // There are 3 items to move around on the screen,
           // So there are 6 elements in the array -
           // 3 for the position of each at each position
-          var yArray = [ y - 200, y - 200, y - 200, y-80, y-80, y-80 ];
+          var yArray = [ y - 200, y - 200, y - 200, y - 80, y - 80, y - 80 ];
           y = yArray[_aodIndex];
           _aodIndex = _aodIndex + 1;
           if (_aodIndex == 6) {
@@ -243,14 +247,16 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
       // show    0       1
       // show    1       0
       // hide    1       1
-      dc.setPenWidth(2);
-      dc.setColor(_colors[_settingsCache.textColor], Gfx.COLOR_TRANSPARENT);
-      var horiz_line = WatchUi.loadResource(Rez.JsonData.l_horiz_line);
-      dc.drawLine(horiz_line["x"][0], horiz_line["y"][0], horiz_line["x"][1],
-                  horiz_line["y"][1]);
-      var vert_line = WatchUi.loadResource(Rez.JsonData.l_vert_line);
-      dc.drawLine(vert_line["x"][0], vert_line["y"][0], vert_line["x"][1],
-                  vert_line["y"][1]);
+      if (_horizLine != null && _vertLine != null && _colors != null &&
+          _settingsCache.textColor != null) {
+        dc.setPenWidth(2);
+        dc.setColor(_colors[_settingsCache.textColor], Gfx.COLOR_TRANSPARENT);
+        dc.drawLine(_horizLine["x"][0], _horizLine["y"][0], _horizLine["x"][1],
+                    _horizLine["y"][1]);
+
+        dc.drawLine(_vertLine["x"][0], _vertLine["y"][0], _vertLine["x"][1],
+                    _vertLine["y"][1]);
+      }
     }
   }
 
@@ -343,6 +349,9 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
         WatchUi.loadResource(Rez.JsonData.l_top_line));  // DisplayTopLine 28
     // _layouts.add(WatchUi.loadResource(
     //     Rez.JsonData.l_weekplusday));  // DisplayWeekDayNumbers 29
+
+    _horizLine = WatchUi.loadResource(Rez.JsonData.l_horiz_line);
+    _vertLine = WatchUi.loadResource(Rez.JsonData.l_vert_line);
 
     var frequency = Setting.GetWeatherUpdateTime();
     _bgInterval = new Toybox.Time.Duration(

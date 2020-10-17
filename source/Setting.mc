@@ -62,7 +62,9 @@ using Toybox.Application.Storage as Storage;
 
  public
   static function SetWeatherStorage(weather) {
-    App.getApp().setProperty(_weather, weather);
+    if (weather != null) {
+      App.getApp().setProperty(_weather, weather);
+    }
   }
 
   //  public

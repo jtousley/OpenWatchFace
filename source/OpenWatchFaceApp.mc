@@ -74,25 +74,33 @@ using Toybox.StringUtil;
         : size && data.size() == Enumerations.WVAL_SIZE) {
       if (data instanceof Array && data[Enumerations.WVAL_ERROR] instanceof
           Number && data[Enumerations.WVAL_ERROR] == 200) {
-        // printMessage("Got new weather data");
-        setWeatherData(data);
+        // Make city name international
+        if (data[Enumerations.WVAL_CITY_NAME] instanceof String) {
+          var cityArray = data[Enumerations.WVAL_CITY_NAME].toCharArray();
+          var internationalName = new[cityArray.size()];
+          for (var i = 0; i < cityArray.size(); i++) {
+            var num = cityArray[i].toNumber();
+            if (num > 255) {
+              num = 95;  // Underscore '_'
+            }
+            internationalName[i] = num.toChar();
+          }
+          data[Enumerations.WVAL_CITY_NAME] =
+              StringUtil.charArrayToString(internationalName);
+        }
+
+        // Save data
+        _settingsCache.UpdateWeather(data);
+        _settingsCache.InitializeWeather();
+        // Update time
+        var now = Time.now().value();
+        Setting.SetLastEventTime(now);
+
+        printMessage("Got new weather data");
       } else {
         _settingsCache.weather._errorCode = data[Enumerations.WVAL_ERROR];
       }
     }
-  }
-
-  function setWeatherData(data) {
-    // Sys.println("Data valid : " + data.toString());
-    if (data[Enumerations.WVAL_CITY_NAME] instanceof String) {
-      var val = data[Enumerations.WVAL_CITY_NAME].toString();
-      data[Enumerations.WVAL_CITY_NAME] = makeCityNameInternational(val);
-    }
-    _settingsCache.UpdateWeather(data);
-    _settingsCache.InitializeWeather();
-    // lastEventTime
-    var now = Time.now().value();
-    Setting.SetLastEventTime(now);
   }
 
   function getServiceDelegate() { return [new BackgroundServiceDelegate()]; }
@@ -135,25 +143,5 @@ using Toybox.StringUtil;
     // (!token.equals(Setting.GetWeatherRefreshToken())) {
     //   Setting.SetWeatherRefreshToken(token);
     // }
-  }
-
-  function makeCityNameInternational(city) {
-    // Sys.println("city : " + city);
-
-    var cityArray = city.toCharArray();
-    // var byteArray = StringUtil.convertEncodedString(city, options);
-    var internationalName = new[cityArray.size()];
-    for (var i = 0; i < cityArray.size(); i++) {
-      var num = cityArray[i].toNumber();
-      if (num > 255) {
-        num = 95;  // Underscore '_'
-      }
-      internationalName[i] = num.toChar();
-    }
-    // Sys.println("array : " + cityArray);
-    // Sys.println("bytes : " + internationalName);
-    // Sys.println("Name : " + StringUtil.charArrayToString(internationalName));
-    // Sys.println("Int name : " +
-    return StringUtil.charArrayToString(internationalName);
   }
 }
