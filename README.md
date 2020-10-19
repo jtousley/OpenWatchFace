@@ -74,7 +74,11 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.12:latest
+### version 1.3.13:latest
+
+1.3.13
+
+Attempt 4 to fix crashing
 
 1.3.12
 

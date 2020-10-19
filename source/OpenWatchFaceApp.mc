@@ -69,37 +69,42 @@ using Toybox.StringUtil;
 
   function onBackgroundData(data) {
     // Sys.println("onBackgroundData");
-
-    if (data != null && data has
-        : size && data.size() == Enumerations.WVAL_SIZE) {
-      if (data instanceof Array && data[Enumerations.WVAL_ERROR] instanceof
-          Number && data[Enumerations.WVAL_ERROR] == 200) {
-        // Make city name international
-        if (data[Enumerations.WVAL_CITY_NAME] instanceof String) {
-          var cityArray = data[Enumerations.WVAL_CITY_NAME].toCharArray();
-          var internationalName = new[cityArray.size()];
-          for (var i = 0; i < cityArray.size(); i++) {
-            var num = cityArray[i].toNumber();
-            if (num > 255) {
-              num = 95;  // Underscore '_'
+    try {
+      if (data != null && data has
+          : size && data.size() == Enumerations.WVAL_SIZE) {
+        if (data instanceof
+            Toybox.Lang.Array && data[Enumerations.WVAL_ERROR] instanceof
+            Toybox.Lang.Number && data[Enumerations.WVAL_ERROR] == 200) {
+          // Make city name international
+          var cityStr = data[Enumerations.WVAL_CITY_NAME].toString();
+          if (cityStr instanceof Toybox.Lang.String) {
+            var cityArray = cityStr.toCharArray();
+            var internationalName = new[cityArray.size()];
+            for (var i = 0; i < cityArray.size(); i++) {
+              var num = cityArray[i].toNumber();
+              if (num > 255) {
+                num = 95;  // Underscore '_'
+              }
+              internationalName[i] = num.toChar();
             }
-            internationalName[i] = num.toChar();
+            data[Enumerations.WVAL_CITY_NAME] =
+                StringUtil.charArrayToString(internationalName);
           }
-          data[Enumerations.WVAL_CITY_NAME] =
-              StringUtil.charArrayToString(internationalName);
+
+          // Save data
+          _settingsCache.UpdateWeather(data);
+          _settingsCache.InitializeWeather();
+          // Update time
+          var now = Time.now().value();
+          Setting.SetLastEventTime(now);
+
+          printMessage("Got new weather data");
+        } else {
+          _settingsCache.weather._errorCode = data[Enumerations.WVAL_ERROR];
         }
-
-        // Save data
-        _settingsCache.UpdateWeather(data);
-        _settingsCache.InitializeWeather();
-        // Update time
-        var now = Time.now().value();
-        Setting.SetLastEventTime(now);
-
-        printMessage("Got new weather data");
-      } else {
-        _settingsCache.weather._errorCode = data[Enumerations.WVAL_ERROR];
       }
+    } catch (ex) {
+      _settingsCache.weather._errorCode = ex.getErrorMessage();
     }
   }
 

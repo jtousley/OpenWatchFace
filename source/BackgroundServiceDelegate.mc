@@ -137,6 +137,7 @@ using Toybox.Time as Time;
       // printMessage("No update");
       _received = new[WVAL_SIZE];
       _received[WVAL_ERROR] = 0;
+      _received[WVAL_CITY_NAME] = _city;
       Background.exit(_received);
     }
   }
@@ -146,6 +147,7 @@ using Toybox.Time as Time;
       // printMessage("API calls exceeded : " + responseCode);
       _received = new[WVAL_SIZE];
       _received[WVAL_ERROR] = responseCode;
+      _received[WVAL_CITY_NAME] = _city;
       Background.exit(_received);
     } else {
       if (data != null) {
@@ -292,7 +294,7 @@ using Toybox.Time as Time;
 
         _received[WVAL_ALRT] = 0;
         _received[WVAL_ALERT_NAME] = "unk alrt";
-        if (alert instanceof String) {
+        if (alert instanceof Toybox.Lang.String) {
           _received[WVAL_ALRT] = 1;
           _received[WVAL_ALERT_NAME] = alert;
           printMessage("Alert : " + alert);
@@ -329,6 +331,7 @@ using Toybox.Time as Time;
     } else {
       _received = new[WVAL_SIZE];
       _received[WVAL_ERROR] = responseCode;
+      _received[WVAL_CITY_NAME] = _city;
       Background.exit(_received);
     }
   }

@@ -145,6 +145,8 @@
     <setting propertyKey="@Properties.BackgroundColor" title="@Strings.BackgroundColorTitle">
         <settingConfig type="list">
             <listEntry value="0">@Strings.ColorBlack</listEntry>
+            <listEntry value="1">@Strings.ColorDarkGray</listEntry>
+            <listEntry value="2">@Strings.ColorLightGray</listEntry>
             <listEntry value="3">@Strings.ColorWhite</listEntry>
         </settingConfig>
     </setting>

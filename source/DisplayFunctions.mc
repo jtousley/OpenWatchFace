@@ -24,8 +24,6 @@ using Toybox.Activity as Activity;
 
 class DisplayFunctions {
  protected
-  var _heartRate = 0;
- protected
   var _heartRateText = "-- ";
  protected
   var _gTimeNow;
@@ -609,9 +607,8 @@ class DisplayFunctions {
 
     if (info != null && info has
         : currentHeartRate && info.currentHeartRate != null &&
-              _heartRate != info.currentHeartRate) {
-      _heartRate = info.currentHeartRate;
-      _heartRateText = _heartRate.toString();
+              _heartRateText != info.currentHeartRate.toString()) {
+      _heartRateText = info.currentHeartRate.toString();
       isUpdate = true;
     }
 
@@ -793,7 +790,8 @@ class DisplayFunctions {
     }
 
     if (_settings.isTest == true) {
-      row1 = _settings.weather._errorCode;
+      row1 = _settings.weather._errorCode + ":" +
+             _settings.weather._todayPrimaryId;
     }
 
     return [ row1, row2 ];
