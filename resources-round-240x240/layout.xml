@@ -50,7 +50,7 @@
 	</jsonData>
 
 	<jsonData id="l_currTemp">
-		{"x":[170], "y":[33], "col":[2], "font":[102], "jus":[1], "func":5, "type":[0]}
+		{"x":[170], "y":[25], "col":[2], "font":[102], "jus":[1], "func":5, "type":[0]}
 	</jsonData>
 	<jsonData id="l_currFeelsTemp">
 		{"x":[205], "y":[58], "col":[2], "font":[102], "jus":[1], "func":6, "type":[0]}
@@ -92,18 +92,18 @@
 		"func":17, "type":[1,0]}
 	</jsonData>
 	<jsonData id="l_t_weatherIcon">
-		{"x":[95], "y":[90], "col":[7], 
-		"font":[105], "jus":[1], "func":18, "type":[1]}
+		{"x":[95, 95, 95], "y":[90, 65, 70], "col":[7, 7, 7], 
+		"font":[105, 102, 102], "jus":[1, 1, 1], "func":18, "type":[1, 1, 1]}
 	</jsonData>
 	<jsonData id="l_n_weatherIcon">
-		{"x":[128], "y":[90], "col":[7], 
-		"font":[105], "jus":[1], 
-		"func":19, "type":[1]}
+		{"x":[128, 128, 128], "y":[90, 65, 70], "col":[7, 7, 7], 
+		"font":[105, 102, 102], "jus":[1, 1, 1], 
+		"func":19, "type":[1, 1, 1]}
 	</jsonData>
 	<jsonData id="l_nn_weatherIcon">
-		{"x":[161], "y":[90], "col":[7], 
-		"font":[105], "jus":[1], 
-		"func":20, "type":[1]}
+		{"x":[161, 161, 161], "y":[90, 65, 70], "col":[7, 7, 7], 
+		"font":[105, 102, 102], "jus":[1, 1, 1], 
+		"func":20, "type":[1, 1, 1]}
 	</jsonData>
 	<jsonData id="l_thirdWeatherIcon">
 		{"x":[161], "y":[90], "col":[7], 
@@ -111,7 +111,7 @@
 		"func":21, "type":[1], "hide":[1]}
 	</jsonData>
 	<jsonData id="l_currWeatherIcon">
-		{"x":[165], "y":[60], "col":[7], "font":[105], "jus":[1], "func":22}
+		{"x":[165], "y":[55], "col":[7], "font":[105], "jus":[1], "func":22}
 	</jsonData>
 
 	<jsonData id="l_field3">

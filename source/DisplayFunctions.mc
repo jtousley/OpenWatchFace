@@ -469,6 +469,7 @@ class DisplayFunctions {
   }
   function DisplayNextNextWeatherIcon(layout) {
     var weather = _settings.weather;
+    // weather._nextNextPrimaryId = 212;
     var data =
         Weather.convertOpenWeatherIdToIcon(weather._nextNextPrimaryId, false);
 
@@ -502,6 +503,7 @@ class DisplayFunctions {
       night = true;
     }
 
+    // weather._currentId = 611;
     var data = Weather.convertOpenWeatherIdToIcon(weather._currentId, night);
     var icon = data[0];
     // var intensity = data[1];

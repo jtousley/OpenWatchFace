@@ -36,7 +36,7 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
   var _funcs = [:DisplayLocation               // = 0
                 , :DisplayDate                 // = 1
                 , :DisplayTime                 // = 2
-                , :DisplayPmAm                 // = 3
+                , :DisplayPmAm                 // = 3 // TODO: Remove
                 , :DisplaySeconds              // = 4
                 , :DisplayCurrentTemp          // = 5
                 , :DisplayFeelsTemp            // = 6
@@ -54,7 +54,7 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
                 , :DisplayTodayWeatherIcon     // = 18
                 , :DisplayNextWeatherIcon      // = 19
                 , :DisplayNextNextWeatherIcon  // = 20
-                , :DisplayThirdWeatherIcon     // = 21
+                , :DisplayThirdWeatherIcon     // = 21 // TODO: Remove
                 , :DisplayCurrWeatherIcon      // = 22
                 , :LoadField3                  // = 23
                 , :LoadField4                  // = 24
@@ -246,12 +246,12 @@ class WatchFaceView extends Toybox.WatchUi.WatchFace {
       }
     }
 
+    //         Burn    Low_Power
+    // show    0       0
+    // show    0       1
+    // show    1       0
+    // hide    1       1
     if (!(_inLowPower && _canBurnIn)) {
-      //         Burn    Low_Power
-      // show    0       0
-      // show    0       1
-      // show    1       0
-      // hide    1       1
       if (_horizLine != null && _vertLine != null && _colors != null &&
           _settingsCache.textColor != null) {
         dc.setPenWidth(2);

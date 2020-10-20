@@ -74,7 +74,11 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.13:latest
+### version 1.3.14:latest
+
+1.3.14
+
+Add back intensity for weather data
 
 1.3.13
 

@@ -100,6 +100,7 @@ class Enumerations {
     SUNSET = "h",
     SUNRISE = "i",
     HUMIDITY = "j",
+    // WEATHER_TSTORM = "k",
     CALORIES = "k",
     DEW_POINT = "l",
     UV_INDEX = "m",
