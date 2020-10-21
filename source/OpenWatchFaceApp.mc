@@ -38,13 +38,11 @@ using Toybox.StringUtil;
     _singleton = self;
   }
 
+  // One does not simply make subroutines in this class
+
   function setSettings(settings) { _settingsCache = settings; }
 
   static public function getOpenWatchFaceApp() { return _singleton; }
-
-  ( : debug) function printMessage(msg) { Sys.println(msg); }
-
-  ( : production) function printMessage(msg) {}
 
   // Return the initial view of your application here
   //
@@ -98,7 +96,7 @@ using Toybox.StringUtil;
           var now = Time.now().value();
           Setting.SetLastEventTime(now);
 
-          printMessage("Got new weather data");
+          // Sys.println("Got new weather data");
         } else {
           _settingsCache.weather._errorCode = data[Enumerations.WVAL_ERROR];
         }

@@ -75,9 +75,9 @@ using Toybox.Time as Time;
     Sys.ServiceDelegate.initialize();
   }
 
-  ( : debug) function printMessage(msg) { Sys.println(msg); }
+  // ( : debug) function printMessage(msg) { Sys.println(msg); }
 
-  ( : production) function printMessage(msg) {}
+  // ( : production) function printMessage(msg) {}
 
   function onTemporalEvent() {
     _received = null;
@@ -86,7 +86,6 @@ using Toybox.Time as Time;
     var sSettings = Sys.getDeviceSettings();
     if (sSettings has : connectionAvailable) {
       connected = sSettings.connectionAvailable;
-      // Sys.println("Connected : " + connected);
     }
     // Sys.println("onTemporalEvent - Memory: " +
     // Sys.getSystemStats().freeMemory +
@@ -297,7 +296,7 @@ using Toybox.Time as Time;
         if (alert instanceof Toybox.Lang.String) {
           _received[WVAL_ALRT] = 1;
           _received[WVAL_ALERT_NAME] = alert;
-          printMessage("Alert : " + alert);
+          // printMessage("Alert : " + alert);
         }
         _received[WVAL_ERROR] = responseCode;
         success = true;

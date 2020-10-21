@@ -74,7 +74,11 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.14:latest
+### version 1.3.15:latest
+
+1.3.15
+
+Fix app crashing during sleep
 
 1.3.14
 
