@@ -793,7 +793,7 @@ class DisplayFunctions {
 
     if (_settings.isTest == true) {
       row1 = _settings.weather._errorCode + ":" +
-             _settings.weather._todayPrimaryId;
+             _settings.weather._currentId;
     }
 
     return [ row1, row2 ];

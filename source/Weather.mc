@@ -124,36 +124,36 @@ class Weather {
       case 200:
         // Thunderstorm	thunderstorm with light rain	 11d
         icon = Enumerations.WEATHER_TSTORM_RAIN;
-        intensity = Enumerations.INTENSITY_LIGHT;
+        intensity = Enumerations.INTENSITY_MEDIUM;
         break;
       case 201:
         // Thunderstorm	thunderstorm with rain	 11d
         icon = Enumerations.WEATHER_TSTORM_RAIN;
-        intensity = Enumerations.INTENSITY_MEDIUM;
+        intensity = Enumerations.INTENSITY_HARD;
         break;
       case 202:
         // Thunderstorm	thunderstorm with heavy rain	 11d
         icon = Enumerations.WEATHER_TSTORM_RAIN;
-        intensity = Enumerations.INTENSITY_HARD;
+        intensity = Enumerations.INTENSITY_EXTREME;
         break;
       case 210:
         // Thunderstorm	light thunderstorm	 11d
-        icon = Enumerations.WEATHER_TSTORM;
+        icon = Enumerations.WEATHER_TSTORM_RAIN;
         intensity = Enumerations.INTENSITY_LIGHT;
         break;
       case 211:
         // Thunderstorm	thunderstorm	 11d
-        icon = Enumerations.WEATHER_TSTORM;
+        icon = Enumerations.WEATHER_TSTORM_RAIN;
         intensity = Enumerations.INTENSITY_MEDIUM;
         break;
       case 212:
         // Thunderstorm	heavy thunderstorm	 11d
+        icon = Enumerations.WEATHER_TSTORM_RAIN;
         intensity = Enumerations.INTENSITY_HARD;
-        icon = Enumerations.WEATHER_TSTORM;
         break;
       case 221:
         // Thunderstorm	ragged thunderstorm	 11d
-        icon = Enumerations.WEATHER_TSTORM;
+        icon = Enumerations.WEATHER_TSTORM_RAIN;
         ragged = Enumerations.INTENSITY_RAGGED;
         break;
       case 230:
@@ -391,7 +391,7 @@ class Weather {
       case 804:
         // Clouds	overcast clouds: 85-100%	 04d
         icon = Enumerations.WEATHER_CLOUDY;
-        intensity = Enumerations.INTENSITY_EXTREME;
+        // intensity = Enumerations.INTENSITY_EXTREME;
         break;
       default:
         break;

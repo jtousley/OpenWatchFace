@@ -98,9 +98,6 @@ using Toybox.StringUtil;
 
           // Sys.println("Got new weather data");
         }
-        //  else {
-        //   _settingsCache.weather._errorCode = data[Enumerations.WVAL_ERROR];
-        // }
       }
     } catch (ex) {
       // _settingsCache.weather._errorCode = ex.getErrorMessage();

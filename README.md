@@ -53,8 +53,30 @@ Smart weather****
 First day of week = Monday
 Last week# = (first day of next year is Thursday or later? Yes = 1, No = 53)
 
+
 **These icons support intensity values for certain types of weather:
 '' = none/light intensity, '.' = medium intensity, '..' = high intensity, '...' = extreme intensity, '~' = "ragged"
+#Cloudiness:
+- clear = sunny
+- 11-25% = partly cloudy: light
+- 25-50% = partly cloudy: medium
+- 51-84% = partly cloudy: high
+- 85-100% = cloudy
+
+#Rain/Drizzle/Thunderstorms/Snow/Sleet:
+These options generally try to follow light/medium/high/extreme/ragged, although OWM offers numerous codes for each.
+
+#Mist/Fog/Haze/Sand/Dust
+OWM offers only one code for these, and they are a bit difficult to distinguish with an icon. If you see something hazy, check your nearest window...
+
+#Freezing Rain/Volcano/Hurricane/Tornado:
+Only one code for these, but the icon is pretty obvious. Just remember freezing rain is the droplets with the thermometer, and sleet is the streaks coming down.
+
+The full list of OWM codes can be seen here:
+https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2
+
+How they are handled by software is in Weather.mc and Enumerations.mc
+
 
 ***Sensor Pressure:
 1. Ambient Pressure
@@ -63,6 +85,7 @@ This returns ambient (local) barometric pressure as measured by the pressure sen
 This returns ambient (local) barometric pressure as measured by the internal pressure sensor. The data is the temperature compensated information read directly from the internal sensor.
 3. Sea Level Pressure
 This returns barometric pressure calibrated to sea level. Since pressure varies dues to several factors, a GPS-based altitude must first be obtained, then the ambient (local) pressure is measured by the pressure sensor before conversion to a calibrated barometric pressure value.
+
 
 ****Smart weather
 Displays the following data, when available:
@@ -74,7 +97,16 @@ Displays the following data, when available:
 
 --------------------------------------------------
 ## Changelog
-### version 1.3.15:latest
+### version 1.4.0:latest
+
+1.4.0
+
+Fix the way cloudiness was being displayed - detailed weather
+descriptions in comments
+
+1.3.16
+
+Remove debugging
 
 1.3.15
 
