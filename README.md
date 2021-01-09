@@ -89,15 +89,19 @@ This returns barometric pressure calibrated to sea level. Since pressure varies 
 
 ****Smart weather
 Displays the following data, when available:
-1. Rainfall amount (mm/in)
-2. Snowfall amount (mm/in)
-3. Wind gust (km/h, knots, m/s, mph)
-4. Humidty percentage, if greater than 50
-5. UV index
+1. Next rainfall amount (mm/in)
+2. Next snowfall amount (mm/in)
+3. Next wind gust (km/h, knots, m/s, mph)
+4. Humidty percentage
+Values 1-3, when they appear, are applicable to the most imminent day with the corresponding weather pattern.
 
 --------------------------------------------------
 ## Changelog
-### version 1.4.0:latest
+### version 1.4.1:latest
+1.4.1
+ 
+Use appropriate unit for distance (swapped)
+More intelligent smart weather
 
 1.4.0
 

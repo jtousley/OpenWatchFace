@@ -241,14 +241,21 @@ using Toybox.Time as Time;
         // probability of precipitation
         _received[WVAL_T_POP] = getValFromDict(data, daily, 0, "pop", -1, -1);
 
-        _received[WVAL_RAIN_DPT] =
-            getValFromDict(data, daily, 0, "rain", -1, -1);
+        for(var i = 0; i < 3; i++) {
+          _received[WVAL_RAIN_DPT] =
+              getValFromDict(data, daily, i, "rain", -1, -1);
 
-        _received[WVAL_SNOW_DPT] =
-            getValFromDict(data, daily, 0, "snow", -1, -1);
+          _received[WVAL_SNOW_DPT] =
+              getValFromDict(data, daily, i, "snow", -1, -1);
 
-        _received[WVAL_WIND_GUST] =
-            getValFromDict(data, daily, 0, "wind_gust", -1, -1);
+          _received[WVAL_WIND_GUST] =
+              getValFromDict(data, daily, i, "wind_gust", -1, -1);
+          if(!(_received[WVAL_RAIN_DPT] == 0 && 
+              _received[WVAL_SNOW_DPT] == 0 &&
+              _received[WVAL_WIND_GUST] == 0)) {
+                break;
+          }
+        }
 
         _received[WVAL_N_MIN] =
             getValFromDict(data, daily, 1, "temp", "min", -1);

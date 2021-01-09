@@ -38,7 +38,7 @@
 	<string id = "DisplayTodayPrecipitation">Today's Precipitation Probability</string>
 	<string id = "DisplayNextPrecipitation">Tomorrow's Precipitation Probability</string>
 	<string id = "DisplayNextNextPrecipitation">Next Day's Precipitation Probability</string>
-    <string id = "DisplaySmartWeather">Smart Weather (Rain/snow/wind -> humidity > 50 -> UV)</string>
+    <string id = "DisplaySmartWater">Smart Weather (Rain/snow/wind -> humidity)</string>
     
     <string id="WindSystemTitle">Wind</string>
     <string id="Knots">Knots</string>

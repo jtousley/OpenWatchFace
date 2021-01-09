@@ -96,7 +96,7 @@
             <listEntry value = "6">@Strings.DisplayTodayPrecipitation</listEntry>
             <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
             <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
-            <listEntry value = "9">@Strings.DisplaySmartWeather</listEntry>
+            <listEntry value = "9">@Strings.DisplaySmartWater</listEntry>
             <listEntry value = "10">@Strings.HideFunction</listEntry>
         </settingConfig>
     </setting>
@@ -112,7 +112,7 @@
             <listEntry value = "6">@Strings.DisplayTodayPrecipitation</listEntry>
             <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
             <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
-            <listEntry value = "9">@Strings.DisplaySmartWeather</listEntry>
+            <listEntry value = "9">@Strings.DisplaySmartWater</listEntry>
             <listEntry value = "10">@Strings.HideFunction</listEntry>
         </settingConfig>
     </setting>
@@ -128,7 +128,7 @@
             <listEntry value = "6">@Strings.DisplayTodayPrecipitation</listEntry>
             <listEntry value = "7">@Strings.DisplayNextPrecipitation</listEntry>
             <listEntry value = "8">@Strings.DisplayNextNextPrecipitation</listEntry>
-            <listEntry value = "9">@Strings.DisplaySmartWeather</listEntry>
+            <listEntry value = "9">@Strings.DisplaySmartWater</listEntry>
             <listEntry value = "10">@Strings.HideFunction</listEntry>
         </settingConfig>
     </setting>

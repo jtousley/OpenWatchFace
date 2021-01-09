@@ -65,7 +65,7 @@ class DisplayFunctions {
                         , :DisplayTodayPrecipitation
                         , :DisplayNextPrecipitation
                         , :DisplayNextNextPrecipitation
-                        , :DisplaySmartWeather
+                        , :DisplaySmartWater
                         , :HideFunction];
 
   function setTime(time) {
@@ -567,9 +567,9 @@ class DisplayFunctions {
 
     if (_sSettings has
         : distanceUnits && _sSettings.distanceUnits == Sys.UNIT_STATUTE) {
-      distance = (distance / 100000).format("%2.1f");
-    } else {
       distance = (distance / 160934.4).format("%2.1f");
+    } else {
+      distance = (distance / 100000).format("%2.1f");
     }
 
     return [ Enumerations.DISTANCE, distance ];
@@ -875,7 +875,7 @@ class DisplayFunctions {
 
   // Display the most important water value
   //
-  function DisplaySmartWeather(layout) {
+  function DisplaySmartWater(layout) {
     var weather = _settings.weather;
     var rain = weather._rainDepth_mm;
     if (rain > 0) {
@@ -914,13 +914,7 @@ class DisplayFunctions {
     }
 
     var humidity = weather._humidityPercentage;
-    if (humidity > 50) {
-      return [ Enumerations.HUMIDITY, humidity + "%" ];
-    }
-
-    var uv = weather._uvIndex;
-
-    return [ Enumerations.UV_INDEX, uv.format("%2.1f") ];
+    return [ Enumerations.HUMIDITY, humidity + "%" ];
   }
 
   // Display battery
