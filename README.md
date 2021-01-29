@@ -97,7 +97,12 @@ Values 1-3, when they appear, are applicable to the most imminent day with the c
 
 --------------------------------------------------
 ## Changelog
-### version 1.4.1:latest
+### version 1.4.2:latest
+
+1.4.2
+
+Fix calories and wind direction (numeric) icons
+
 1.4.1
  
 Use appropriate unit for distance (swapped)
