@@ -97,7 +97,11 @@ Values 1-3, when they appear, are applicable to the most imminent day with the c
 
 --------------------------------------------------
 ## Changelog
-### version 1.4.2:latest
+### version 1.4.3:latest
+
+1.4.3
+
+Fix updating problems
 
 1.4.2
 
