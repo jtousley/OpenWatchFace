@@ -32,7 +32,7 @@
 	</jsonData>
 
 	<jsonData id="l_date">
-		{"x":[30], "y":[165], "col":[3], "font":[101], "jus":[2], "func":1, "type":[0]}
+		{"x":[30], "y":[165, 165, 162], "col":[3], "font":[101, 101, 0], "jus":[2], "func":1, "type":[0]}
 	</jsonData>
 
 	<jsonData id="l_time">

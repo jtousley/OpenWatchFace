@@ -46,6 +46,8 @@ class SettingsCache {
     weatherStaleTime = Setting.GetWeatherStaleTime();
     weatherCurrentColor = Setting.GetWeatherCurrentColor();
 
+    showIntntnlDate = Setting.GetIntntlDate();
+
     InitializeWeather();
   }
 
@@ -163,4 +165,6 @@ class SettingsCache {
   var weatherCurrentColor;
  public
   var pulseField;
+ public 
+  var showIntntnlDate;
 }

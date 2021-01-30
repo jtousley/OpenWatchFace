@@ -97,7 +97,10 @@ Values 1-3, when they appear, are applicable to the most imminent day with the c
 
 --------------------------------------------------
 ## Changelog
-### version 1.4.3:latest
+### version 1.4.4:latest
+1.4.4
+
+Add option for international users to select system fonts (support for non-Latin characters)
 
 1.4.3
 

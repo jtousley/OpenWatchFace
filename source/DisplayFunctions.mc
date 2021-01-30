@@ -88,8 +88,7 @@ class DisplayFunctions {
   function DisplayTopLine(layout) {
     var data = [ "", "", "" ];
 
-    var moonData = GetMoonPhase(Time.now());
-    data[0] = moonData[0];
+    data[0] = GetMoonPhase(Time.now());
 
     data[1] = Enumerations.BLUETOOTH_NOT_CONNECTED;
     // layout["col"][1] = Enumerations.ColorRed;
@@ -187,6 +186,15 @@ class DisplayFunctions {
       data = (month + " " + day + " " + week);
     }
     _isInit = true;
+
+    // font for international date hot fix
+    if(_settings.showIntntnlDate == 1) {
+      layout["y"][0] = layout["y"][2];
+      layout["font"][0] = layout["font"][2];
+    } else {
+      layout["y"][0] = layout["y"][1];
+      layout["font"][0] = layout["font"][1];
+    }
 
     return [data];
   }
@@ -962,60 +970,7 @@ class DisplayFunctions {
       phase = Enumerations.NEW_MOON;
     }  // A new moon";
 
-    IP = IP * 2d * Math.PI;  // Convert phase to radians
-
-    // calculate moon's distance
-    //
-    var DP = 2d * Math.PI * Normalize((JD - 2451562.2d) / 27.55454988d);
-
-    // calculate moon's ecliptic longitude
-    //
-    var RP = Normalize((JD - 2451555.8d) / 27.321582241d);
-    var LO = 360d * RP + 6.3d * Math.sin(DP) + 1.3d * Math.sin(2d * IP - DP) +
-             0.7d * Math.sin(2d * IP);
-
-    var zodiac = 0;
-    if (LO < 33.18) {
-      zodiac = 0;
-    }  // Pisces
-    else if (LO < 51.16) {
-      zodiac = 1;
-    }  // Aries"
-    else if (LO < 93.44) {
-      zodiac = 2;
-    }  // Taurus"
-    else if (LO < 119.48) {
-      zodiac = 3;
-    }  // Gemini"
-    else if (LO < 135.30) {
-      zodiac = 4;
-    }  // Cancer"
-    else if (LO < 173.34) {
-      zodiac = 5;
-    }  // Leo"
-    else if (LO < 224.17) {
-      zodiac = 6;
-    }  // Virgo"
-    else if (LO < 242.57) {
-      zodiac = 7;
-    }  // Libra"
-    else if (LO < 271.26) {
-      zodiac = 8;
-    }  // Scorpio"
-    else if (LO < 302.49) {
-      zodiac = 9;
-    }  // Sagittarius"
-    else if (LO < 311.72) {
-      zodiac = 10;
-    }  // Capricorn"
-    else if (LO < 348.58) {
-      zodiac = 11;
-    }  // Aquarius"
-    else {
-      zodiac = 0;
-    }  //  Pisces"
-
-    return [ phase, zodiac ];
+    return phase;
   }
 
   function Normalize(value) {

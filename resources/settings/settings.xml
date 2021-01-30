@@ -34,6 +34,13 @@
         </settingConfig>
     </setting>
 
+     <setting propertyKey="@Properties.ShowIntDate" title="@Strings.showIntDateTitle">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.StrOff</listEntry>
+            <listEntry value="1">@Strings.StrOn</listEntry>
+        </settingConfig>
+    </setting>
+
     <setting propertyKey = "@Properties.field-0" title = "@Strings.field_0_title">
         <settingConfig type = "list">
             <listEntry value = "0">@Strings.DisplayPulse</listEntry>
@@ -376,8 +383,8 @@
 
     <setting propertyKey="@Properties.isTest" title="@Strings.isTestTitle">
         <settingConfig type="list">
-            <listEntry value="0">@Strings.IsTestOff</listEntry>
-            <listEntry value="1">@Strings.IsTestOn</listEntry>
+            <listEntry value="0">@Strings.StrOff</listEntry>
+            <listEntry value="1">@Strings.StrOn</listEntry>
         </settingConfig>
     </setting>
 

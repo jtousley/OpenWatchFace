@@ -93,9 +93,10 @@
 	<string id = "ColorOrange">Orange</string>
 
 	<string id="showTimeOptionsTitle">Time Options (Seconds, AM/PM, Week No.)</string>
+    <string id="showIntDateTitle">International Font For Date</string>
 	
     <string id = "isTestTitle">Developer Use Only</string>
-    <string id = "IsTestOff">OFF</string>
-    <string id = "IsTestOn">ON</string>
+    <string id = "StrOff">OFF</string>
+    <string id = "StrOn">ON</string>
 	
 </strings>

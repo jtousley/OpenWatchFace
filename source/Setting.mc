@@ -47,6 +47,7 @@ using Toybox.Application.Storage as Storage;
   static protected var _minColor = "MinColor";
   static protected var _backgroundColor = "BackgroundColor";
   static protected var _showTimeOptions = "ShowTimeOptions";
+  static protected var _showIntntnlDate = "ShowIntDate";
 
  public
   static function GetDateOrder() {
@@ -67,17 +68,6 @@ using Toybox.Application.Storage as Storage;
     }
   }
 
-  //  public
-  //   static function GetWeatherProvider() {
-  //     var tmp = App.getApp().getProperty(_weatherProvider);
-  //     return tmp != null ? tmp : 0;
-  //   }
-
-  //  public
-  //   static function SetWeatherProvider(weatherProvider) {
-  //     App.getApp().setProperty(_weatherProvider, weatherProvider);
-  //   }
-
  public
   static function GetOpenWeatherToken() {
     var val = App.getApp().getProperty(_openWeatherApiToken);
@@ -89,19 +79,7 @@ using Toybox.Application.Storage as Storage;
   static function SetOpenWeatherToken(openWeatherApiToken) {
     return App.getApp().setProperty(_openWeatherApiToken, openWeatherApiToken);
   }
-
-  //  public
-  //   static function GetAccuWeatherToken() {
-  //     var val = App.getApp().getProperty(_accuWeatherApiToken);
-  //     return (val != null ? val : "");
-  //   }
-
-  //  public
-  //   static function SetAccuWeatherToken(accuWeatherApiToken) {
-  //     return App.getApp().setProperty(_accuWeatherApiToken,
-  //     accuWeatherApiToken);
-  //   }
-
+  
  public
   static function SetTextColor(color) {
     var val = App.getApp().setProperty(_textColor, color);
@@ -270,5 +248,12 @@ using Toybox.Application.Storage as Storage;
   static function GetWField(id) {
     var val = App.getApp().getProperty("wfield-" + id).toNumber();
     return (val != null ? val : 0);
+  }
+
+ public
+  static function GetIntntlDate() {
+    var val = App.getApp().getProperty(_showIntntnlDate);
+    return (val != null ? val : 0);
+    // return true;
   }
 }
